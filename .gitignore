@@ -1,0 +1,23 @@
+# Logs
+*.log
+# Temporary files
+*.tmp
+*~
+
+*.bak
+# Environment files (containing secrets, API keys, credentials)
+.env
+*.env
+.env.*
+
+# Local configuration that shouldn't be shared
+*.local
+
+### Rust ###
+# rust specific files
+
+/target/
+**/*.rs.bk
+debug/
+target/debug/
+target/release/

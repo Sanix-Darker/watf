@@ -1,0 +1,57 @@
+{
+  "$id": "urn:watf:request:1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "catalog": {
+      "type": "boolean"
+    },
+    "command": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "fields": {
+      "type": "boolean"
+    },
+    "id": {
+      "maxLength": 64,
+      "type": "string"
+    },
+    "installed_only": {
+      "type": "boolean"
+    },
+    "limit": {
+      "maximum": 128,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "max_bytes": {
+      "maximum": 1048576,
+      "minimum": 256,
+      "type": "integer"
+    },
+    "op": {
+      "const": "search"
+    },
+    "query": {
+      "maxLength": 16384,
+      "minLength": 1,
+      "type": "string"
+    },
+    "schema_version": {
+      "const": 1
+    }
+  },
+  "required": [
+    "id",
+    "query"
+  ],
+  "title": "watf request v1",
+  "type": "object"
+}

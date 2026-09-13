@@ -1,0 +1,36 @@
+{
+  "suite": "offline_source_and_corpus_integrity",
+  "catalog_records": 124530,
+  "catalog_kinds": {
+    "input_field": 41613,
+    "option": 64450,
+    "command": 18467
+  },
+  "catalog_compressed_bytes": 5334641,
+  "catalog_sha256": "71da55e8d4cbdf76fb7f12e1c624cd670c5ac38aefa4287a12f4c313ce08bef0",
+  "source_models": 425,
+  "core_records": 608,
+  "core_command_scopes": 117,
+  "complex_samples": 100,
+  "sample_categories": {
+    "release": 10,
+    "search": 10,
+    "backup": 10,
+    "systems": 10,
+    "build": 10,
+    "infra": 10,
+    "cloud": 10,
+    "media": 10,
+    "data": 10,
+    "abstain": 10
+  },
+  "rust_test_functions_present": 102,
+  "rust_tests_executed": false,
+  "rust_compilation_verified": false,
+  "model_inference_verified": false,
+  "performance_measured": false,
+  "python_sources_parsed": 12,
+  "json_documents_parsed": 11,
+  "text_files_without_em_dash": 102,
+  "json_schema_checks": "four schemas checked, core records and example plan validated"
+}

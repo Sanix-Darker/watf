@@ -1,0 +1,10 @@
+{
+  "status": "ok",
+  "steps": [
+    {"command": "git status", "args": ["--short"], "after": "start", "stdout": null},
+    {"command": "git add", "args": ["-A"], "after": "success", "stdout": null},
+    {"command": "git commit", "args": ["-m", "release"], "after": "success", "stdout": null},
+    {"command": "docker compose up", "args": ["--build", "--detach"], "after": "success", "stdout": null}
+  ],
+  "questions": []
+}

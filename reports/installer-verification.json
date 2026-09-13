@@ -1,0 +1,12 @@
+{
+  "suite": "shell_installer_with_inert_fixture",
+  "passed": 6,
+  "checks": [
+    "valid flat release installs",
+    "unknown archive paths not extracted",
+    "no-index avoids running binary",
+    "bad checksum rejected",
+    "invalid repository rejected before networking",
+    "invalid version rejected"
+  ]
+}

@@ -1,0 +1,79 @@
+# Architecture
+
+## Data flow
+
+```text
+local docs + optional catalog
+  -> bounded native ingestion
+  -> typed records and source provenance
+  -> canonical deduplication
+  -> immutable binary index
+
+human or agent intent
+  -> quoted-clause splitting and lexical normalization
+  -> cross-tool retrieval
+  -> candidate command scopes
+  -> scoped option and documentation retrieval
+  -> round-robin clause coverage and evidence deduplication
+  -> bounded provenance-backed packet
+       -> agent: return evidence, no model
+       -> human plan: local GGUF + GBNF
+            -> typed draft
+            -> deterministic surface checks
+            -> quoted, inert Bash proposal + warnings
+```
+
+## Module contracts and review points
+
+| Module | Responsibility | Important boundary |
+|---|---|---|
+| `record` | Typed command, option, field and example records | Nested fields never become flags |
+| `text` | Terms, small synonyms, quote-aware clause splitting | No semantic planner or LLM at retrieval time |
+| `discover` | Absolute PATH inventory and filename-only project hints | No executable/version probe |
+| `ingest` | Bounded plain/gzip file reading and static parsers | No shell, roff interpreter, callbacks or network |
+| `index::build` | Deduplicate, rank impacts, encode and publish | Exclusive writer lock, fresh inode, fsync and rename |
+| `index::read` | Map bytes, checked offsets, lazy materialization | Read-only mapping is not safe against malicious truncation |
+| `index::search` | Rare-first lexical ranking with bounded top-K | Scores are relevance, not calibrated probability |
+| `packet` | Hierarchical retrieval, clause coverage, hard output cap | Evidence presence is not proof of satisfied intent |
+| `plan` | Typed steps, flag checks, evidence IDs and shell quoting | Surface validation is not semantic verification |
+| `infer` | Optional in-process Qwen3 adapter and grammar | Real model token budget, no cloud or executable fallback |
+| `cli` | Stable operations and foreground JSONL protocol | No execution flag exists |
+| `tui` | Minimal interactive view of the same engine | Planning is explicit and currently blocking |
+
+## Retrieval mechanics
+
+Build-time field weights favor command and option names over descriptions.
+BM25-like length-normalized impacts are precomputed per posting with k1=1.2,
+b=0.75. A small source-priority multiplier and query coverage multiplier apply
+at search time. Exact flag tokens preserve case, so `-A` and `-a` differ.
+
+The index has one global vocabulary and a prefixed local-only vocabulary. The
+latter contains only non-catalog records. Scoped searches find the command's DocIDs
+once, then binary-search each term posting list instead of scanning an entire
+global list. This is an implemented optimization, not a benchmark claim.
+
+Scratch arrays are reused with epoch marks; clearing a query does not zero the
+whole record-space. Only top candidates become full capability objects. An
+agent process can amortize index opening and PATH discovery through `serve`.
+
+## Sources and conflicts
+
+Priority is captured help, man page, static completion, built-in/local document,
+then bulk catalog. Canonical deduplication uses scope, kind and name. The highest
+priority copy wins that exact key. Alias overlap resolves to the highest priority
+matching option. Distinct canonical names can coexist. This does not prove that a
+local source belongs to the current executable or that a plugin is installed.
+
+Source hashes describe decoded input. Metadata snapshots use the original file's
+size and modification timestamp. The quick freshness check is metadata-only;
+changed/missing selected local sources reject a plan. Preserved size and timestamps
+can evade that check. Rebuild or independently hash documentation when integrity
+matters. Catalog and built-in sources remain labeled snapshots.
+
+## Deliberate scope
+
+A straight-line, at-most-eight-step IR was chosen instead of a general workflow
+language. Pipelines are represented explicitly and rendered with Bash pipefail.
+Model output cannot insert arbitrary shell grammar: arguments are literal strings,
+not a shell program. There is no executor, repair loop or permission system hidden
+inside the planner. The caller owns execution and authorization.

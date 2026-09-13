@@ -1,0 +1,3002 @@
+{
+  "schema_version": 1,
+  "source_package": "botocore",
+  "source_version": "1.43.18",
+  "license": "Apache-2.0",
+  "records": 124530,
+  "counts": {
+    "command": 18467,
+    "option": 64450,
+    "input_field": 41613
+  },
+  "services": 425,
+  "service_counts": {
+    "accessanalyzer": 248,
+    "account": 60,
+    "acm": 106,
+    "acm-pca": 166,
+    "aiops": 43,
+    "amp": 202,
+    "amplify": 242,
+    "amplifybackend": 231,
+    "amplifyuibuilder": 366,
+    "apigateway": 598,
+    "apigatewaymanagementapi": 7,
+    "apigatewayv2": 586,
+    "appconfig": 213,
+    "appconfigdata": 7,
+    "appfabric": 121,
+    "appflow": 445,
+    "appintegrations": 129,
+    "application-autoscaling": 158,
+    "application-insights": 166,
+    "application-signals": 203,
+    "applicationcostprofiler": 26,
+    "appmesh": 474,
+    "apprunner": 179,
+    "appstream": 509,
+    "appsync": 445,
+    "arc-region-switch": 236,
+    "arc-zonal-shift": 55,
+    "artifact": 23,
+    "athena": 346,
+    "auditmanager": 273,
+    "autoscaling": 525,
+    "autoscaling-plans": 73,
+    "b2bi": 215,
+    "backup": 565,
+    "backup-gateway": 93,
+    "backupsearch": 71,
+    "batch": 512,
+    "bcm-dashboards": 128,
+    "bcm-data-exports": 57,
+    "bcm-pricing-calculator": 211,
+    "bcm-recommended-actions": 8,
+    "bedrock": 820,
+    "bedrock-agent": 788,
+    "bedrock-agent-runtime": 397,
+    "bedrock-agentcore": 691,
+    "bedrock-agentcore-control": 1273,
+    "bedrock-data-automation": 244,
+    "bedrock-data-automation-runtime": 48,
+    "bedrock-runtime": 240,
+    "billing": 64,
+    "billingconductor": 210,
+    "braket": 112,
+    "budgets": 209,
+    "ce": 331,
+    "chatbot": 153,
+    "chime": 239,
+    "chime-sdk-identity": 124,
+    "chime-sdk-media-pipelines": 287,
+    "chime-sdk-meetings": 108,
+    "chime-sdk-messaging": 275,
+    "chime-sdk-voice": 352,
+    "cleanrooms": 565,
+    "cleanroomsml": 352,
+    "cloud9": 53,
+    "cloudcontrol": 41,
+    "clouddirectory": 457,
+    "cloudformation": 539,
+    "cloudfront": 944,
+    "cloudfront-keyvaluestore": 26,
+    "cloudhsm": 63,
+    "cloudhsmv2": 69,
+    "cloudsearch": 168,
+    "cloudsearchdomain": 22,
+    "cloudtrail": 286,
+    "cloudtrail-data": 7,
+    "cloudwatch": 292,
+    "codeartifact": 311,
+    "codebuild": 438,
+    "codecatalyst": 185,
+    "codecommit": 399,
+    "codeconnections": 111,
+    "codedeploy": 263,
+    "codeguru-reviewer": 95,
+    "codeguru-security": 44,
+    "codeguruprofiler": 103,
+    "codepipeline": 345,
+    "codestar-connections": 109,
+    "codestar-notifications": 58,
+    "cognito-identity": 107,
+    "cognito-idp": 758,
+    "cognito-sync": 77,
+    "comprehend": 493,
+    "comprehendmedical": 100,
+    "compute-optimizer": 202,
+    "compute-optimizer-automation": 137,
+    "config": 550,
+    "connect": 2647,
+    "connect-contact-lens": 5,
+    "connectcampaigns": 83,
+    "connectcampaignsv2": 229,
+    "connectcases": 309,
+    "connecthealth": 98,
+    "connectparticipant": 52,
+    "controlcatalog": 32,
+    "controltower": 111,
+    "cost-optimization-hub": 53,
+    "cur": 36,
+    "customer-profiles": 801,
+    "databrew": 304,
+    "dataexchange": 237,
+    "datapipeline": 94,
+    "datasync": 382,
+    "datazone": 1570,
+    "dax": 98,
+    "deadline": 869,
+    "detective": 101,
+    "devicefarm": 339,
+    "devops-agent": 359,
+    "devops-guru": 168,
+    "directconnect": 317,
+    "discovery": 121,
+    "dlm": 134,
+    "dms": 1039,
+    "docdb": 343,
+    "docdb-elastic": 86,
+    "drs": 255,
+    "ds": 336,
+    "ds-data": 108,
+    "dsql": 67,
+    "dynamodb": 495,
+    "dynamodbstreams": 19,
+    "ebs": 40,
+    "ec2": 5339,
+    "ec2-instance-connect": 9,
+    "ecr": 266,
+    "ecr-public": 97,
+    "ecs": 921,
+    "efs": 129,
+    "eks": 451,
+    "eks-auth": 3,
+    "elasticache": 514,
+    "elasticbeanstalk": 258,
+    "elb": 127,
+    "elbv2": 334,
+    "elementalinference": 70,
+    "emr": 445,
+    "emr-containers": 173,
+    "emr-serverless": 185,
+    "entityresolution": 215,
+    "es": 262,
+    "events": 377,
+    "evs": 133,
+    "finspace": 328,
+    "finspace-data": 147,
+    "firehose": 446,
+    "fis": 152,
+    "fms": 202,
+    "forecast": 309,
+    "forecastquery": 12,
+    "frauddetector": 360,
+    "freetier": 22,
+    "fsx": 535,
+    "gamelift": 682,
+    "gameliftstreams": 111,
+    "geo-maps": 46,
+    "geo-places": 105,
+    "geo-routes": 407,
+    "glacier": 187,
+    "globalaccelerator": 233,
+    "glue": 2586,
+    "grafana": 142,
+    "greengrass": 392,
+    "greengrassv2": 172,
+    "groundstation": 320,
+    "guardduty": 445,
+    "health": 95,
+    "healthlake": 78,
+    "iam": 605,
+    "identitystore": 128,
+    "imagebuilder": 531,
+    "importexport": 35,
+    "inspector": 150,
+    "inspector-scan": 3,
+    "inspector2": 561,
+    "interconnect": 57,
+    "internetmonitor": 90,
+    "invoicing": 120,
+    "iot": 1542,
+    "iot-data": 52,
+    "iot-jobs-data": 34,
+    "iot-managed-integrations": 454,
+    "iotdeviceadvisor": 60,
+    "iotevents": 227,
+    "iotevents-data": 71,
+    "iotfleetwise": 426,
+    "iotsecuretunneling": 31,
+    "iotsitewise": 691,
+    "iotthingsgraph": 130,
+    "iottwinmaker": 321,
+    "iotwireless": 697,
+    "ivs": 158,
+    "ivs-realtime": 198,
+    "ivschat": 73,
+    "kafka": 367,
+    "kafkaconnect": 121,
+    "kendra": 771,
+    "kendra-ranking": 40,
+    "keyspaces": 139,
+    "keyspacesstreams": 20,
+    "kinesis": 203,
+    "kinesis-video-archived-media": 62,
+    "kinesis-video-media": 8,
+    "kinesis-video-signaling": 9,
+    "kinesis-video-webrtc-storage": 5,
+    "kinesisanalytics": 176,
+    "kinesisanalyticsv2": 334,
+    "kinesisvideo": 165,
+    "kms": 278,
+    "lakeformation": 361,
+    "lambda": 549,
+    "launch-wizard": 60,
+    "lex-models": 235,
+    "lex-runtime": 55,
+    "lexv2-models": 1069,
+    "lexv2-runtime": 112,
+    "license-manager": 366,
+    "license-manager-linux-subscriptions": 38,
+    "license-manager-user-subscriptions": 102,
+    "lightsail": 665,
+    "location": 367,
+    "logs": 618,
+    "lookoutequipment": 248,
+    "m2": 226,
+    "machinelearning": 166,
+    "macie2": 363,
+    "mailmanager": 360,
+    "managedblockchain": 145,
+    "managedblockchain-query": 71,
+    "marketplace-agreement": 146,
+    "marketplace-catalog": 240,
+    "marketplace-deployment": 18,
+    "marketplace-discovery": 36,
+    "marketplace-entitlement": 5,
+    "marketplace-reporting": 3,
+    "marketplacecommerceanalytics": 16,
+    "mediaconnect": 633,
+    "mediaconvert": 1381,
+    "medialive": 1614,
+    "mediapackage": 156,
+    "mediapackage-vod": 109,
+    "mediapackagev2": 271,
+    "mediastore": 61,
+    "mediastore-data": 18,
+    "mediatailor": 333,
+    "medical-imaging": 112,
+    "memorydb": 244,
+    "meteringmarketplace": 28,
+    "mgh": 105,
+    "mgn": 594,
+    "migration-hub-refactor-spaces": 112,
+    "migrationhub-config": 15,
+    "migrationhuborchestrator": 160,
+    "migrationhubstrategy": 109,
+    "mpa": 84,
+    "mq": 137,
+    "mturk": 200,
+    "mwaa": 100,
+    "mwaa-serverless": 75,
+    "neptune": 472,
+    "neptune-graph": 155,
+    "neptunedata": 189,
+    "network-firewall": 519,
+    "networkflowmonitor": 107,
+    "networkmanager": 465,
+    "networkmonitor": 56,
+    "notifications": 143,
+    "notificationscontacts": 24,
+    "nova-act": 87,
+    "oam": 51,
+    "observabilityadmin": 191,
+    "odb": 221,
+    "omics": 639,
+    "opensearch": 508,
+    "opensearchserverless": 229,
+    "organizations": 205,
+    "osis": 83,
+    "outposts": 190,
+    "panorama": 159,
+    "partnercentral-account": 148,
+    "partnercentral-benefits": 107,
+    "partnercentral-channel": 137,
+    "partnercentral-selling": 418,
+    "payment-cryptography": 198,
+    "payment-cryptography-data": 297,
+    "pca-connector-ad": 221,
+    "pca-connector-scep": 38,
+    "pcs": 134,
+    "personalize": 326,
+    "personalize-events": 42,
+    "personalize-runtime": 29,
+    "pi": 93,
+    "pinpoint": 1046,
+    "pinpoint-email": 173,
+    "pinpoint-sms-voice": 46,
+    "pinpoint-sms-voice-v2": 523,
+    "pipes": 294,
+    "polly": 57,
+    "pricing": 29,
+    "proton": 403,
+    "qapps": 210,
+    "qbusiness": 664,
+    "qconnect": 880,
+    "quicksight": 4452,
+    "ram": 183,
+    "rbin": 48,
+    "rds": 1407,
+    "rds-data": 56,
+    "redshift": 789,
+    "redshift-data": 89,
+    "redshift-serverless": 310,
+    "rekognition": 427,
+    "repostspace": 77,
+    "resiliencehub": 354,
+    "resiliencehubv2": 273,
+    "resource-explorer-2": 96,
+    "resource-groups": 98,
+    "resourcegroupstaggingapi": 36,
+    "rolesanywhere": 111,
+    "route53": 313,
+    "route53-recovery-cluster": 15,
+    "route53-recovery-control-config": 97,
+    "route53-recovery-readiness": 112,
+    "route53domains": 160,
+    "route53globalresolver": 215,
+    "route53profiles": 55,
+    "route53resolver": 348,
+    "rtbfabric": 221,
+    "rum": 123,
+    "s3api": 1182,
+    "s3control": 680,
+    "s3files": 88,
+    "s3outposts": 19,
+    "s3tables": 229,
+    "s3vectors": 99,
+    "sagemaker": 3611,
+    "sagemaker-a2i-runtime": 20,
+    "sagemaker-edge": 36,
+    "sagemaker-featurestore-runtime": 27,
+    "sagemaker-geospatial": 173,
+    "sagemaker-metrics": 16,
+    "sagemaker-runtime": 35,
+    "savingsplans": 65,
+    "scheduler": 111,
+    "schemas": 117,
+    "sdb": 48,
+    "secretsmanager": 116,
+    "security-ir": 126,
+    "securityagent": 310,
+    "securityhub": 3479,
+    "securitylake": 136,
+    "serverlessrepo": 88,
+    "service-quotas": 90,
+    "servicecatalog": 532,
+    "servicecatalog-appregistry": 84,
+    "servicediscovery": 157,
+    "ses": 316,
+    "sesv2": 534,
+    "shield": 106,
+    "signer": 101,
+    "signer-data": 6,
+    "signin": 8,
+    "simpledbv2": 14,
+    "simspaceweaver": 62,
+    "sms-voice": 46,
+    "snow-device-management": 46,
+    "snowball": 185,
+    "sns": 137,
+    "socialmessaging": 115,
+    "sqs": 105,
+    "ssm": 1023,
+    "ssm-contacts": 190,
+    "ssm-guiconnect": 11,
+    "ssm-incidents": 190,
+    "ssm-quicksetup": 51,
+    "ssm-sap": 115,
+    "sso": 15,
+    "sso-admin": 349,
+    "sso-oidc": 34,
+    "stepfunctions": 171,
+    "storagegateway": 446,
+    "sts": 59,
+    "supplychain": 170,
+    "support": 65,
+    "support-app": 33,
+    "sustainability": 18,
+    "swf": 277,
+    "synthetics": 138,
+    "taxsettings": 135,
+    "textract": 132,
+    "timestream-influxdb": 235,
+    "timestream-query": 90,
+    "timestream-write": 133,
+    "tnb": 102,
+    "transcribe": 279,
+    "transfer": 433,
+    "translate": 99,
+    "trustedadvisor": 70,
+    "uxc": 8,
+    "verifiedpermissions": 237,
+    "voice-id": 127,
+    "vpc-lattice": 334,
+    "waf": 303,
+    "waf-regional": 313,
+    "wafv2": 529,
+    "wellarchitected": 372,
+    "wickr": 284,
+    "wisdom": 219,
+    "workdocs": 268,
+    "workmail": 454,
+    "workmailmessageflow": 9,
+    "workspaces": 450,
+    "workspaces-instances": 172,
+    "workspaces-thin-client": 70,
+    "workspaces-web": 351,
+    "xray": 193
+  },
+  "compressed_sha256": "71da55e8d4cbdf76fb7f12e1c624cd670c5ac38aefa4287a12f4c313ce08bef0",
+  "jsonl_sha256": "16d55329de4deb118dd4376e9f866eabdc410af9155244013b32918f3773e76d",
+  "compressed_bytes": 5334641,
+  "scope": "AWS CLI modeled operations and direct options, plus separately typed nested JSON input fields",
+  "limitations": [
+    "Not 100000 executables or independent tasks",
+    "Not an installed command inventory",
+    "AWS CLI customizations may differ from service models",
+    "Catalog syntax is not installed-version verified"
+  ],
+  "inputs": [
+    {
+      "path": "data/accessanalyzer/2019-11-01/service-2.json.gz",
+      "decoded_sha256": "529f3521a1841590d02d3af962bf2e50ac9bfbd89259a56d6be35a85f495e6ac",
+      "compressed_sha256": "3fcbb7c4cafbfe908170e1be50abc3610762aa9fa3bee9440db6cb73a8f12bc7",
+      "api_version": "2019-11-01"
+    },
+    {
+      "path": "data/account/2021-02-01/service-2.json.gz",
+      "decoded_sha256": "4c0a316c9908f91d1585772c618aff47f01df65c7adc0b7678b953eec67eded3",
+      "compressed_sha256": "b9e457f7552febc3dedcbb9c3b1bacbc1963e5171432de98dfbe30eb9dbca7ff",
+      "api_version": "2021-02-01"
+    },
+    {
+      "path": "data/acm/2015-12-08/service-2.json.gz",
+      "decoded_sha256": "64851dc42f548993cca7d2f58743a5a53397fab4574b8bbebc3243926288a392",
+      "compressed_sha256": "8a7273dc7ae2998118e75dc53116b775d2f01220ce37ce7788fef00246ea1b2d",
+      "api_version": "2015-12-08"
+    },
+    {
+      "path": "data/acm-pca/2017-08-22/service-2.json.gz",
+      "decoded_sha256": "2b54e9196b0b37606b34c7d13656a23320753b13d0996d56b34d0ee0a797637b",
+      "compressed_sha256": "96f9d34e3e94f34c2c444f19c6b8dfc896acfdff228770f7b6039dee27bbf458",
+      "api_version": "2017-08-22"
+    },
+    {
+      "path": "data/aiops/2018-05-10/service-2.json.gz",
+      "decoded_sha256": "b0dcb453c8443f0799c1e6c87719499268650d2ad9bd163c9757db298e9fe245",
+      "compressed_sha256": "257491b1480a40fa61cdf8a17acd2d7c82432f9709d3eba2f9d4bab15665b47b",
+      "api_version": "2018-05-10"
+    },
+    {
+      "path": "data/amp/2020-08-01/service-2.json.gz",
+      "decoded_sha256": "dbd67f6706322549dba20d5cf54e641e1f35555fb51468a6907944a3d747fc1a",
+      "compressed_sha256": "843aca71b472a601fc8c10638d654cad78bf4628776404021279c51df84ed671",
+      "api_version": "2020-08-01"
+    },
+    {
+      "path": "data/amplify/2017-07-25/service-2.json.gz",
+      "decoded_sha256": "602c55d9c517a1233f2fb956013b3b38b3ffeae4d9063f189a847364719b08a5",
+      "compressed_sha256": "cba2f152f08ec2f328f7b27b775b7ea808071b68e8147f45f6fe48cc736f25e5",
+      "api_version": "2017-07-25"
+    },
+    {
+      "path": "data/amplifybackend/2020-08-11/service-2.json.gz",
+      "decoded_sha256": "aea155e331718a235863ed8b3b9b9f4a9dceae90231f181573163b0da738ff23",
+      "compressed_sha256": "c67a25f4cb74984679ac77a43758130069993e3064b979a1c1fbfcc4e824058a",
+      "api_version": "2020-08-11"
+    },
+    {
+      "path": "data/amplifyuibuilder/2021-08-11/service-2.json.gz",
+      "decoded_sha256": "919d003421e4e4995a1c5cd4585a513b7d93cc3923d46382c152eed97b9cfc62",
+      "compressed_sha256": "03aba8f1106e1ffd2fec66a1ee93f2f8fb58b77bcc20d8cda778c836b8f1a1e3",
+      "api_version": "2021-08-11"
+    },
+    {
+      "path": "data/apigateway/2015-07-09/service-2.json.gz",
+      "decoded_sha256": "677fa434fada74fed45b93419e8e59aa37eb80c886564fd54082136d127c4713",
+      "compressed_sha256": "5bd4ee8a96a78888a5189de3ab7930cd751b2826975081124b6baed0daeabe64",
+      "api_version": "2015-07-09"
+    },
+    {
+      "path": "data/apigatewaymanagementapi/2018-11-29/service-2.json.gz",
+      "decoded_sha256": "0199b0a4a80b0ddc8baf143dfaf3e0ae0f8d9ed95a033d8204284cad3bbb40ae",
+      "compressed_sha256": "76c60467daaceb83bfe3158d98a551446e012618d6cab2427ce81525fd6b81e9",
+      "api_version": "2018-11-29"
+    },
+    {
+      "path": "data/apigatewayv2/2018-11-29/service-2.json.gz",
+      "decoded_sha256": "fdb831dc9be4cb380b42e21525a1a7e6e379958b7d8a3df7fd71c6c7f50df47c",
+      "compressed_sha256": "8a86af001440d8f42de9af60e24f33faf30e8aca34d7c8a696e522cadf2707b0",
+      "api_version": "2018-11-29"
+    },
+    {
+      "path": "data/appconfig/2019-10-09/service-2.json.gz",
+      "decoded_sha256": "db07fed9a940bbf1200819595ae25b37c7f36b1680683c20473f91da80b4c397",
+      "compressed_sha256": "5e427f37e060185a3c9da61344adee1dabce944c8853c0cb20d9217253ae5820",
+      "api_version": "2019-10-09"
+    },
+    {
+      "path": "data/appconfigdata/2021-11-11/service-2.json.gz",
+      "decoded_sha256": "9e7bbb7e65ff714fef8bbc80aed1325e60463bf1005b6c2c9b95cef02e1ef5f4",
+      "compressed_sha256": "ff2fcb9a1868d4b816a9ce5fff0c90a20781c36ce8f595f2a518c06238f2e7c1",
+      "api_version": "2021-11-11"
+    },
+    {
+      "path": "data/appfabric/2023-05-19/service-2.json.gz",
+      "decoded_sha256": "60a5c9f210eb05d10a50eedb098107d2aecef80449efd2a0c4f6dad7dc6a753f",
+      "compressed_sha256": "9c5d05c49a67c869b5f6d9d239f4a256fed743967ea0b2f8ecbb629e488fc723",
+      "api_version": "2023-05-19"
+    },
+    {
+      "path": "data/appflow/2020-08-23/service-2.json.gz",
+      "decoded_sha256": "efb18084cb95f31c82a4073b6c7536c218dd49334632f455ae038974d40cd820",
+      "compressed_sha256": "eb6f1aaf32bb6da46017af2f7d9bfe4d529d8a11a53388894078ced8f6d8e8df",
+      "api_version": "2020-08-23"
+    },
+    {
+      "path": "data/appintegrations/2020-07-29/service-2.json.gz",
+      "decoded_sha256": "788c80a1cabc8cf568b1764cf98255eccec46947a682f49410e650c41705700f",
+      "compressed_sha256": "17f4a6b06672067080cd8fe442cdcc0c836d05981d6f09823f3e3a6830b267e9",
+      "api_version": "2020-07-29"
+    },
+    {
+      "path": "data/application-autoscaling/2016-02-06/service-2.json.gz",
+      "decoded_sha256": "a5038d239d6c23ff3f7d144c2b78fa807fa35e7fd09162599e70b685766ee695",
+      "compressed_sha256": "f49319627fe46e466c2809b88214855cb418063dc1850d9c23137926e4e6c015",
+      "api_version": "2016-02-06"
+    },
+    {
+      "path": "data/application-insights/2018-11-25/service-2.json.gz",
+      "decoded_sha256": "4f36e1f1f199b449d260f4c0bd112de74d5d093b17685054d1659daa4551a33b",
+      "compressed_sha256": "6961f9956aa18c8b89a95bde91ad8b3fade923d210ed969b964a96a7eb72a2df",
+      "api_version": "2018-11-25"
+    },
+    {
+      "path": "data/application-signals/2024-04-15/service-2.json.gz",
+      "decoded_sha256": "4f293faae936c962fb856be6b6ad8bdaee1975868ba3c30920c90bcee17eee70",
+      "compressed_sha256": "bcf26e5679e1c8c8411a18561c232523b7c3047da3a7fc1fcd9f2de5a122cc14",
+      "api_version": "2024-04-15"
+    },
+    {
+      "path": "data/applicationcostprofiler/2020-09-10/service-2.json.gz",
+      "decoded_sha256": "007c51be98116f9caaee41727454a7e180dba3eea6357c0184302f98ce790eb0",
+      "compressed_sha256": "c5e4f6b0cd9a69619c871cd69511169ea4cf9fbecbb1c68fffc5d3c4335d97be",
+      "api_version": "2020-09-10"
+    },
+    {
+      "path": "data/appmesh/2019-01-25/service-2.json.gz",
+      "decoded_sha256": "75ec1ee2829500308d677fe8a73368e84f91f6d6b1c125299a60f53d3362cab7",
+      "compressed_sha256": "321a25838460cdd643da9d92354a5c1c5569adad5314c4c521236898bc83d834",
+      "api_version": "2019-01-25"
+    },
+    {
+      "path": "data/apprunner/2020-05-15/service-2.json.gz",
+      "decoded_sha256": "38683aba7b851715118f6bac7c0550e30f3b79853c949d5e49593ea56bcc1f8a",
+      "compressed_sha256": "edf6d65e32d02be43065d85fa6f428706531bcec4644fc9081c4f661f4c683a3",
+      "api_version": "2020-05-15"
+    },
+    {
+      "path": "data/appstream/2016-12-01/service-2.json.gz",
+      "decoded_sha256": "6c3337ce4b4e9ffa5475a176f269f16fb2817b002ab2038304cfce793cf1f816",
+      "compressed_sha256": "799990514c02a3391fcea36260ba1347ea1e37c0d8ae1021af3cfd83ffeadfde",
+      "api_version": "2016-12-01"
+    },
+    {
+      "path": "data/appsync/2017-07-25/service-2.json.gz",
+      "decoded_sha256": "bf07702c047232c7f203014534f46e2dc7673ef1cd344a9802bc8071e7b05f1d",
+      "compressed_sha256": "69ea412fbf54ae5314b006950ca449f30da2adebfd437620e46f7100f1cb510e",
+      "api_version": "2017-07-25"
+    },
+    {
+      "path": "data/arc-region-switch/2022-07-26/service-2.json.gz",
+      "decoded_sha256": "e21fa44b38e9d6651fbb10572cbcd7eb6727b2021fe050f454e4ab6aa6ff5767",
+      "compressed_sha256": "b447cea7a3ec0d282229e1c0b9ab58cbe7cc772b7c722646e396927c4b82e259",
+      "api_version": "2022-07-26"
+    },
+    {
+      "path": "data/arc-zonal-shift/2022-10-30/service-2.json.gz",
+      "decoded_sha256": "306b808951047ebf53e78d0e2d7992eb8a28d0e35fa92556feaa5b5328eea8c2",
+      "compressed_sha256": "83992c0402421f8088fefa8e19ef357c7f60b2fb6f98a4a470b238576830ed41",
+      "api_version": "2022-10-30"
+    },
+    {
+      "path": "data/artifact/2018-05-10/service-2.json.gz",
+      "decoded_sha256": "31a5e1ff41968050560b26aa031640a0d11985c95ac1b9e83705a2e6b588756c",
+      "compressed_sha256": "9341beafc9a2715fad3b0134e8f87e3ec21c15afddc6685528c3fb59ab278a5f",
+      "api_version": "2018-05-10"
+    },
+    {
+      "path": "data/athena/2017-05-18/service-2.json.gz",
+      "decoded_sha256": "2931dcc88863ec682e4ba74414c871e81103f04bb799c9a513f603982cd7e315",
+      "compressed_sha256": "29822da19e244e608e879bce7d0e24cd9ab5c1c04f3a379699fec2a2f7fa6cdf",
+      "api_version": "2017-05-18"
+    },
+    {
+      "path": "data/auditmanager/2017-07-25/service-2.json.gz",
+      "decoded_sha256": "461fbeb8e12f947747b816f7fc5c781ae0613403facfe5b5854eaf74b8b11022",
+      "compressed_sha256": "a768a1303479cd26738cffaa3e57d971d8d74b70ee989340c7ed6d28ee8cef2c",
+      "api_version": "2017-07-25"
+    },
+    {
+      "path": "data/autoscaling/2011-01-01/service-2.json.gz",
+      "decoded_sha256": "25641bfd2ceea5a275c275921563a3cd921add066ea2ba4c3994b5d980fc4372",
+      "compressed_sha256": "6d5f611a6411d4c0761028efb4168840e98b8f8d6bdceb2aea30fc039c13f107",
+      "api_version": "2011-01-01"
+    },
+    {
+      "path": "data/autoscaling-plans/2018-01-06/service-2.json.gz",
+      "decoded_sha256": "e0250f39fda907be28a6155a548d12c7373b93f28844555d65c5421bef11253c",
+      "compressed_sha256": "8559619b4f7247213fdd9968ddb628b926f46626aec77ba89e0ad208cd04a3b2",
+      "api_version": "2018-01-06"
+    },
+    {
+      "path": "data/b2bi/2022-06-23/service-2.json.gz",
+      "decoded_sha256": "ddd87b375132685cca4a4b7eed3b31167511b52f79721b81cd5481cbfd2e1c97",
+      "compressed_sha256": "481808ada7f8106aafe4e46226e607eecd1e5a57892f1f33ed05a415fe9b559b",
+      "api_version": "2022-06-23"
+    },
+    {
+      "path": "data/backup/2018-11-15/service-2.json.gz",
+      "decoded_sha256": "27e6236818ac2a56c700b081e99cf8ad7701ded3e98ffa1b01dac18e7e431969",
+      "compressed_sha256": "7e30da5e77709613a9555bfa7df2238b8b8250a8aba472be6777e516648fce8c",
+      "api_version": "2018-11-15"
+    },
+    {
+      "path": "data/backup-gateway/2021-01-01/service-2.json.gz",
+      "decoded_sha256": "460ca6bacecf0933eee1656d712028950e07402e43ae11a7e9b72e5a7a11a724",
+      "compressed_sha256": "b73673008123603e9a6573afa86f3e6f367b75bc705eafb3b11a25c9f32be44f",
+      "api_version": "2021-01-01"
+    },
+    {
+      "path": "data/backupsearch/2018-05-10/service-2.json.gz",
+      "decoded_sha256": "7c60f073a3d82f14622802dcf0abeed2162b3399cf65ea246062251d05cedb5b",
+      "compressed_sha256": "397034437c1a9155160f0291894556850e4b540d5111fae738f369e3e5b04d24",
+      "api_version": "2018-05-10"
+    },
+    {
+      "path": "data/batch/2016-08-10/service-2.json.gz",
+      "decoded_sha256": "c417129aa7df31992fb442fabac558d81f95cdab795f348658db4c5cee058262",
+      "compressed_sha256": "29a90f3da37718c2a016e4b822bba80a0cc6a6bc56df695f7f587444f8a1c594",
+      "api_version": "2016-08-10"
+    },
+    {
+      "path": "data/bcm-dashboards/2025-08-18/service-2.json.gz",
+      "decoded_sha256": "4697c97e6cb493421ff7a75861636bb9046c6db4bbc34da828e45487235326c5",
+      "compressed_sha256": "664ffbffe9c6e2ae0d55dfab4c15d27565bc12165b133ef9cb8beaa152dce374",
+      "api_version": "2025-08-18"
+    },
+    {
+      "path": "data/bcm-data-exports/2023-11-26/service-2.json.gz",
+      "decoded_sha256": "735d5c34ae07d04ec3c8146cc56574b23c6daa548ba89f7c52a11739ad446f11",
+      "compressed_sha256": "21db4285652bd83e9d48bb60bdc58bde339ce7bfb05fca5f9d955375933b3e16",
+      "api_version": "2023-11-26"
+    },
+    {
+      "path": "data/bcm-pricing-calculator/2024-06-19/service-2.json.gz",
+      "decoded_sha256": "c1ab0caf358537b90b0c4a0e498df647a1eb927d7d9ed1ad62aef0120002ce2a",
+      "compressed_sha256": "61aed682aab09a23b2e1002436566938cccfd4c240a719ffaecd9a6e61cb2e72",
+      "api_version": "2024-06-19"
+    },
+    {
+      "path": "data/bcm-recommended-actions/2024-11-14/service-2.json.gz",
+      "decoded_sha256": "18d8c6fc0fb48e487f77b43ee16464c009f2bb76997f08943c8652133535a1a7",
+      "compressed_sha256": "0d6efc3bd57484d553034b087e0ed113c166b57ce6de311285795950c1f65485",
+      "api_version": "2024-11-14"
+    },
+    {
+      "path": "data/bedrock/2023-04-20/service-2.json.gz",
+      "decoded_sha256": "bd05f61ed2a7e5aba591895fcd9641b70864c926f5e3b3bdcbea1f6fec664c0b",
+      "compressed_sha256": "45f7a209a7c3ff4d49898f02b93330c7f3f539c07cfb7e775a4826e62285bfd6",
+      "api_version": "2023-04-20"
+    },
+    {
+      "path": "data/bedrock-agent/2023-06-05/service-2.json.gz",
+      "decoded_sha256": "a337a1e441f4930880b8606e32a1f318d4ef4d4ad2797120172acb8753104c02",
+      "compressed_sha256": "0eb113cbda8dac1ce5c104c8aad435bc71d7769e96a9c2affb485a026c7c04f0",
+      "api_version": "2023-06-05"
+    },
+    {
+      "path": "data/bedrock-agent-runtime/2023-07-26/service-2.json.gz",
+      "decoded_sha256": "eb4c21174da77408d86bafcf5b03807ced5b7dbbf894418ad636d931a2cc204b",
+      "compressed_sha256": "b1b1de4594cffcb438b8b86875c1f4cf3c67d68ce3a27b29ad8441be30d540f6",
+      "api_version": "2023-07-26"
+    },
+    {
+      "path": "data/bedrock-agentcore/2024-02-28/service-2.json.gz",
+      "decoded_sha256": "536bb139ec33e2b3d0bb84aa968bdb783a2c10767362101917ec99c5a7e768c3",
+      "compressed_sha256": "13ea2e905b6538b57e6ab79e4a276803e59cfb7318f2c720b102fa1bb0425ac7",
+      "api_version": "2024-02-28"
+    },
+    {
+      "path": "data/bedrock-agentcore-control/2023-06-05/service-2.json.gz",
+      "decoded_sha256": "dec9fb89789ea4a280d38d998dc53e9e45f515a74a2b6dced3c2e8bf2c70a4c0",
+      "compressed_sha256": "6c2e250b55482890f32eadf870b35de8d0e0fe3f9530f38a391d345befc31c35",
+      "api_version": "2023-06-05"
+    },
+    {
+      "path": "data/bedrock-data-automation/2023-07-26/service-2.json.gz",
+      "decoded_sha256": "a9787c03b99e8bdb63d0f487c6ffe390c4abfc7b194c4e4fa3ffa8d4cfad527a",
+      "compressed_sha256": "d61a6abb3faaae6996daa5f5a1b1fa5a99bd92c99d5e1e3d73d5a83015707979",
+      "api_version": "2023-07-26"
+    },
+    {
+      "path": "data/bedrock-data-automation-runtime/2024-06-13/service-2.json.gz",
+      "decoded_sha256": "ba354e78c83f7dda97b725933da67ad137e8d0644e1438bd43867e735a1fe3b5",
+      "compressed_sha256": "b3478255d6edcda24a6f078043f27fe55f7a7cdd458f858224df48f733f6c65b",
+      "api_version": "2024-06-13"
+    },
+    {
+      "path": "data/bedrock-runtime/2023-09-30/service-2.json.gz",
+      "decoded_sha256": "9461748a0ac5ac149e00f7711cb75fa52ba583ab5b0ab89b45bd92cb1b62527d",
+      "compressed_sha256": "9fd21d87296e0379c643279ded8529d29ce426e83fe9894a51e09b667cdd1586",
+      "api_version": "2023-09-30"
+    },
+    {
+      "path": "data/billing/2023-09-07/service-2.json.gz",
+      "decoded_sha256": "cb071fc10534ed1a992ac191bb72519e847305dbfba2ac39d46fc6c8abfcaa81",
+      "compressed_sha256": "c3677f601c993c6ce28ccf037fafc93f242075b6b8bd0d09a380c6ae3527d5e7",
+      "api_version": "2023-09-07"
+    },
+    {
+      "path": "data/billingconductor/2021-07-30/service-2.json.gz",
+      "decoded_sha256": "f81f064856d662a5113cd01486341fb926e5fc056bbe603d81f339c17d4b0f92",
+      "compressed_sha256": "85223fadede09f6db56f3845fa71b3f91e55acce4405fb620cccddc48c8255d7",
+      "api_version": "2021-07-30"
+    },
+    {
+      "path": "data/braket/2019-09-01/service-2.json.gz",
+      "decoded_sha256": "9c29c18575dfd4d34a26bb6490029260b509ae7e2dd5d63785b2ff0331c122f6",
+      "compressed_sha256": "24c7adce38b59627eb7369b699c060b725e413c4adb0eb50a7fbea4914696e5c",
+      "api_version": "2019-09-01"
+    },
+    {
+      "path": "data/budgets/2016-10-20/service-2.json.gz",
+      "decoded_sha256": "815aebe9896d14c03a662103407ce6afb725e40d4b15a0578db306316172d936",
+      "compressed_sha256": "7d9fdad0f5c105a9a0fa333f87f231c9f8054af3483593f00553f89b235fd72e",
+      "api_version": "2016-10-20"
+    },
+    {
+      "path": "data/ce/2017-10-25/service-2.json.gz",
+      "decoded_sha256": "297f1a2ac3a77a0cbff3dd7706abc120d477c588c38b2cf826a25f9fdd06e8c4",
+      "compressed_sha256": "5a348e33f7f33dadf3ab1294c66ea814b05b5e47ddae059c1f8751763f2cbf03",
+      "api_version": "2017-10-25"
+    },
+    {
+      "path": "data/chatbot/2017-10-11/service-2.json.gz",
+      "decoded_sha256": "6224499798473fcc3ebee7211e50e028b37e86c2de00b9e9ba3af4a26d34141f",
+      "compressed_sha256": "7733cae3ccf8c92d1bc9a9068af61dc27e7295746d6f6810663a43edc6f7cfeb",
+      "api_version": "2017-10-11"
+    },
+    {
+      "path": "data/chime/2018-05-01/service-2.json.gz",
+      "decoded_sha256": "f65f7a178c5b065484bc4876a63ee328a2370429f0ffdac69408b3ac60e0131b",
+      "compressed_sha256": "39c139699d1994d7899b6ec4e6f0f795b5ecdc8af4516fb402e508d05ad109a6",
+      "api_version": "2018-05-01"
+    },
+    {
+      "path": "data/chime-sdk-identity/2021-04-20/service-2.json.gz",
+      "decoded_sha256": "98546b10a1ae5d9c38e337726f970717d758a4862eaf210c67c214c0cc269676",
+      "compressed_sha256": "969b6246718d07b9d7ebafa4a53caff49eef795fc8e3d4b4a7be2c585030407b",
+      "api_version": "2021-04-20"
+    },
+    {
+      "path": "data/chime-sdk-media-pipelines/2021-07-15/service-2.json.gz",
+      "decoded_sha256": "23277c3e1a4ddb63adc9e6ef9fce30185753e349889d15be827cd26e498aba21",
+      "compressed_sha256": "06093f99d6fdbc3d76f87b30d2a543eb15b56917d66c503c0806662740055a08",
+      "api_version": "2021-07-15"
+    },
+    {
+      "path": "data/chime-sdk-meetings/2021-07-15/service-2.json.gz",
+      "decoded_sha256": "dbdbe10bc7ae5dd5a5d78ff0fa6dad20ea826a38ce2e4cbf77b7b7a8a4a5068e",
+      "compressed_sha256": "e8bc7aecbb5bced8d225708abd0993e00b8646700087380efb8786dfb13ebd15",
+      "api_version": "2021-07-15"
+    },
+    {
+      "path": "data/chime-sdk-messaging/2021-05-15/service-2.json.gz",
+      "decoded_sha256": "aa2ef45a3c6d1a488c9dde0771f9b0c070c5745e9571716d4563f81943bde3e5",
+      "compressed_sha256": "14bdc3a0841adea775c80ab5e01d1476e021224fa4ad4bef103ac596dddc2d88",
+      "api_version": "2021-05-15"
+    },
+    {
+      "path": "data/chime-sdk-voice/2022-08-03/service-2.json.gz",
+      "decoded_sha256": "5718aff022469b1528271cc458030fcc1244a8b449213fb4a27e7347faebbb52",
+      "compressed_sha256": "bf75b7127614ea6c66cb2cd741ac73f189337f4bde42755f9bc552fc5da5d097",
+      "api_version": "2022-08-03"
+    },
+    {
+      "path": "data/cleanrooms/2022-02-17/service-2.json.gz",
+      "decoded_sha256": "9480d113414349eb20cf88f2875b15528fec92544d1e1ea9e33c60a436cce246",
+      "compressed_sha256": "417450b5b0a81848b2fc141f6e1b341abffb9447c7c4f263ecf39428b6d4e2d4",
+      "api_version": "2022-02-17"
+    },
+    {
+      "path": "data/cleanroomsml/2023-09-06/service-2.json.gz",
+      "decoded_sha256": "0bdda97f100716eac990f268ceccbd55c7976a917294e1cec925f4e19e652496",
+      "compressed_sha256": "418d3da63e4e386dc9f93239a3c23315bb54398e8da9676112ded5d64e4bdf24",
+      "api_version": "2023-09-06"
+    },
+    {
+      "path": "data/cloud9/2017-09-23/service-2.json.gz",
+      "decoded_sha256": "e63dd1cf8f8d55d2fe1949ddd90f0c3c761e2e52dec7845cf9e4026e1b110cfe",
+      "compressed_sha256": "a459161ab382b7649bd5958f48919db09a93ae0b319aebb679bd86861ab9c4b7",
+      "api_version": "2017-09-23"
+    },
+    {
+      "path": "data/cloudcontrol/2021-09-30/service-2.json.gz",
+      "decoded_sha256": "ed1a147853a43d7f35844731d5c8208b0d3bed8d5d7c5bf95da818103f1c0e89",
+      "compressed_sha256": "8e5d107a3c8be930f0f6b001047e1f31546355889ae7c077ce8fc59ebaef6ac6",
+      "api_version": "2021-09-30"
+    },
+    {
+      "path": "data/clouddirectory/2017-01-11/service-2.json.gz",
+      "decoded_sha256": "914010da9579edd22961d88b73d7417f0515a5a30d0e81d1f2c90eb6000df6e6",
+      "compressed_sha256": "ad6d99a13c68de7397bd36bb8adbee5276a3e8b6a285a7c164d440b2d06d0126",
+      "api_version": "2017-01-11"
+    },
+    {
+      "path": "data/cloudformation/2010-05-15/service-2.json.gz",
+      "decoded_sha256": "fbb179afd664fde47ade0d0be37d434ab3e1fac69e77cd39259872351593420f",
+      "compressed_sha256": "137631330e40c68e509c4e09e418542cde01cc25e669cd0e60bf8b4e4ebdc93a",
+      "api_version": "2010-05-15"
+    },
+    {
+      "path": "data/cloudfront/2020-05-31/service-2.json.gz",
+      "decoded_sha256": "90eea0e6f340e27167bd2decc2c64cc379b32aae824cb29a281acd567f32a8d5",
+      "compressed_sha256": "2535cbaaa328bd28196090a58cf407eaa2d2426cf378bb559ad38820d6c00228",
+      "api_version": "2020-05-31"
+    },
+    {
+      "path": "data/cloudfront-keyvaluestore/2022-07-26/service-2.json.gz",
+      "decoded_sha256": "9bc300ee21019a5f77cd91dd0dc01144930107bb2193b3da02d79743dcb4ea36",
+      "compressed_sha256": "c4f1d91902ea71e5e3789b1fea8f2cf096590615ce43ff014ec1476c18e290e6",
+      "api_version": "2022-07-26"
+    },
+    {
+      "path": "data/cloudhsm/2014-05-30/service-2.json.gz",
+      "decoded_sha256": "b741276dbea80cc7b77c4397518d3ef9838f2e8561c5dcb98903c1060075de59",
+      "compressed_sha256": "dd5497c36d146bf8565b0d9ca9fe63008a616f6c5b5ca728c7fdcb813f9fb890",
+      "api_version": "2014-05-30"
+    },
+    {
+      "path": "data/cloudhsmv2/2017-04-28/service-2.json.gz",
+      "decoded_sha256": "922de79639fb66aeafcb7e102368b4de93d11930806f20dac5efeb6995d4ea05",
+      "compressed_sha256": "c74e45571e76823fe9b6cb8502a9fe2ca3157bfc8992e63a8033183f6e13c725",
+      "api_version": "2017-04-28"
+    },
+    {
+      "path": "data/cloudsearch/2013-01-01/service-2.json.gz",
+      "decoded_sha256": "eeaf305370d8035f137fa1d078bfdae8c5a98fe5e6722261901c6d80c72bd781",
+      "compressed_sha256": "5ad05cfaf168e395ae792ba3eb09d852b1a1470dde28eaac8b598d4e0594a0d3",
+      "api_version": "2013-01-01"
+    },
+    {
+      "path": "data/cloudsearchdomain/2013-01-01/service-2.json.gz",
+      "decoded_sha256": "65e9ea550fc4778fb1bffaf94180ac96921cb96e7ed2d5c57c4d223a92d56c98",
+      "compressed_sha256": "631fdf4a5a3047f05ccb065eb3aca4974608c7a8030fad3ac52aeb4cadaec8de",
+      "api_version": "2013-01-01"
+    },
+    {
+      "path": "data/cloudtrail/2013-11-01/service-2.json.gz",
+      "decoded_sha256": "47518a69b3affabe424be6381e8c75b78b1579a661bc35ee65ad0696a459644c",
+      "compressed_sha256": "1d0bbc593753590dc9afc412b6a4a004bfe104eca7894c4e43c37d226700e8c4",
+      "api_version": "2013-11-01"
+    },
+    {
+      "path": "data/cloudtrail-data/2021-08-11/service-2.json.gz",
+      "decoded_sha256": "41c352ea177300df06c834d002c7c7f0e37aecd5f0a3e0ceb3e20c81f75373a6",
+      "compressed_sha256": "a58516072df83c9a3da30b3dbe98fed49c64a3bc28c785809b80c25000f3b0f6",
+      "api_version": "2021-08-11"
+    },
+    {
+      "path": "data/cloudwatch/2010-08-01/service-2.json.gz",
+      "decoded_sha256": "362afa6a4e5fb51c87ea1d28c8c7eebd6fc8773c36e4b2c25e29534facc0fc5f",
+      "compressed_sha256": "30206b7bf63d2bcb5d29a8ca2ccf3f5f1c6987775fa68ec1b5b892802eb689d2",
+      "api_version": "2010-08-01"
+    },
+    {
+      "path": "data/codeartifact/2018-09-22/service-2.json.gz",
+      "decoded_sha256": "ad62fc5998bbb0d44cdc91fc767df659e6c5057e4f6245709830550c827c037e",
+      "compressed_sha256": "fe93915ac508a4210d78d28133c054f83c17062dd6007086d84ad58f7702114d",
+      "api_version": "2018-09-22"
+    },
+    {
+      "path": "data/codebuild/2016-10-06/service-2.json.gz",
+      "decoded_sha256": "f49bebbacfbdbe89a2298c6c235738a0fe54b62c775b4a5f7aebb5ae2f8d1e7d",
+      "compressed_sha256": "e2a747695aa23c07984b7af75a853f9486e050fbce2ce7c72a9566c89188722d",
+      "api_version": "2016-10-06"
+    },
+    {
+      "path": "data/codecatalyst/2022-09-28/service-2.json.gz",
+      "decoded_sha256": "6515657bc0e3a5b394e5af89656bea428c710c58ea21b60afb550e3295517709",
+      "compressed_sha256": "7a83799844b45f4c6ac2a0ef50e95afd85b4337087ba5f9d45b116c73ffe25af",
+      "api_version": "2022-09-28"
+    },
+    {
+      "path": "data/codecommit/2015-04-13/service-2.json.gz",
+      "decoded_sha256": "b50d5c4428ffeb86fdc67462c7766ae7df781a3c0186f52bbfa50feff3488908",
+      "compressed_sha256": "99a69535dac68012ec31e71b766742da748d9c2218c6687fd075b25d61e6a0d0",
+      "api_version": "2015-04-13"
+    },
+    {
+      "path": "data/codeconnections/2023-12-01/service-2.json.gz",
+      "decoded_sha256": "c2b7780facc20c58a9e87fb634434ac5fce63b465ba868fca81909d41a90b17c",
+      "compressed_sha256": "5a3f38c863e4f889824d11f228e0b4e0bc1d2b2f5096f02911d9b1834d2e5e6a",
+      "api_version": "2023-12-01"
+    },
+    {
+      "path": "data/codedeploy/2014-10-06/service-2.json.gz",
+      "decoded_sha256": "a35bf7bae4ddb7de67f9e670d228b8b2e4ec4cfc0a9b4b7f60da645aa824fbf4",
+      "compressed_sha256": "364e2aab5c1483d33407467b772e2c506a0c993b586bc5dfd8efd75662537558",
+      "api_version": "2014-10-06"
+    },
+    {
+      "path": "data/codeguru-reviewer/2019-09-19/service-2.json.gz",
+      "decoded_sha256": "72befb39a80dce9714710b1de696da20f73f69bc4746a99cbf890a82ff3b7be6",
+      "compressed_sha256": "a4aac065f74071805f7dbd01a4f082483af864d8669887197729e13b53dfb2f4",
+      "api_version": "2019-09-19"
+    },
+    {
+      "path": "data/codeguru-security/2018-05-10/service-2.json.gz",
+      "decoded_sha256": "2dcc67bc36196c139b77abdfb175fb72d39239d56c3e6fd869f6f31aae871707",
+      "compressed_sha256": "a474075bbd61bfd4140eec7e58660e369773d337037ff5801202f9f2e40d2635",
+      "api_version": "2018-05-10"
+    },
+    {
+      "path": "data/codeguruprofiler/2019-07-18/service-2.json.gz",
+      "decoded_sha256": "6f0b631a27b05cc7161be74d5861bcc7ddfc6691f3a0012abdca7a21c89a1fb7",
+      "compressed_sha256": "1074e0f9796fc38293d94ad2f0f0bb9c6d3e507010bbae7a08bd8de7e8de0db2",
+      "api_version": "2019-07-18"
+    },
+    {
+      "path": "data/codepipeline/2015-07-09/service-2.json.gz",
+      "decoded_sha256": "d703e508f2d317b31d37aad6fbcf762c83b3481cd02b0a7f49399ac1b3677351",
+      "compressed_sha256": "d1a75656a81d92ac4605650b5411184bf8f413784355ec71bb01f919a7e958be",
+      "api_version": "2015-07-09"
+    },
+    {
+      "path": "data/codestar-connections/2019-12-01/service-2.json.gz",
+      "decoded_sha256": "69e6fd3f065fc7d9f4119f7fb4fd8981efef5404d0f9a82163ee4b984f74b4ba",
+      "compressed_sha256": "df5a28655c3ed02ed04d5059320ed7aac93f30fce9d078e2cf39bdcccfd188cd",
+      "api_version": "2019-12-01"
+    },
+    {
+      "path": "data/codestar-notifications/2019-10-15/service-2.json.gz",
+      "decoded_sha256": "30d18edc405fa1aecef00b54dcf3ad3e9d51b48b9951e5d7e02cc30e1fc759fa",
+      "compressed_sha256": "0ec0ad9a4af0c89aed783a8cf5d9e6d35dcc88232952d6d8ce38e86ffa5ebba0",
+      "api_version": "2019-10-15"
+    },
+    {
+      "path": "data/cognito-identity/2014-06-30/service-2.json.gz",
+      "decoded_sha256": "2cfb6995b06c70ab8e9a5c7c1c0612f4212ba3c355f40d033a2b9ae323ff9fc5",
+      "compressed_sha256": "f5faa5cc03d40a8bc880d5a89aab8459c2163ebb3f79392d64e2ec9b4297bf87",
+      "api_version": "2014-06-30"
+    },
+    {
+      "path": "data/cognito-idp/2016-04-18/service-2.json.gz",
+      "decoded_sha256": "e0b646abb0be7dd823bbd3b2ba940a62efbdd8d9ff2c2d5a8899d35f395d5ab6",
+      "compressed_sha256": "0d4fe77b4b0dbedb27dc6547e23f48c0bbdb915437f78e2981e8432003a4ec03",
+      "api_version": "2016-04-18"
+    },
+    {
+      "path": "data/cognito-sync/2014-06-30/service-2.json.gz",
+      "decoded_sha256": "9704ab3c52a6e719752b2ef1f623678de8c6991362c1ad30f844d23b06ef239a",
+      "compressed_sha256": "75c7b7f9b18699fcd39630b6c75e34aa54bc4e71a151c4d0d9c0de89e63a2d83",
+      "api_version": "2014-06-30"
+    },
+    {
+      "path": "data/comprehend/2017-11-27/service-2.json.gz",
+      "decoded_sha256": "511336decb22aef786c4cb88c36ded6ffbd1bdc69e84970373a8e5cc101b2200",
+      "compressed_sha256": "31ee53882df6ac7e3071b1da60bf36645f5ad0a5e5f9e05e7725822bdce62fa6",
+      "api_version": "2017-11-27"
+    },
+    {
+      "path": "data/comprehendmedical/2018-10-30/service-2.json.gz",
+      "decoded_sha256": "74725207b423cb9c660401da111b9735303ed645752cf580f42bc1c5a170054e",
+      "compressed_sha256": "40a28bb6e5ba3d722144e35d9cea1665e46689c3daa6e3a773b1c7610ec38ef2",
+      "api_version": "2018-10-30"
+    },
+    {
+      "path": "data/compute-optimizer/2019-11-01/service-2.json.gz",
+      "decoded_sha256": "fc878cab5d712395fbb62a2322b448de222edcff65d9b7e102ddf280d4a40342",
+      "compressed_sha256": "404c74ec9e8cdbb12029ca6af0baa6d29d85b8c82c1e8dc2acb483e39833314b",
+      "api_version": "2019-11-01"
+    },
+    {
+      "path": "data/compute-optimizer-automation/2025-09-22/service-2.json.gz",
+      "decoded_sha256": "cc6e0497755bb9d255d9b0feb8497f2a85c47ea3b33d9cde8a1feae9e54af36a",
+      "compressed_sha256": "dd4d489642c2349f19a04a5e9b9845098c6f36771733ecf9ecdc3ab00a15afce",
+      "api_version": "2025-09-22"
+    },
+    {
+      "path": "data/config/2014-11-12/service-2.json.gz",
+      "decoded_sha256": "67dd6d424557f998ce8a9d0b63a8061c8b1d553bc2693037aa5825c88ca13979",
+      "compressed_sha256": "65ab823436b3dda5dde5e7f8d32b5fa76a81a503b023edb1795d8e8c5f0cbbba",
+      "api_version": "2014-11-12"
+    },
+    {
+      "path": "data/connect/2017-08-08/service-2.json.gz",
+      "decoded_sha256": "1c2aa937f1b5963bbf7d9e86595ac14d1b71243da9bec6ffe83637707e5f3ed8",
+      "compressed_sha256": "a692219b055b22425453db52c9c07573277855514860e9a1023ecafc1a74c5f4",
+      "api_version": "2017-08-08"
+    },
+    {
+      "path": "data/connect-contact-lens/2020-08-21/service-2.json.gz",
+      "decoded_sha256": "459de86aad8b6b4d8f3cc234dc1575ddf9a353d7497455b118f3a72e0bb25467",
+      "compressed_sha256": "20a3a2cc39a6387277b70e2f376e5e5b9aeff63b15ec1d05d9842914cd4f6651",
+      "api_version": "2020-08-21"
+    },
+    {
+      "path": "data/connectcampaigns/2021-01-30/service-2.json.gz",
+      "decoded_sha256": "24c937faa62f03956891212371c971bc432ceacda05ecd0767246f24ea3e0db6",
+      "compressed_sha256": "2593b2c74da39ebc113d0a733fadc94bb55df3e23699ffa52f9b981080c49b15",
+      "api_version": "2021-01-30"
+    },
+    {
+      "path": "data/connectcampaignsv2/2024-04-23/service-2.json.gz",
+      "decoded_sha256": "e06c4a68f40aba047c1eb41657c8db7270e186c609059f1a7624183f34633a28",
+      "compressed_sha256": "c1ec1e9b91fa7b80595da2de1cdbb127576cbd296809d76ea108f014979f448e",
+      "api_version": "2024-04-23"
+    },
+    {
+      "path": "data/connectcases/2022-10-03/service-2.json.gz",
+      "decoded_sha256": "52384555427a20d53922b78bda9eae50378a6eb470ea0143273cd656cb6f1bca",
+      "compressed_sha256": "1a904a7760a70d7a39c58af5dc00d75451e9bb1489276eda3ba4fdb2f713486f",
+      "api_version": "2022-10-03"
+    },
+    {
+      "path": "data/connecthealth/2025-01-29/service-2.json.gz",
+      "decoded_sha256": "b1a4173bb2340151e4a96c29b410b72b908fee3bc8584fc252d0dafda2cd1aa8",
+      "compressed_sha256": "6db7e449eddc19b6fe6e1d0eec627626b2eeb1d9a60d3c81bd366c9a726213c3",
+      "api_version": "2025-01-29"
+    },
+    {
+      "path": "data/connectparticipant/2018-09-07/service-2.json.gz",
+      "decoded_sha256": "f79e3d42ac10745a85ebbf9b6b3ef806ae998c78f9fd34d4fee00e5515fee49a",
+      "compressed_sha256": "31403d358a4977542369ce3d2c98985021163016df3aaba83c33ea8c800083b2",
+      "api_version": "2018-09-07"
+    },
+    {
+      "path": "data/controlcatalog/2018-05-10/service-2.json.gz",
+      "decoded_sha256": "ed372f60097ffb38e3fc2364b855d4fae4f924df9f20801b7e3c1ae228ae4acd",
+      "compressed_sha256": "742d3ed9582af4938b066fbd47583c765429608324ef59fbf37ddc0d5da07249",
+      "api_version": "2018-05-10"
+    },
+    {
+      "path": "data/controltower/2018-05-10/service-2.json.gz",
+      "decoded_sha256": "914199f4614a24930dc1ef20d7abd2883303d737b6277e307882fed630858561",
+      "compressed_sha256": "310dc00063964796de0a391a54d923ccfbf55be96444741f18fc4e21d2ef5372",
+      "api_version": "2018-05-10"
+    },
+    {
+      "path": "data/cost-optimization-hub/2022-07-26/service-2.json.gz",
+      "decoded_sha256": "9328e27f063d0ed141dcc5b942a6db4bea4a3e9ab90ff80d9f230d1dbd89a650",
+      "compressed_sha256": "1b7fc73e4716c75202bbc8c01e6afa252bae321349e3cd3201754cf766fc79ab",
+      "api_version": "2022-07-26"
+    },
+    {
+      "path": "data/cur/2017-01-06/service-2.json.gz",
+      "decoded_sha256": "73177e91ed597265ebdf0884e8b1c71bbe7fcf6b6c04239a61eda93ef0475b0f",
+      "compressed_sha256": "d1a541bb404f7e154c21fc909217fcc8e95132a8558f75f7f6742038be7f8bff",
+      "api_version": "2017-01-06"
+    },
+    {
+      "path": "data/customer-profiles/2020-08-15/service-2.json.gz",
+      "decoded_sha256": "92110517dd57067489f1517a21498935e0e8e9a81546a7a6f3f10c8d3bc6853d",
+      "compressed_sha256": "a9c1f9c27b3cdf3090e656d84f456fee050dbf38c38c46df58e677e8a030e3de",
+      "api_version": "2020-08-15"
+    },
+    {
+      "path": "data/databrew/2017-07-25/service-2.json.gz",
+      "decoded_sha256": "1377946c8a2498d5bd7d3fe1aee976b1d72c43f3135882f29772d62c634b4399",
+      "compressed_sha256": "fd563677e047a0b1eaae55573591b702f0fadb9d9367f8404f8976b8e9911e06",
+      "api_version": "2017-07-25"
+    },
+    {
+      "path": "data/dataexchange/2017-07-25/service-2.json.gz",
+      "decoded_sha256": "2be363c844843124a6e94cd5adb3301b8c6a529ac0704dfb544582176ef6a60f",
+      "compressed_sha256": "7bf1ee1cb37d4aa0ea5332354d4d10710992585f0399409229f140bf405255f5",
+      "api_version": "2017-07-25"
+    },
+    {
+      "path": "data/datapipeline/2012-10-29/service-2.json.gz",
+      "decoded_sha256": "e05fa818dc4982b14da79d3d4f61dfd67acf8ad2562aa93d9f29e5637cbd6bb3",
+      "compressed_sha256": "90ad05045fad0183c4eb01faf60f08ca14412c01b63f01f275d864c19d4b00fc",
+      "api_version": "2012-10-29"
+    },
+    {
+      "path": "data/datasync/2018-11-09/service-2.json.gz",
+      "decoded_sha256": "285016d83865a20787e6dc491d5af0bf9d4b3d909847286a0c88356208d31ad6",
+      "compressed_sha256": "8dd611064a14e7a6152d916484006d49912690f7b256801f8d48124f8b085907",
+      "api_version": "2018-11-09"
+    },
+    {
+      "path": "data/datazone/2018-05-10/service-2.json.gz",
+      "decoded_sha256": "15642d8dfa17f339f0f6081d6528ffe9ff230ff5759abeb646c58984ad69f27a",
+      "compressed_sha256": "410cca3536c3792ebd3810e9678dd1edb7c62da96395aaf945c3c47d5af0450c",
+      "api_version": "2018-05-10"
+    },
+    {
+      "path": "data/dax/2017-04-19/service-2.json.gz",
+      "decoded_sha256": "d6333e4023e227fb40a07057a0a3a5e77fee9de595e27bb6d40d65ebfc4290bc",
+      "compressed_sha256": "5b3a4c5db0ec73b854f41ccf5196728e6533b90db912eb6ab7232c85187a991e",
+      "api_version": "2017-04-19"
+    },
+    {
+      "path": "data/deadline/2023-10-12/service-2.json.gz",
+      "decoded_sha256": "a5ca396347a3ecd6ef5be2d4c7390dbf4076d51f05784d3e7031b13511e24152",
+      "compressed_sha256": "10c888333d358cf7b547459be48ffe0d0fd17aa62b68f5df36f4a6e5447e03b9",
+      "api_version": "2023-10-12"
+    },
+    {
+      "path": "data/detective/2018-10-26/service-2.json.gz",
+      "decoded_sha256": "8173836f89c468f803186b3f2ee05b4d1d5b91f85fb547f636de868e0e134ac9",
+      "compressed_sha256": "c4b2357dbdcf67acb24f118d0563472fd783fcd80b62f12caf6a219caa2a26a0",
+      "api_version": "2018-10-26"
+    },
+    {
+      "path": "data/devicefarm/2015-06-23/service-2.json.gz",
+      "decoded_sha256": "39b981ff0580050d6815e2daa7ca0d99bb1679455e28b042501b52b5fa87d5e9",
+      "compressed_sha256": "5af7caecbb07df68e76374180d7f48bceecdd44aa3177ea1964cd6dda5a61270",
+      "api_version": "2015-06-23"
+    },
+    {
+      "path": "data/devops-agent/2026-01-01/service-2.json.gz",
+      "decoded_sha256": "25c5e1e352551b3a3e3dbd54c7a2292eb8ad0cd5908031988947e822406addc3",
+      "compressed_sha256": "20e1f228d204c5deb3bf2550c7d373275b95c8d0f5cad6cc186314f615384bb9",
+      "api_version": "2026-01-01"
+    },
+    {
+      "path": "data/devops-guru/2020-12-01/service-2.json.gz",
+      "decoded_sha256": "3df7694a9b8b633e2a0c6458d48a9f98762a92f658f878b4f5cf3e79ee2dd71e",
+      "compressed_sha256": "d3a627345a0a0ac33e0df3c028480128a6ade1b15d8cd7321c2d0f4bf4d3161f",
+      "api_version": "2020-12-01"
+    },
+    {
+      "path": "data/directconnect/2012-10-25/service-2.json.gz",
+      "decoded_sha256": "9a7584dcf58fde17c29441625cbcbdc8f4f177f40ec37bf93cddc3d2ee2d6e62",
+      "compressed_sha256": "99ea98f17e760b353d2f86c5e62b4756d8eb9b9b0379be50ea27a2b16d202d73",
+      "api_version": "2012-10-25"
+    },
+    {
+      "path": "data/discovery/2015-11-01/service-2.json.gz",
+      "decoded_sha256": "0165edf8e4232b58ed08500ebd1a9456b06d9f7cd50f99aa21b4d577ee0fa401",
+      "compressed_sha256": "130d30787f517bf69350b385cd29a91dd0e75b8ab7b6412433797881c88b89dd",
+      "api_version": "2015-11-01"
+    },
+    {
+      "path": "data/dlm/2018-01-12/service-2.json.gz",
+      "decoded_sha256": "15aec103a99c9526d2cdd28ff45e1b36896697527435935310818c745fad1397",
+      "compressed_sha256": "2ff2525abe215b50356c4ac7038e8f1633198e34edc16e23df31b134b5571480",
+      "api_version": "2018-01-12"
+    },
+    {
+      "path": "data/dms/2016-01-01/service-2.json.gz",
+      "decoded_sha256": "392737b4da263442ff31a90b1ac19e390e7c9099bc9d09ca5a0bba8fc4a83bd2",
+      "compressed_sha256": "47dd49c41a546b754f5c7e766030859fb40325c59bb98d8106739afbd9fd5b2e",
+      "api_version": "2016-01-01"
+    },
+    {
+      "path": "data/docdb/2014-10-31/service-2.json.gz",
+      "decoded_sha256": "67c47cb2ef73d9c31f9be272fc6fd2dc2de903eeb0346c162e07227bed4fddcd",
+      "compressed_sha256": "2fbdf2a7a26ce380d1d7e59a807636dcf923830c1342848b8545fc95c78867fe",
+      "api_version": "2014-10-31"
+    },
+    {
+      "path": "data/docdb-elastic/2022-11-28/service-2.json.gz",
+      "decoded_sha256": "8a4624c3e034d6822b5f44e87c3178b89fc5a6008ca9694220ad56c44691e23a",
+      "compressed_sha256": "7d3d36b48cae7dfe61f22100e6003141aec83fe36a12861f9813ccb2274e8a3d",
+      "api_version": "2022-11-28"
+    },
+    {
+      "path": "data/drs/2020-02-26/service-2.json.gz",
+      "decoded_sha256": "5ed556989c39d6fe22b2a82d6bb868c056ab4b04129b52d62149c08cb0dc972c",
+      "compressed_sha256": "7c2059f545237c91a709173e5720cb6034669e50f441196a85e3e7c56ce199bf",
+      "api_version": "2020-02-26"
+    },
+    {
+      "path": "data/ds/2015-04-16/service-2.json.gz",
+      "decoded_sha256": "e814c684765a53e3368b5ec420943244e05a703d11ca1a8f25e1c40f07739a06",
+      "compressed_sha256": "a0b0e822f865cf83b58a0df69f3e7bf55889b7aa4929fe9850ca78337930a155",
+      "api_version": "2015-04-16"
+    },
+    {
+      "path": "data/ds-data/2023-05-31/service-2.json.gz",
+      "decoded_sha256": "00a171b30e32059ceb8c4a3d4be036ad7e7a10c620d1b6be74bd2ceb3b2b048c",
+      "compressed_sha256": "3974777051ee33ac25f1c2c8113f60fbb9a8e5d1da26b3e42ab06ce6d8966fda",
+      "api_version": "2023-05-31"
+    },
+    {
+      "path": "data/dsql/2018-05-10/service-2.json.gz",
+      "decoded_sha256": "a7188cf9081f98e6b34eba30176ef5eae6c43ec03cb3fa365cc728a0f7923357",
+      "compressed_sha256": "376c6db0958b6cafbb0f6df93d71e248d39cf3f33010fc085fd3efec41d6fb7a",
+      "api_version": "2018-05-10"
+    },
+    {
+      "path": "data/dynamodb/2012-08-10/service-2.json.gz",
+      "decoded_sha256": "b180021688e8721f44d4f03a033b75370b5e4b969d9556a2cbd086d09a6ae746",
+      "compressed_sha256": "3947ca7020feb45134524c8b01b37595911cb07629e7d6e8c45ef34fe0133ddb",
+      "api_version": "2012-08-10"
+    },
+    {
+      "path": "data/dynamodbstreams/2012-08-10/service-2.json.gz",
+      "decoded_sha256": "95cd147c971cd46365849c08e8c596bfd557b31a448b0bbf494d91f65d0ac62f",
+      "compressed_sha256": "9e8352510b4d48d1a2f35d10734cb047142fe1c2b6908270ae2faaa1c1caa8ed",
+      "api_version": "2012-08-10"
+    },
+    {
+      "path": "data/ebs/2019-11-02/service-2.json.gz",
+      "decoded_sha256": "14e3f24d274c904deeb2f3b574fc07dd425e6107676d11c5f2afd0a87786d24d",
+      "compressed_sha256": "1373696b95f2619ae47a3b7b15212afade6ebaa72e5a992b75fde48bd9240679",
+      "api_version": "2019-11-02"
+    },
+    {
+      "path": "data/ec2/2016-11-15/service-2.json.gz",
+      "decoded_sha256": "3e8905c16702faab3a6635324bd38e1882bc477d5c4e826224a40af329c60da9",
+      "compressed_sha256": "04f38e10d8b80a09d61e06d106490dfac4b821829830a086b09a6efe3bd26da3",
+      "api_version": "2016-11-15"
+    },
+    {
+      "path": "data/ec2-instance-connect/2018-04-02/service-2.json.gz",
+      "decoded_sha256": "802d657fd1740b122c9406b33e26279f002f12e1916dc995b8fbaa7e3645c617",
+      "compressed_sha256": "75fd61dce4353e2011886cfbdcd5e6256be6c2bbbb56d569702b05c1c5518732",
+      "api_version": "2018-04-02"
+    },
+    {
+      "path": "data/ecr/2015-09-21/service-2.json.gz",
+      "decoded_sha256": "3df743678897ac26e9ca4b8a04bf3007fcadf887feb3e71a50131c874cfbe757",
+      "compressed_sha256": "e86107d665b03be8380aa501ad09bd49c5eb03e8fb01a9604f21573020d00dbf",
+      "api_version": "2015-09-21"
+    },
+    {
+      "path": "data/ecr-public/2020-10-30/service-2.json.gz",
+      "decoded_sha256": "d7938cf93c45f1d58554f4d328d7ff4c0f289759a2e0acd1e17692d107cdad23",
+      "compressed_sha256": "12abf4de7ab66cfca17247459b95af1525eb501e7001d1313d18fe3374577726",
+      "api_version": "2020-10-30"
+    },
+    {
+      "path": "data/ecs/2014-11-13/service-2.json.gz",
+      "decoded_sha256": "01178c64d9e07a07af6177e806eef905c7c1691895a470ee9bc4187db93ee8cb",
+      "compressed_sha256": "e7609c89ea134e0604200924933c3fb1774f4fd6780edea768f2c711523a4df1",
+      "api_version": "2014-11-13"
+    },
+    {
+      "path": "data/efs/2015-02-01/service-2.json.gz",
+      "decoded_sha256": "ad2aaede37d03895a5eb64d7be27a2272e46adeb5e31aaefb3a61792d5a43c04",
+      "compressed_sha256": "6297d79167b6ca3cbe0e24b2730c984dc273190906bbd784933b4dd1cbe0ce35",
+      "api_version": "2015-02-01"
+    },
+    {
+      "path": "data/eks/2017-11-01/service-2.json.gz",
+      "decoded_sha256": "0bdec6da6af7f3fa8439b08d2a672e6a45b9febfa9703d2fa400e108a7b97da1",
+      "compressed_sha256": "33dc8d690f4986656238d4abdda9d281cdfccb31f19dbb4a2f96403994d6a464",
+      "api_version": "2017-11-01"
+    },
+    {
+      "path": "data/eks-auth/2023-11-26/service-2.json.gz",
+      "decoded_sha256": "e03eebdf7d4b49a86f8b18ebf0d0de82f79d11e284fe68e7e80edf418fee4335",
+      "compressed_sha256": "500e9fb38d196b1d8b80a4dff82a3def789fc6a1a3c4bfd467b8bc65b81825ab",
+      "api_version": "2023-11-26"
+    },
+    {
+      "path": "data/elasticache/2015-02-02/service-2.json.gz",
+      "decoded_sha256": "0850919cdd2b146c91bc95a941c9263327cca872ab4148750a6b3a76fa51b813",
+      "compressed_sha256": "35ae4242cd8a21c7074ccc357bc66ee60f8b20a858159ebc3126fb0f5f6c2f4a",
+      "api_version": "2015-02-02"
+    },
+    {
+      "path": "data/elasticbeanstalk/2010-12-01/service-2.json.gz",
+      "decoded_sha256": "0fbbbc563129ef69e58ac1abf3cb3e19ac59e60c6f17ed0f4a51b7beb6d84150",
+      "compressed_sha256": "5a89aee494840e57acff300030f34541b9422ddd9ad4f53afc438d31d01ce084",
+      "api_version": "2010-12-01"
+    },
+    {
+      "path": "data/elb/2012-06-01/service-2.json.gz",
+      "decoded_sha256": "621dc2eb3a92a1b4dcb2980bc8e69dc5ad7814c96a6d8d358633818261068c29",
+      "compressed_sha256": "c2cb3d0bd01ab8ab8ed5ea49157a0a58dd25257f3b6d83263ea4d7705b649163",
+      "api_version": "2012-06-01"
+    },
+    {
+      "path": "data/elbv2/2015-12-01/service-2.json.gz",
+      "decoded_sha256": "dcf5305cb54a9734a71889670d23643d10919095a506b9c1f3dbc082d188b10b",
+      "compressed_sha256": "5edf8bb3ab8e25b504e89df3300c6958f42cc33c747078aa2f323a53ea3c2cfb",
+      "api_version": "2015-12-01"
+    },
+    {
+      "path": "data/elementalinference/2018-11-14/service-2.json.gz",
+      "decoded_sha256": "ed1374a5ae7606c3ddcdcafabbfe6160c89c5e08a4e875c2e75bcdff886877d3",
+      "compressed_sha256": "88caf71e7e5455059f5ac460b5d9dec706a256b91baffcb216e3361ee7d7270e",
+      "api_version": "2018-11-14"
+    },
+    {
+      "path": "data/emr/2009-03-31/service-2.json.gz",
+      "decoded_sha256": "55367b3b5bd7f320173b07036d7a2b766a9c80a61708c68332cbff5d1c518e0c",
+      "compressed_sha256": "f91384b23bc59478e68e67038195e25449f899e67543611cd73db23e365f4b89",
+      "api_version": "2009-03-31"
+    },
+    {
+      "path": "data/emr-containers/2020-10-01/service-2.json.gz",
+      "decoded_sha256": "d5893829c56de4099e4903bcdf31cc6e5434c2ccb059a5d37265e2e74c41a946",
+      "compressed_sha256": "e60f1fa9f9505e8d063af3936238a3fa0c590f9af531c940ceef65c738e02ac1",
+      "api_version": "2020-10-01"
+    },
+    {
+      "path": "data/emr-serverless/2021-07-13/service-2.json.gz",
+      "decoded_sha256": "9c6190335b06edbc4c5e4f6b70e26fe3ae2fbdda1ca7c261db4b8acef81f072d",
+      "compressed_sha256": "e19c944ed06708818c9fb40a34ad16b2dfaf11d5e3e6b3058c3cf3b4f48716f0",
+      "api_version": "2021-07-13"
+    },
+    {
+      "path": "data/entityresolution/2018-05-10/service-2.json.gz",
+      "decoded_sha256": "13c3dd05ba957277bd02f9979ff4fd1638708d9198b58d4f370e55a01ba3d817",
+      "compressed_sha256": "af8d831c088091066da0dc9307146031c9f33c2bbc699e0d13740b9643a4b1a3",
+      "api_version": "2018-05-10"
+    },
+    {
+      "path": "data/es/2015-01-01/service-2.json.gz",
+      "decoded_sha256": "dcdf0eeff4ad758425d2f700fe1ae46ad298fee8ad5f942cd6ca39dbb188d5e6",
+      "compressed_sha256": "4a214f4a98db3c47696b956c8ad2fbbf6b346dbc6700a8f642452b835e13e8db",
+      "api_version": "2015-01-01"
+    },
+    {
+      "path": "data/events/2015-10-07/service-2.json.gz",
+      "decoded_sha256": "a079841110d1ec8252b0ad2cbcb9091ed6871a99900ce5def93b2c1685ef830a",
+      "compressed_sha256": "aab689fd370f7ec1a2c619370abe999b620294edc8a12a8f974a81ccca22a056",
+      "api_version": "2015-10-07"
+    },
+    {
+      "path": "data/evs/2023-07-27/service-2.json.gz",
+      "decoded_sha256": "1c9bdd596f8982ed1da33d7f2bdb1b274c18528bd9a8f06ce6f244f1f336c96a",
+      "compressed_sha256": "2b17793fc5742c4f3fe4ac0191cb78f9f10350734e23565bcc1182357967d739",
+      "api_version": "2023-07-27"
+    },
+    {
+      "path": "data/finspace/2021-03-12/service-2.json.gz",
+      "decoded_sha256": "dee921e1f763d75e19be4f943c32c0a94f29b70ec09901ce9524dce0222b3eb1",
+      "compressed_sha256": "793fcc056fa792f92d28f9254a2106f192482948d16215348921f07a6cb1c694",
+      "api_version": "2021-03-12"
+    },
+    {
+      "path": "data/finspace-data/2020-07-13/service-2.json.gz",
+      "decoded_sha256": "d48eaed23afc9731236ef2e9d3d14a4d9848a2cb476dcdb991518977efc71a3b",
+      "compressed_sha256": "4802ba20f3876fb4109f5e04f78de13f5c89d0b20f8391bbb18d1ddfded6eae3",
+      "api_version": "2020-07-13"
+    },
+    {
+      "path": "data/firehose/2015-08-04/service-2.json.gz",
+      "decoded_sha256": "321bc39f3b895f46dd68d875d150d15505550568a7835efe007eb30036b84a40",
+      "compressed_sha256": "90a4e943723c7ebcfab58302ce02bb811b341c554577f73c55db3bc6eb4a7ecc",
+      "api_version": "2015-08-04"
+    },
+    {
+      "path": "data/fis/2020-12-01/service-2.json.gz",
+      "decoded_sha256": "1c0faad607be8bd7b72b79e46b056edee4c3c33f9c7ad499e9ae69acedf1b317",
+      "compressed_sha256": "e36af78d46f488e3be46ce6a67fed95b9be9d295f305368e04ac0aef49ad4724",
+      "api_version": "2020-12-01"
+    },
+    {
+      "path": "data/fms/2018-01-01/service-2.json.gz",
+      "decoded_sha256": "de474efa7cfdfdfdb4438a37819928237f8120a9ee3dac59768e8e491919b0dd",
+      "compressed_sha256": "de57614e00120cb526d51e83e6f2320fb8369ab6581411810b1a53d50bc92cf5",
+      "api_version": "2018-01-01"
+    },
+    {
+      "path": "data/forecast/2018-06-26/service-2.json.gz",
+      "decoded_sha256": "141ac827ac0bd59ec4457fa375dd3c9acdecf7149e2e7022b092ad88ef6a32e5",
+      "compressed_sha256": "5081b1dc6f615f29630d890cb92827addc6be9b1ee00d2f8edc0a3ccba84ae18",
+      "api_version": "2018-06-26"
+    },
+    {
+      "path": "data/forecastquery/2018-06-26/service-2.json.gz",
+      "decoded_sha256": "e63d19ab5df3387e4f1cc278d3787e676a221e43d517190bee0a4d8b72f86b10",
+      "compressed_sha256": "16df3f1069b0f41ed0e7d5ceae6b63b34e5a86c54e05b910f66416b5c7c86b6b",
+      "api_version": "2018-06-26"
+    },
+    {
+      "path": "data/frauddetector/2019-11-15/service-2.json.gz",
+      "decoded_sha256": "bf10355c6bf54df3d1fd53799e8ab332c80c0bf22fa5e7768a47a7925d52c7cc",
+      "compressed_sha256": "a95f47be477f046c9474326c9c4e338668b6d49d7e03bbae8c231aa4ad3a0baf",
+      "api_version": "2019-11-15"
+    },
+    {
+      "path": "data/freetier/2023-09-07/service-2.json.gz",
+      "decoded_sha256": "c7a165830628017df7044a71852f55ef86526e80360667709adb8b7278c988bb",
+      "compressed_sha256": "b92ce97b95cc747c3ca402217d91d6d90583b6a6d56f040bef75719ac189dde7",
+      "api_version": "2023-09-07"
+    },
+    {
+      "path": "data/fsx/2018-03-01/service-2.json.gz",
+      "decoded_sha256": "64396a531df436072149f075498cce7171e3fc8e6bddc8d0065a5fa12fd6c4ba",
+      "compressed_sha256": "c6b4bf6e95aefb641529571b5a7539c3db8aa11c256c8f502fb5df61b8b110d1",
+      "api_version": "2018-03-01"
+    },
+    {
+      "path": "data/gamelift/2015-10-01/service-2.json.gz",
+      "decoded_sha256": "036144d6194820027aea6f437ffeb8b8e44e3c6c43ff49962238666423435da2",
+      "compressed_sha256": "b7c09ade8cfb42da297cd6600a8adcc00806201efbc1d593fcc7a7680b48a8bc",
+      "api_version": "2015-10-01"
+    },
+    {
+      "path": "data/gameliftstreams/2018-05-10/service-2.json.gz",
+      "decoded_sha256": "05a2ff84d05dfc278b1718e2d954f71a2f3841a3f115705d7a70ca2de2275a67",
+      "compressed_sha256": "2f62e5d535e1e94a8c054678eeadc186bc2bd5ee75e7f1a9d2e1f0af1d288473",
+      "api_version": "2018-05-10"
+    },
+    {
+      "path": "data/geo-maps/2020-11-19/service-2.json.gz",
+      "decoded_sha256": "91f165489b872d1d745c3f730cbc802b653d2622a87aeb6dca5c39a8fb0344eb",
+      "compressed_sha256": "141884b284f2209eaa577bbf8881eb1c76031209845dde2274d0d202f933acd5",
+      "api_version": "2020-11-19"
+    },
+    {
+      "path": "data/geo-places/2020-11-19/service-2.json.gz",
+      "decoded_sha256": "7407fd22d08d5c1ada1b14dc0f7f06964a28942bc925d55ebd187d3a3d3b809c",
+      "compressed_sha256": "d5165cd493a94787326cfe23e4d54d477d1c96e0e80e04c2d026bd9c7001383e",
+      "api_version": "2020-11-19"
+    },
+    {
+      "path": "data/geo-routes/2020-11-19/service-2.json.gz",
+      "decoded_sha256": "8c2d72f7f16996fc32ca69d80c72942205a6a5d710cbcca56426117c04c67a79",
+      "compressed_sha256": "dd08f816fa9ed133ac7a6e62f84b2c92e645c47d889025cbc5093bb458bda91a",
+      "api_version": "2020-11-19"
+    },
+    {
+      "path": "data/glacier/2012-06-01/service-2.json.gz",
+      "decoded_sha256": "cb547d13e60d1d8e7a74677d3c108064ff0665b7c05b673b37b7b6c9983c2e0f",
+      "compressed_sha256": "c121d4ad3246e2234424de9af099353da1f8e6ee69819f2457423b03478b9f63",
+      "api_version": "2012-06-01"
+    },
+    {
+      "path": "data/globalaccelerator/2018-08-08/service-2.json.gz",
+      "decoded_sha256": "63967da7d733c0263a08b302c322c28f2e0d1891684e87a6992f3f4d1d7d679c",
+      "compressed_sha256": "54a6d3508796d30f0fdb883010af73f4311ff91e7e6c299c54b96731b7825355",
+      "api_version": "2018-08-08"
+    },
+    {
+      "path": "data/glue/2017-03-31/service-2.json.gz",
+      "decoded_sha256": "8275140b71cb688d3488a64d77d29aaede709b8477bb451144b301ba7d6bc8fb",
+      "compressed_sha256": "429fd52a65c36833e29d71463c8c4ecd7962a617291c2342f6d77ab1c22e8e2b",
+      "api_version": "2017-03-31"
+    },
+    {
+      "path": "data/grafana/2020-08-18/service-2.json.gz",
+      "decoded_sha256": "cde3a085226b019ca6f2d00303509947c79489fe16c7d859ca451944029e2188",
+      "compressed_sha256": "f2b88beac2a21a378ec99d450edeafb0d042966da64fb15b7c97f7db1fcf0189",
+      "api_version": "2020-08-18"
+    },
+    {
+      "path": "data/greengrass/2017-06-07/service-2.json.gz",
+      "decoded_sha256": "d633a5edb4e57632a92602c92fa737d4842e989ce36d2284c9c120b94400a384",
+      "compressed_sha256": "cf2595d39808a7c64b6e186b9277a1d8116ab33b3ab1f42b042bda86ee92535e",
+      "api_version": "2017-06-07"
+    },
+    {
+      "path": "data/greengrassv2/2020-11-30/service-2.json.gz",
+      "decoded_sha256": "e83793dcc17d86a17235d2b09c41669ab4fcaf3de76e574d227d591c8d804981",
+      "compressed_sha256": "665666d7719b8ff584ce44feee77f2c15da6b8da8796f1f2c38ded149b2b3c0a",
+      "api_version": "2020-11-30"
+    },
+    {
+      "path": "data/groundstation/2019-05-23/service-2.json.gz",
+      "decoded_sha256": "eb33c15ebcb76b35816cbc8d6054cfd32dfdd9dc46734f7d0bfd6d8bca81cc7b",
+      "compressed_sha256": "f0bd56564dcbbba6e8260408ce7dfefb7455706c710f2fc94cb9a960744009a0",
+      "api_version": "2019-05-23"
+    },
+    {
+      "path": "data/guardduty/2017-11-28/service-2.json.gz",
+      "decoded_sha256": "cfb3433d25c66707ce12f7659be94064636ef478cd29ab2e9d6abd08a92be5cb",
+      "compressed_sha256": "d5d7b3ab1ee37cce1bf0473dd10eff4b1ec3601fd7064645470e8ea2fdf270c1",
+      "api_version": "2017-11-28"
+    },
+    {
+      "path": "data/health/2016-08-04/service-2.json.gz",
+      "decoded_sha256": "b3f4a75d2d306617837e6630554b9fcf89bb7470ac00a8dd3b8b5a74717ea64d",
+      "compressed_sha256": "4e3b6b51d1c4cfa9120210cdde8ceee6420e1f4bf49dc5937102b2cf30ccabed",
+      "api_version": "2016-08-04"
+    },
+    {
+      "path": "data/healthlake/2017-07-01/service-2.json.gz",
+      "decoded_sha256": "8b8630660d3b5f87aff0b0b144f481b8e1d493858f34b901d6117fa104fceca3",
+      "compressed_sha256": "8fc6d09c2e3909b03c7fd826220e5fd46b896ef9c635b268b8fd2d21d5b95a66",
+      "api_version": "2017-07-01"
+    },
+    {
+      "path": "data/iam/2010-05-08/service-2.json.gz",
+      "decoded_sha256": "c38893871dbb08aabc02ffae18d5a3a59187f58603a642b46458c6ccddc132e5",
+      "compressed_sha256": "4e5836b75fb2a2bebf1e1e6ff1e073a7fff5964b7e0420f04ba9c54d9537da78",
+      "api_version": "2010-05-08"
+    },
+    {
+      "path": "data/identitystore/2020-06-15/service-2.json.gz",
+      "decoded_sha256": "155381ff52f01dcfd012d782c6bd86d22c6085a0343ffff8f20935e31c36da6b",
+      "compressed_sha256": "ed80580fcec270c650e328acca8b1a0abe99ad066a5359b20b710b2bef3729b4",
+      "api_version": "2020-06-15"
+    },
+    {
+      "path": "data/imagebuilder/2019-12-02/service-2.json.gz",
+      "decoded_sha256": "47e924e898d7d094c1f18f6f069a9831ea998a028d25c75b78766692ff3c4591",
+      "compressed_sha256": "c2e0bb45c53686d4eb53a39114f0e681ce2050eb3212f0e90fe51df5dcded5ff",
+      "api_version": "2019-12-02"
+    },
+    {
+      "path": "data/importexport/2010-06-01/service-2.json.gz",
+      "decoded_sha256": "62184ea344a0c03e64e43b20a4f996f5218e6589224e7c31fd3d7559834670fa",
+      "compressed_sha256": "bcaed6ff5cd4bbc4d35c1085ebde7c25e440828a21b16700ac05022a3003a108",
+      "api_version": "2010-06-01"
+    },
+    {
+      "path": "data/inspector/2016-02-16/service-2.json.gz",
+      "decoded_sha256": "23ec24f4604a93933cfa8253fbf8f62ca975928eb4d978d0015d065c6918fcc4",
+      "compressed_sha256": "21f63b17f1cfd366dcc8ff6cf504fb21d0db640efc7442cf0e44153702236327",
+      "api_version": "2016-02-16"
+    },
+    {
+      "path": "data/inspector-scan/2023-08-08/service-2.json.gz",
+      "decoded_sha256": "c99556a2f0316c51844158ec00e0a48d807be95af1bab321830cc8d3815177b9",
+      "compressed_sha256": "29f9da5c0776eddd2af4a676848c6e9b449ce42eb45ef99063ef202bb2025cdf",
+      "api_version": "2023-08-08"
+    },
+    {
+      "path": "data/inspector2/2020-06-08/service-2.json.gz",
+      "decoded_sha256": "fb9787cf606c81fdefa943304070473cb6f33b4f2520b18410a5130592d94eec",
+      "compressed_sha256": "d936c9978ef3bd79adfeed6f303dcb86c6b675b65b27ef3268cdd1fa96ebbbf2",
+      "api_version": "2020-06-08"
+    },
+    {
+      "path": "data/interconnect/2022-07-26/service-2.json.gz",
+      "decoded_sha256": "f504f72e12afb008ddc7368ec57d07d500d7cd68301c909f37e20a6fe4631a24",
+      "compressed_sha256": "ef995148236a5a4ddc88fe4349782ed96789778010cd94041c4ff93575036546",
+      "api_version": "2022-07-26"
+    },
+    {
+      "path": "data/internetmonitor/2021-06-03/service-2.json.gz",
+      "decoded_sha256": "192c82f1dbbc0eb4b372582d57ec8b7c284e5dcff568598c25f016ca533f482a",
+      "compressed_sha256": "cebe6c0c420a6645ecafa344e39caffe8cfa1592fe25eee0a1f6d9d935166056",
+      "api_version": "2021-06-03"
+    },
+    {
+      "path": "data/invoicing/2024-12-01/service-2.json.gz",
+      "decoded_sha256": "14d430a13d7c154ff884e23f06264bea25a8190ba06638593422465a287166cb",
+      "compressed_sha256": "3aa349760c0dbbbc9d850a9e1d2b4a1a92fc1c735f08a23bb66357f10c32da63",
+      "api_version": "2024-12-01"
+    },
+    {
+      "path": "data/iot/2015-05-28/service-2.json.gz",
+      "decoded_sha256": "61ad791e294cf42281bcca8da2d559db8030b4d0508e784bfbdd7bdbbb662dc3",
+      "compressed_sha256": "429f20edc136d6a459abe65b39d559714c9a7b2a815e8c43e176e53429a9db28",
+      "api_version": "2015-05-28"
+    },
+    {
+      "path": "data/iot-data/2015-05-28/service-2.json.gz",
+      "decoded_sha256": "43c95db5be5facda59e3df5b9bbec2be9041422b23692de9f08f1b4763df51db",
+      "compressed_sha256": "2216ccfc5e67d879bfd1a1bd9f2fe86b62eb55325fc557c9c698d75344c9e8d3",
+      "api_version": "2015-05-28"
+    },
+    {
+      "path": "data/iot-jobs-data/2017-09-29/service-2.json.gz",
+      "decoded_sha256": "08bb3e428292dba5dab62d6c4fad004d6a5dc5cf1f9c90df130e162bb4453594",
+      "compressed_sha256": "40f3009e3d42572e41908da249728349c118ea53a90a4be26f7c3488df83ac7d",
+      "api_version": "2017-09-29"
+    },
+    {
+      "path": "data/iot-managed-integrations/2025-03-03/service-2.json.gz",
+      "decoded_sha256": "332000ac5e006b56851e2788e9721ae79afd00a6565073b7cef1f24395549c91",
+      "compressed_sha256": "ec7b31a6b2fab01967d7a88f3b965b56205e078630fc72d8b0bab5a2e2978930",
+      "api_version": "2025-03-03"
+    },
+    {
+      "path": "data/iotdeviceadvisor/2020-09-18/service-2.json.gz",
+      "decoded_sha256": "8392c282a16e80c2695946ee90b496e1f05e61b035aa41430d3e83ac90967ab3",
+      "compressed_sha256": "7077593901b8cd4d7b3f8cc02e5f0acdbff248a9cb845158ced0b7ff4c8df1da",
+      "api_version": "2020-09-18"
+    },
+    {
+      "path": "data/iotevents/2018-07-27/service-2.json.gz",
+      "decoded_sha256": "75653b40dc5c82a3eb94ee7026b0d910b300ee3ecb151d54a6c45d2bc4a1ed22",
+      "compressed_sha256": "7fd957d2b45fa6d90a9981591b22130882c54f059cd60b8846c2c97ab5f14a7e",
+      "api_version": "2018-07-27"
+    },
+    {
+      "path": "data/iotevents-data/2018-10-23/service-2.json.gz",
+      "decoded_sha256": "9ba385a02daf3d99a1ad5edd1ce34b196f8c73f4ba7d3d3ffb8556014f9af8b2",
+      "compressed_sha256": "6e3e7b44ffb4ef3e354e378443ed6f4b38554bf46c94918b0d7999f64c8e2204",
+      "api_version": "2018-10-23"
+    },
+    {
+      "path": "data/iotfleetwise/2021-06-17/service-2.json.gz",
+      "decoded_sha256": "f257ff79e3f0a08dfed86d00d7f31a4f125254c28bde4671d04217bbca83921d",
+      "compressed_sha256": "ca9bbb3b1a7498ec414bd03c1ddc4c8d1e56e0450f22ba89d833785be6ed4120",
+      "api_version": "2021-06-17"
+    },
+    {
+      "path": "data/iotsecuretunneling/2018-10-05/service-2.json.gz",
+      "decoded_sha256": "1052d8548c9c11928e04ee63388182ebc0bec62140dee87e1517c1e6f8cdd5b0",
+      "compressed_sha256": "1f5ce784c4e198d006c705ee36e475bc062ae389988eb6f399c28b687f5aa312",
+      "api_version": "2018-10-05"
+    },
+    {
+      "path": "data/iotsitewise/2019-12-02/service-2.json.gz",
+      "decoded_sha256": "32e637b07ab5da590d4eee9628b18cf5f34b87c62204e169329540bd880a9f00",
+      "compressed_sha256": "be0e0bd1d4d32a9e067e09a1e773910fba46bfd6839544f12431394acd422ed4",
+      "api_version": "2019-12-02"
+    },
+    {
+      "path": "data/iotthingsgraph/2018-09-06/service-2.json.gz",
+      "decoded_sha256": "89b3c739d0c6281943e1fcd2c6b093773ef6b5ccae5d3b31235f9e1fff2ab913",
+      "compressed_sha256": "ba2c82b6cff8b4f61a3c54f86d4c3e3a77cef8f5086ece1f958e3887d28def1d",
+      "api_version": "2018-09-06"
+    },
+    {
+      "path": "data/iottwinmaker/2021-11-29/service-2.json.gz",
+      "decoded_sha256": "7289d249b6776549019be0e6a35a0951cdb8d6c6e6bec7e902f0189efbfaf2fc",
+      "compressed_sha256": "51ea7765b484534d6b03bef66713b4b92b8be4d51786a53635405a14e0e67cd6",
+      "api_version": "2021-11-29"
+    },
+    {
+      "path": "data/iotwireless/2020-11-22/service-2.json.gz",
+      "decoded_sha256": "ec64dd5e162339c6dca091090e5aa071c998137ccd2f157b1624b4c32fef8d14",
+      "compressed_sha256": "7f15e174479d70aad4ae6c409ba2473a9ac75fb54026a593f80ec1ce69b7d7cd",
+      "api_version": "2020-11-22"
+    },
+    {
+      "path": "data/ivs/2020-07-14/service-2.json.gz",
+      "decoded_sha256": "728c19daaf801e4a34c5f5cf6a5df0f947ec2b6be3ad93894252d6b43b8677f6",
+      "compressed_sha256": "3731889fced08e5b27eedd1832ecebd6b7d9f661a8431541cf3607470a083842",
+      "api_version": "2020-07-14"
+    },
+    {
+      "path": "data/ivs-realtime/2020-07-14/service-2.json.gz",
+      "decoded_sha256": "58a88bed3f43a1fd780383cf47588e9966448b4f309611e3d57416169e998df7",
+      "compressed_sha256": "f9aee4e0056e62584a80379aa3dccfe6219eadd7e5a66c25e54210ec12dd6c3f",
+      "api_version": "2020-07-14"
+    },
+    {
+      "path": "data/ivschat/2020-07-14/service-2.json.gz",
+      "decoded_sha256": "1c6608e560edff3fe831a5bc26de5b6408b429b121df5ca0db0788c110555226",
+      "compressed_sha256": "983dba09f6929cbee1ad8f8cd097137d5a6da84c7bc61c6621b78b5813ed7f44",
+      "api_version": "2020-07-14"
+    },
+    {
+      "path": "data/kafka/2018-11-14/service-2.json.gz",
+      "decoded_sha256": "c1b9f8cc2cbb120b5da783011c45c0d52df054698699c0ebb529974aa961f4e2",
+      "compressed_sha256": "4d432bcaa892ad0addc912bbe22d76a96bc964d4900b1af541ed5ba93c20d6ee",
+      "api_version": "2018-11-14"
+    },
+    {
+      "path": "data/kafkaconnect/2021-09-14/service-2.json.gz",
+      "decoded_sha256": "dcb20b84ee892471ebe6a0f7e863b2cf7bb4a9f703b5fef67e0a0eb1ad602105",
+      "compressed_sha256": "3c0c00c827d1529fe4a122632b1c5347802e931974b2e37466a51f5ac1787491",
+      "api_version": "2021-09-14"
+    },
+    {
+      "path": "data/kendra/2019-02-03/service-2.json.gz",
+      "decoded_sha256": "c83cf14c86db6994c73422ff166686827ba3d35b32ba60b054561b7a4de7a287",
+      "compressed_sha256": "2dab2c8c27ec17766c0fdb26bd08e15402b7a614a2173b372dc1ae76dd9130c7",
+      "api_version": "2019-02-03"
+    },
+    {
+      "path": "data/kendra-ranking/2022-10-19/service-2.json.gz",
+      "decoded_sha256": "90c2d333f99cba1c34ab847afc02067185026eb919b981a0fe5793f32c3452fc",
+      "compressed_sha256": "6960e24f1cfc54ae40f7ae38bbdb7aa047e55eb2cd6f68ce8cdefcb3c3af503a",
+      "api_version": "2022-10-19"
+    },
+    {
+      "path": "data/keyspaces/2022-02-10/service-2.json.gz",
+      "decoded_sha256": "ac3d0ded2d98dd4c4e65841dd80ef6dbb1cf45419e4c6c5b3efaa150c3681f14",
+      "compressed_sha256": "1757432c3b4e3c15bfdbfdf4bbc6343149857d170d56d8bb3eb62ffb02afc16b",
+      "api_version": "2022-02-10"
+    },
+    {
+      "path": "data/keyspacesstreams/2024-09-09/service-2.json.gz",
+      "decoded_sha256": "9faa60656cb49188efcf91675feba612ff7f3b4c9589d76f8322ca7f26245a3c",
+      "compressed_sha256": "169730221df277ab4731649729d2398df97ca35b3de3c6aaed917a1eb9aaf8a7",
+      "api_version": "2024-09-09"
+    },
+    {
+      "path": "data/kinesis/2013-12-02/service-2.json.gz",
+      "decoded_sha256": "59d549ef85e6e41bbba0280eee360b1f310350d8587c4f0cfc01f7a1276499a5",
+      "compressed_sha256": "b7f45b01b20724359e6d633897d4beb85416b568edc95ebefd13d626ce9d0052",
+      "api_version": "2013-12-02"
+    },
+    {
+      "path": "data/kinesis-video-archived-media/2017-09-30/service-2.json.gz",
+      "decoded_sha256": "0d0a0b0cfe8bbce1e5e3ee2784273016e0870d6bf5670d816dc6b1143eba3d80",
+      "compressed_sha256": "9db08cbe3de2a2c0aa78b3d7ef3345730bba2f085704bebb5d3be5bf40135c58",
+      "api_version": "2017-09-30"
+    },
+    {
+      "path": "data/kinesis-video-media/2017-09-30/service-2.json.gz",
+      "decoded_sha256": "e0f6c84912980c245c876d09fa1c85be082ba336ca18ef61046974a4d6696087",
+      "compressed_sha256": "bce29db35df05c95d67c0e4d74ab086d5e3d6967f0089f932e823ed651639c47",
+      "api_version": "2017-09-30"
+    },
+    {
+      "path": "data/kinesis-video-signaling/2019-12-04/service-2.json.gz",
+      "decoded_sha256": "07f1c805bdd82bb569f8d7539e3e8db2d2d5e9cd6c668c2ed5f13fa1f724a167",
+      "compressed_sha256": "dd46c53bc2b78d20a4b42612972609ca1934d697e0c83f6fb92a47d9940f397e",
+      "api_version": "2019-12-04"
+    },
+    {
+      "path": "data/kinesis-video-webrtc-storage/2018-05-10/service-2.json.gz",
+      "decoded_sha256": "5058789833773b41c59730bd788924da690ea19a76d0d6faf7f88d5b3c0bab94",
+      "compressed_sha256": "fd074d0c4c599d1058b4843674431a6fd82a610d8039cfcf32c54fec2bbfd960",
+      "api_version": "2018-05-10"
+    },
+    {
+      "path": "data/kinesisanalytics/2015-08-14/service-2.json.gz",
+      "decoded_sha256": "831bae3b4cbdd181190b9df37c179b136f63d8be5a9d2537fa4c7d18b3669791",
+      "compressed_sha256": "0c74ef0e2179d042124a3c52a18fc7da38fc82c13f9cd2c67f4544c5a82c057f",
+      "api_version": "2015-08-14"
+    },
+    {
+      "path": "data/kinesisanalyticsv2/2018-05-23/service-2.json.gz",
+      "decoded_sha256": "7eff7cb22c5ff0e07bca70155c7c1ca655d66e0c42f4c9a296d6b31690245e4b",
+      "compressed_sha256": "a5d9eb665c16bbb9b66a6261054411c61cf875ddb5914ecc9b8c66d06bf60a94",
+      "api_version": "2018-05-23"
+    },
+    {
+      "path": "data/kinesisvideo/2017-09-30/service-2.json.gz",
+      "decoded_sha256": "3f98a490f1f7ab7571d9a36161ff241b781bcda034ef7505ee90391b633fb324",
+      "compressed_sha256": "dd94d088ec02e65fa81e4f1ec41d98074080989a6e6ece363085f91f4242c4cd",
+      "api_version": "2017-09-30"
+    },
+    {
+      "path": "data/kms/2014-11-01/service-2.json.gz",
+      "decoded_sha256": "e46c319dda3fad44819291b2a46cdfaeee6ece271504ae48b69fc2a7cf9158f1",
+      "compressed_sha256": "588d2422dc80bcf50c5928b89ae24677ca2b84607b2cf2965a82f239a90b2225",
+      "api_version": "2014-11-01"
+    },
+    {
+      "path": "data/lakeformation/2017-03-31/service-2.json.gz",
+      "decoded_sha256": "92c5c287e549d2c6d72073f70ea2eb4b6ec303fe3058c3942b06cc4fdfb07260",
+      "compressed_sha256": "f0c06b5a88c0a017db3b8b58e7a950725cd2da77e94992c27ae62ea7e0a027ed",
+      "api_version": "2017-03-31"
+    },
+    {
+      "path": "data/lambda/2015-03-31/service-2.json.gz",
+      "decoded_sha256": "39dedcf72ef0d4cc7d69f916d93c9c13dbb7286da9aa09dfffb191f7cf9b213e",
+      "compressed_sha256": "adb426708302e0578a8c920c389e67011a1b1643dbc4a3cf10882e1757dd8b1d",
+      "api_version": "2015-03-31"
+    },
+    {
+      "path": "data/launch-wizard/2018-05-10/service-2.json.gz",
+      "decoded_sha256": "17654ee2b4916f25391f1f221c26baefb13907a65cb0ac0755fa3f3e963c7ae7",
+      "compressed_sha256": "944d604c9b8b6757b167b158e38383a15c65e068937056c09b68b33a5d7b0152",
+      "api_version": "2018-05-10"
+    },
+    {
+      "path": "data/lex-models/2017-04-19/service-2.json.gz",
+      "decoded_sha256": "544432a4a0328ab92e7d812419ba1a20821f69867f5ad7dd2690ebbeab69dadf",
+      "compressed_sha256": "42fc9106db0e1734306024b0f76cc20199fcaa8ab2adc807c8a2da5e987a8ecf",
+      "api_version": "2017-04-19"
+    },
+    {
+      "path": "data/lex-runtime/2016-11-28/service-2.json.gz",
+      "decoded_sha256": "c595a8f8d92c1dd8d169be1ca2bbc9a4b568a11329f7c52a1deef277c7cfa4fc",
+      "compressed_sha256": "a3c4020f32aa990371dc1cf279590e5d0780b2fe040f1939f8e1c6795a5eedca",
+      "api_version": "2016-11-28"
+    },
+    {
+      "path": "data/lexv2-models/2020-08-07/service-2.json.gz",
+      "decoded_sha256": "5e4c736fb65218b90326f55428eb230b32ae1fbd6715c2d22f64136760d8540b",
+      "compressed_sha256": "9cf3e1fd5b9488c5bd6a24cfb71167a0f2997db6f934ebd8b0e7d262d5fe0350",
+      "api_version": "2020-08-07"
+    },
+    {
+      "path": "data/lexv2-runtime/2020-08-07/service-2.json.gz",
+      "decoded_sha256": "783f2dd026af84e55470a47c95d0e461e19c69828fcf1753303cce5a2315a3d6",
+      "compressed_sha256": "e029d3730381419d2f1cdf9a3918df7ff8c58f258bbe44ed34202ea3b5f5bb32",
+      "api_version": "2020-08-07"
+    },
+    {
+      "path": "data/license-manager/2018-08-01/service-2.json.gz",
+      "decoded_sha256": "b800089f92a8c06072a42061124d0335547e7dbc89c1f0a9c27c1fac20f54f4f",
+      "compressed_sha256": "f9697956c511b02cb3e15b467065be34cb86a2c00c0149a034ae888a2b55484b",
+      "api_version": "2018-08-01"
+    },
+    {
+      "path": "data/license-manager-linux-subscriptions/2018-05-10/service-2.json.gz",
+      "decoded_sha256": "77587e14fe63b0733e4ca25e2885b178676db63e5317058bb44f5b53c406d631",
+      "compressed_sha256": "cdf43e938d3d986723b74c72938594df8d0f4f163db4cd9cc7c8b10d45e6aa71",
+      "api_version": "2018-05-10"
+    },
+    {
+      "path": "data/license-manager-user-subscriptions/2018-05-10/service-2.json.gz",
+      "decoded_sha256": "b2d96aca2b7864f56d048232fc1d501516c60a9702e4943b0f65a0fb1bdbda0d",
+      "compressed_sha256": "c61197960d861951721351ac35bb448b4c0331e6c85aca1dc06950be50048273",
+      "api_version": "2018-05-10"
+    },
+    {
+      "path": "data/lightsail/2016-11-28/service-2.json.gz",
+      "decoded_sha256": "2aa206e6f8eea589b25ffc4ace4ad2c2bbfc358bbd65d3cf83f45c23e52153bd",
+      "compressed_sha256": "82413a22933714331d10eb418d64b929d80c8b402a4f0e389901c766065418d9",
+      "api_version": "2016-11-28"
+    },
+    {
+      "path": "data/location/2020-11-19/service-2.json.gz",
+      "decoded_sha256": "51a19f77c9a9afd9d1c50140c1bac38e89aca544174a1b1e2a4ee3ce05a59413",
+      "compressed_sha256": "d09ad15eb47998643e5cef9137e5333dc94f0a2ea583fdca3a59cdaa026b9320",
+      "api_version": "2020-11-19"
+    },
+    {
+      "path": "data/logs/2014-03-28/service-2.json.gz",
+      "decoded_sha256": "444ec6f6ab6df0f7df259e57cf8822822ca8c7e387b7ae7620532fe471910b20",
+      "compressed_sha256": "dfe2a7961a10bfc05c5907ccdf347e41810cca1c8f2a81c920b9f10ffe97f83b",
+      "api_version": "2014-03-28"
+    },
+    {
+      "path": "data/lookoutequipment/2020-12-15/service-2.json.gz",
+      "decoded_sha256": "058e4c9ded3379a2b2d43c436140d3641830edbd8e5fbc4e50c11afa3ba8386f",
+      "compressed_sha256": "9d3310a0b55f6dfdb9b14ff4e39cbfe06e2541d4bd3ed36c145e442e2ecab9c5",
+      "api_version": "2020-12-15"
+    },
+    {
+      "path": "data/m2/2021-04-28/service-2.json.gz",
+      "decoded_sha256": "d544a0dc846cde16785a50e70119ed536317931a17309e4b865da93399df5d17",
+      "compressed_sha256": "9994b94726a2347dea5d1a1b6357e120ec5c0833f0728defdec8dad12b47cc84",
+      "api_version": "2021-04-28"
+    },
+    {
+      "path": "data/machinelearning/2014-12-12/service-2.json.gz",
+      "decoded_sha256": "4af803e604f09fdbebb1a2f4fc939862f473d8d96ae5cf0448cd31dfc074a0d2",
+      "compressed_sha256": "a9dcf838b166e1a0d7e7ac888946aa0930a2e1d3b04895e64e7bc757dcbf7db2",
+      "api_version": "2014-12-12"
+    },
+    {
+      "path": "data/macie2/2020-01-01/service-2.json.gz",
+      "decoded_sha256": "7ffb36e62ea8efd9823ff8ad084e0bcda953ca69b6cb0c4ae249eb3fd42399b4",
+      "compressed_sha256": "fd1b9a432434853db509ef64144e552659766454a1aab77674770fd6d97e4b9b",
+      "api_version": "2020-01-01"
+    },
+    {
+      "path": "data/mailmanager/2023-10-17/service-2.json.gz",
+      "decoded_sha256": "076974efa058627da8e5d698e574815fb1dc1aff461eac99ec6508b5f5e3a2af",
+      "compressed_sha256": "fc0ef52b9d4b23e4f93e9e7e23768577a6854bac9c0f14de046ed8321a25056d",
+      "api_version": "2023-10-17"
+    },
+    {
+      "path": "data/managedblockchain/2018-09-24/service-2.json.gz",
+      "decoded_sha256": "08671b701a1dae4dae5bd38f9bda7e4f02cbbcebbab205a743cdeb5b910ced19",
+      "compressed_sha256": "41e653369a0c441d69cfb40f0582f58b559139c87efcd26fa0644a89ed731779",
+      "api_version": "2018-09-24"
+    },
+    {
+      "path": "data/managedblockchain-query/2023-05-04/service-2.json.gz",
+      "decoded_sha256": "35e1bfb4e223ba4e3f9c73b706eff9017fee3e110ac899d5219baa23a1aa17e2",
+      "compressed_sha256": "887475298179c8292649a3c9ce7d8b2231463a187151d8af71a547c3d398986f",
+      "api_version": "2023-05-04"
+    },
+    {
+      "path": "data/marketplace-agreement/2020-03-01/service-2.json.gz",
+      "decoded_sha256": "896c28e45fc9913700c07ddeb5a06e4ca0743f62fd6adc789716b42a9f9897e4",
+      "compressed_sha256": "d572b480c977b13d85c0c18e70697d9ca8507b7db3a7b7455c054b07b751ccab",
+      "api_version": "2020-03-01"
+    },
+    {
+      "path": "data/marketplace-catalog/2018-09-17/service-2.json.gz",
+      "decoded_sha256": "6d976316b862796f720b575dfb4fefe579728787741ea98ca991201ffb159adb",
+      "compressed_sha256": "f9d3811af9d91a988a4648e1f9eb73d41f4ca1d3dbc37c0c41d440aacc4d170d",
+      "api_version": "2018-09-17"
+    },
+    {
+      "path": "data/marketplace-deployment/2023-01-25/service-2.json.gz",
+      "decoded_sha256": "b67f3154d22d4d844efbc5fc669de9662ab94da7be984fb4e7a328674ca3c202",
+      "compressed_sha256": "491c6f4a75ddb5d61e199a5a325bddf3046d3051034ab396d90d6de2636486b8",
+      "api_version": "2023-01-25"
+    },
+    {
+      "path": "data/marketplace-discovery/2026-02-05/service-2.json.gz",
+      "decoded_sha256": "0c0df722e1de2b8be597403bdae50b404e95e6fd3bacbc6c6cd01897dac73a86",
+      "compressed_sha256": "178316514fe3309d27488198e756cc0d3672460c846be8312c4c3bdf1f1a04c9",
+      "api_version": "2026-02-05"
+    },
+    {
+      "path": "data/marketplace-entitlement/2017-01-11/service-2.json.gz",
+      "decoded_sha256": "778576119b31ece32754b9f17673bcde9c6115c2229e677eebd54152173d8200",
+      "compressed_sha256": "3a1812851696ea8095adb33b744dc036250fd01a35abfadab0ac977c498e364f",
+      "api_version": "2017-01-11"
+    },
+    {
+      "path": "data/marketplace-reporting/2018-05-10/service-2.json.gz",
+      "decoded_sha256": "97890d584e8f4e5ff0572ac2fdf07739e977819c398e553f3b56dec641a3e7f1",
+      "compressed_sha256": "2f00e2c8584f96c699f6947f107a8cf88c961f7ee6e79054171b3ce530bfa1a5",
+      "api_version": "2018-05-10"
+    },
+    {
+      "path": "data/marketplacecommerceanalytics/2015-07-01/service-2.json.gz",
+      "decoded_sha256": "dab350950c39b9a2484f6a24fae3dbc43465b210a916723d9beed2ed8b8c3f33",
+      "compressed_sha256": "f840e466ba64a4aa20571821bf37b5f65fe692c3768d30353d36bea94713f608",
+      "api_version": "2015-07-01"
+    },
+    {
+      "path": "data/mediaconnect/2018-11-14/service-2.json.gz",
+      "decoded_sha256": "a51a3bc3c22707d559d36336d613b4f13c9758153e0e3916f132df24529e4f13",
+      "compressed_sha256": "2db1839cc7dfbc8429c550687d623af7e610b38baf0a90d27ad6575a4193c59e",
+      "api_version": "2018-11-14"
+    },
+    {
+      "path": "data/mediaconvert/2017-08-29/service-2.json.gz",
+      "decoded_sha256": "e1e1d0069c9ef33f688dd24e06ccb50713a594edb59790c3f08f7f2a1f86e9cd",
+      "compressed_sha256": "14a01a76fde5105b1f94c40455df9b7a7e55cdd03965f6dc50b9d8871702cc30",
+      "api_version": "2017-08-29"
+    },
+    {
+      "path": "data/medialive/2017-10-14/service-2.json.gz",
+      "decoded_sha256": "3e02b0829522362d60b438e13477cd5a7d979f2c8e9d0e789f4bb21efa4ddb92",
+      "compressed_sha256": "0baa44571e3842bc68af3d33890970d46e6028a1bc2c8b6f865f030a6534f815",
+      "api_version": "2017-10-14"
+    },
+    {
+      "path": "data/mediapackage/2017-10-12/service-2.json.gz",
+      "decoded_sha256": "cd653e9492a78d6a840b132bbad500f7ca614b78398ebc33925956b5e4e31e06",
+      "compressed_sha256": "0f803872e03d38a3445221469181bb315fcc8d790277fa698c0eb018585caa78",
+      "api_version": "2017-10-12"
+    },
+    {
+      "path": "data/mediapackage-vod/2018-11-07/service-2.json.gz",
+      "decoded_sha256": "f816a5e78918be75ba649c8287e622f5bcd95da820a336b8c6568be043a070fe",
+      "compressed_sha256": "2fe182d05a4efd7ec46476f2d2d161ac238980604342a08d9cd8b56c507785eb",
+      "api_version": "2018-11-07"
+    },
+    {
+      "path": "data/mediapackagev2/2022-12-25/service-2.json.gz",
+      "decoded_sha256": "7597161e1b41ba1111ec8e3a8785beeddc784ad592f8b9aee8e006d83ca68879",
+      "compressed_sha256": "397690a58da2cf84e35c84e1f36045580d042cc7d423caa3d9284b149656134a",
+      "api_version": "2022-12-25"
+    },
+    {
+      "path": "data/mediastore/2017-09-01/service-2.json.gz",
+      "decoded_sha256": "e39c4a4150caf4bdf80f57926f1efc514a318de9ec50fc9445f1fc0c46656527",
+      "compressed_sha256": "e45f31512c66007055b218c89589b0f1e02df367bef14cd96241c4ae14a9255d",
+      "api_version": "2017-09-01"
+    },
+    {
+      "path": "data/mediastore-data/2017-09-01/service-2.json.gz",
+      "decoded_sha256": "d051bc2e0ab8757807165d2291f38057fd879781868971cbcb13c02679d0a979",
+      "compressed_sha256": "e29aff980c2c869a0d2109f08d50ed464eb282bff976b576cfce129b9f376e54",
+      "api_version": "2017-09-01"
+    },
+    {
+      "path": "data/mediatailor/2018-04-23/service-2.json.gz",
+      "decoded_sha256": "ae84d5d8c1576ce0be4ede199aa3fe3487d082c47cf1bdb54569e591d322938d",
+      "compressed_sha256": "59cff9fafbd8b46c93d82b4af69d995080d449c410381a89c8c5d087e792b730",
+      "api_version": "2018-04-23"
+    },
+    {
+      "path": "data/medical-imaging/2023-07-19/service-2.json.gz",
+      "decoded_sha256": "51d2e323c6849e63087e7385773c27e273195cd401d167c2b329959f28f60de6",
+      "compressed_sha256": "3cab5d15054c0aba7f9b6b20ee2bfccece97411af672c17daac70ec2a5c069b7",
+      "api_version": "2023-07-19"
+    },
+    {
+      "path": "data/memorydb/2021-01-01/service-2.json.gz",
+      "decoded_sha256": "f873dbcdcc745d031046e810add6b6177de4fd3618428be46fc2aa1add65aef3",
+      "compressed_sha256": "bad8b6fac618ee3e1690a1961f7f756c98990146af32c0e4e6e7884d89b60891",
+      "api_version": "2021-01-01"
+    },
+    {
+      "path": "data/meteringmarketplace/2016-01-14/service-2.json.gz",
+      "decoded_sha256": "f2f18b0a9128dddf7db26a5ef1d39bd0bcc430f13b0f360612fe7b7fd3eacd9a",
+      "compressed_sha256": "86fea47ca091ce2c5d1c7ffb736e13dbe69718211a05a959d3cfa7775a068e72",
+      "api_version": "2016-01-14"
+    },
+    {
+      "path": "data/mgh/2017-05-31/service-2.json.gz",
+      "decoded_sha256": "c3abb3e1e6204b4946104126a9913171d851c4ef807e35be09afb86fe263ff34",
+      "compressed_sha256": "3f03998ab5ea04dd37d9ab6ea4f97d420d5a3eac3b36cfe66e8a2ddaadd9ba1b",
+      "api_version": "2017-05-31"
+    },
+    {
+      "path": "data/mgn/2020-02-26/service-2.json.gz",
+      "decoded_sha256": "569e47bad48d591cd4e971e80bed3cb762def92b5cb16ebd847f3c8013146b63",
+      "compressed_sha256": "68e7de050a202477eade483364d1e49b472368ad880b9ad17b480c7fce31c0be",
+      "api_version": "2020-02-26"
+    },
+    {
+      "path": "data/migration-hub-refactor-spaces/2021-10-26/service-2.json.gz",
+      "decoded_sha256": "aea35616257039401a824aeac357678ded486f1582d0df3fc55ebc0e557f397b",
+      "compressed_sha256": "dcb5e0d5c63289ac333cb5dc28b83b6b19783915852a3b6374db354b0ae60d2b",
+      "api_version": "2021-10-26"
+    },
+    {
+      "path": "data/migrationhub-config/2019-06-30/service-2.json.gz",
+      "decoded_sha256": "293df058bac21a79c2a11f40d0bb7f0a656bf751fe61c3c246c673cbf7bd8c19",
+      "compressed_sha256": "d72d39c6da2c5284a7759d60b4b7cc5c223d02c35b8d4594044dc9bf87946557",
+      "api_version": "2019-06-30"
+    },
+    {
+      "path": "data/migrationhuborchestrator/2021-08-28/service-2.json.gz",
+      "decoded_sha256": "208950d67107cbcf06c4525bd7b1ecb528631ec2d468f86921ef7b0fd55a2add",
+      "compressed_sha256": "3165baae37480ccb701759d509f40498482d6ea8f0276e22c9d662d96803c2be",
+      "api_version": "2021-08-28"
+    },
+    {
+      "path": "data/migrationhubstrategy/2020-02-19/service-2.json.gz",
+      "decoded_sha256": "6da3ac429e375bcf455b9a6fabfc6a3c5129c904a4e4168dbfd0677302230d13",
+      "compressed_sha256": "ad6a1dfb59c3824e59141eb6ecdeb0730d11d3eb8e51597eafe140d8cf2bd0f1",
+      "api_version": "2020-02-19"
+    },
+    {
+      "path": "data/mpa/2022-07-26/service-2.json.gz",
+      "decoded_sha256": "435e86afdf8d2a4c3663440c6ee41cfd737b252cb4755ecd8b07d73d91562a3d",
+      "compressed_sha256": "20c02f2034f33a401f28d0635166c106958cbbee358937b73a1efe240f6a9a38",
+      "api_version": "2022-07-26"
+    },
+    {
+      "path": "data/mq/2017-11-27/service-2.json.gz",
+      "decoded_sha256": "1e273fbd329f67e3c3bfe8cbb73a522c95fb4a17931afee08e0c5ca288043ed7",
+      "compressed_sha256": "131bc7e3d66ea01966f6fddcfa3a73695f9bef344fe32e5eeec333177c1b1799",
+      "api_version": "2017-11-27"
+    },
+    {
+      "path": "data/mturk/2017-01-17/service-2.json.gz",
+      "decoded_sha256": "c2286f141a31961beb3f8258e1954a1b290e185f72c0a7b2a5aee17761585ff7",
+      "compressed_sha256": "d8f369cadd6b04eea7943670a6c024fa0a4a34cdb7780cf377098b5e4a018544",
+      "api_version": "2017-01-17"
+    },
+    {
+      "path": "data/mwaa/2020-07-01/service-2.json.gz",
+      "decoded_sha256": "6c0b28dac50d7b287aa27cacb147522f5df0d5860c474dca98e0dc0b4c06542c",
+      "compressed_sha256": "d535f943d11778b4abaad5bbee1494530161db94f37f2d2ffcffb6391fd28ead",
+      "api_version": "2020-07-01"
+    },
+    {
+      "path": "data/mwaa-serverless/2024-07-26/service-2.json.gz",
+      "decoded_sha256": "ea568122a2943400ce83ae3a6d07580dbf37136eef86006a6280c06b3976330d",
+      "compressed_sha256": "2b7e67288fc80f74918532f2c761cc57510c17ae841fdf379eb34287b5155545",
+      "api_version": "2024-07-26"
+    },
+    {
+      "path": "data/neptune/2014-10-31/service-2.json.gz",
+      "decoded_sha256": "4f849fc0701e315d87f466e8575e3b88d8d3234eb78392fe1b348b4133c4bce6",
+      "compressed_sha256": "73ecf842809bdd66c0a76fcaeff8e4e86fd114273e5f54f8a50c77686daa1265",
+      "api_version": "2014-10-31"
+    },
+    {
+      "path": "data/neptune-graph/2023-11-29/service-2.json.gz",
+      "decoded_sha256": "363f2e98e06385d7ba64f05aad667eafb66f9b9870c949d917dd27deb70b9fdb",
+      "compressed_sha256": "704789f387aa10a74d259b190c95c724d88959c87566233874beaab0ff53cdfc",
+      "api_version": "2023-11-29"
+    },
+    {
+      "path": "data/neptunedata/2023-08-01/service-2.json.gz",
+      "decoded_sha256": "3377a85e8bd004584301e4f61eb04d59af045c45dca06fcece709b37e855f7e6",
+      "compressed_sha256": "cfc549b9cd2188137b9bdfb1503adf75223f6e220ae9d6bc0a595a0263068014",
+      "api_version": "2023-08-01"
+    },
+    {
+      "path": "data/network-firewall/2020-11-12/service-2.json.gz",
+      "decoded_sha256": "daf3cfed63d66f989b20b26188485c9dfeb285412e9bbca8d1dc9e249056efed",
+      "compressed_sha256": "2580089d1d98aa14fb0e3391890d5f3d75d5e3ea56e80dfb8d4f039645722c4b",
+      "api_version": "2020-11-12"
+    },
+    {
+      "path": "data/networkflowmonitor/2023-04-19/service-2.json.gz",
+      "decoded_sha256": "8c3524ecddc9d40f4384621d3188ac544e9fa133704a6517d4d4fc0cadce5d67",
+      "compressed_sha256": "a9dea185c47f1135a693c46b895ae67ea0406e60eb25200ac3ffd46aa5552fd1",
+      "api_version": "2023-04-19"
+    },
+    {
+      "path": "data/networkmanager/2019-07-05/service-2.json.gz",
+      "decoded_sha256": "e17ae6b249f5b41b9ccfff15db83a1d00177d5118d00f4ed6f8046290a85262f",
+      "compressed_sha256": "3cdef187229153f0e554dc06c8a302c9322e49a95873922636469c542c4191d3",
+      "api_version": "2019-07-05"
+    },
+    {
+      "path": "data/networkmonitor/2023-08-01/service-2.json.gz",
+      "decoded_sha256": "51d3e98705f2bdc3e380a13d912da8eb4fd0e54eed9ff18d59ab92582dc62fd6",
+      "compressed_sha256": "ffc0cbfc22699f9fdc37e027147a709028297d96bdc254e60cd7a4f3b2cd8908",
+      "api_version": "2023-08-01"
+    },
+    {
+      "path": "data/notifications/2018-05-10/service-2.json.gz",
+      "decoded_sha256": "556f0c4b675b7fab6acfbe8886ccf7681c63067f376d2ec7eb340b9b9831fe6e",
+      "compressed_sha256": "937345c9a8564e752e9c817f07cfce358c6a2b21f074b1464f999cc5bff8157a",
+      "api_version": "2018-05-10"
+    },
+    {
+      "path": "data/notificationscontacts/2018-05-10/service-2.json.gz",
+      "decoded_sha256": "523d7e158f57e3b24257466bf6639ba30716da7280cc6565fe2941d959b3c6a7",
+      "compressed_sha256": "05ffa7fe92cb502a6bb21455a322788084140aef32c913974ddd38fe6fac0a95",
+      "api_version": "2018-05-10"
+    },
+    {
+      "path": "data/nova-act/2025-08-22/service-2.json.gz",
+      "decoded_sha256": "b6a3c13c6d7597e774ec3fb7d33d042b6e5f9c1e937244343eb9d45701150740",
+      "compressed_sha256": "7d79689b5b3e4f5f2cc9ac60f100d1e495320ca6b8a9900bf770d7f7d1b74ce3",
+      "api_version": "2025-08-22"
+    },
+    {
+      "path": "data/oam/2022-06-10/service-2.json.gz",
+      "decoded_sha256": "0b6e4bc35f8205088ca445bb3b99879bcf75ab84c724a5c3e1403ab98024f14a",
+      "compressed_sha256": "8b0b4512bc3de4833dd374e0d2d0ba43a2edd077d55c90bd63079ce6c8218e3a",
+      "api_version": "2022-06-10"
+    },
+    {
+      "path": "data/observabilityadmin/2018-05-10/service-2.json.gz",
+      "decoded_sha256": "3176a7774399c898eba6aba26e721d4c18c5246b4267ed8919a7dec50fddb65c",
+      "compressed_sha256": "d4b9c95f1a8387a585ab1e30d379797161b6dba1ffca7343f7dee71b9964c566",
+      "api_version": "2018-05-10"
+    },
+    {
+      "path": "data/odb/2024-08-20/service-2.json.gz",
+      "decoded_sha256": "907abcdd5450017d0325b03bed98eaccf14d7529fa3c8ea9ab6c74e2c9cc4af9",
+      "compressed_sha256": "df3e63666da00f9772426811cfdec1cb125fb04c8d01d19cd768f239255df966",
+      "api_version": "2024-08-20"
+    },
+    {
+      "path": "data/omics/2022-11-28/service-2.json.gz",
+      "decoded_sha256": "b413f594215a1ecf9e4acc55d2a17b08f3b233c1304f3fdc9c913a27af890bf4",
+      "compressed_sha256": "c05a08229c3c3ef74c753260ed1f9e319e8e5dad6a90a5b7ebc0fbe69b8c6f0b",
+      "api_version": "2022-11-28"
+    },
+    {
+      "path": "data/opensearch/2021-01-01/service-2.json.gz",
+      "decoded_sha256": "ba729e9d861d0811caf3cd31db6e6ad4d49cce81915a8729a41faafb3f87c5ff",
+      "compressed_sha256": "c693ebda650cf37f4e5be0c1a5a22e9f291f9d960d939666cdae643035cdb944",
+      "api_version": "2021-01-01"
+    },
+    {
+      "path": "data/opensearchserverless/2021-11-01/service-2.json.gz",
+      "decoded_sha256": "64f9ef1bc358dae0e1a9b8bd6b8db0847915cbcc41c42beeb35f002b74c51065",
+      "compressed_sha256": "e78efc1e8d89f32e9cbfb939d0e01baf12efa0eca1f0a42d3d43569754444693",
+      "api_version": "2021-11-01"
+    },
+    {
+      "path": "data/organizations/2016-11-28/service-2.json.gz",
+      "decoded_sha256": "8aa3e981ad2c89502bcc8a68f50bcc10c14483a818d04558d8126b756b577c83",
+      "compressed_sha256": "0a58f8310e26958252a870efb60b4bcd0af8796d181da8a0b990ccdec354cbec",
+      "api_version": "2016-11-28"
+    },
+    {
+      "path": "data/osis/2022-01-01/service-2.json.gz",
+      "decoded_sha256": "cbf67904860b3b35f4c6cdfad8964e3d211138f6f26423ebe9209d593f1634f5",
+      "compressed_sha256": "e0e6eeca11b71b9acdb33175caa2c2dd563c23599fe8b3132b710efbb5a42bbe",
+      "api_version": "2022-01-01"
+    },
+    {
+      "path": "data/outposts/2019-12-03/service-2.json.gz",
+      "decoded_sha256": "498f943b15c2a44f31602959702cce5c21fee382f21bb9ba709d319dd113dc9f",
+      "compressed_sha256": "526058aaff7cb3a6b524f515708d3a739bcc20d65f7b37d921fde322547237cb",
+      "api_version": "2019-12-03"
+    },
+    {
+      "path": "data/panorama/2019-07-24/service-2.json.gz",
+      "decoded_sha256": "ebb1f2677579ce22cda4442f9952b686cf4a53da7580b1af08abdc5ac43d6652",
+      "compressed_sha256": "5744443ac44cf65d6fe0b12bed9440be8cfb77801c7fd50d43ac094b53949589",
+      "api_version": "2019-07-24"
+    },
+    {
+      "path": "data/partnercentral-account/2025-04-04/service-2.json.gz",
+      "decoded_sha256": "978e6cb4997424090c8ab140ff61d1e365e0c1f9588c2e2994758c12feca9db9",
+      "compressed_sha256": "f4433a6cf555706dc61a572d438e9eeab41031e144e90b9b210b205a246d5835",
+      "api_version": "2025-04-04"
+    },
+    {
+      "path": "data/partnercentral-benefits/2018-05-10/service-2.json.gz",
+      "decoded_sha256": "3968c206e6d1bee698fc156b78c364a4c4166d66c34432add67270ec4bc4aa68",
+      "compressed_sha256": "58912b5e379bc55009acb385d66202ff5a003d4593ce8cd6dfa5a3b1f01d0b8a",
+      "api_version": "2018-05-10"
+    },
+    {
+      "path": "data/partnercentral-channel/2024-03-18/service-2.json.gz",
+      "decoded_sha256": "1e246a2cfb391f1943040847adc110afeed6ffee4c599e7bde3b571434c2bc04",
+      "compressed_sha256": "312a8184cb818bb0f11294908e864f3732f1ceb5f426a10f338207404316ed07",
+      "api_version": "2024-03-18"
+    },
+    {
+      "path": "data/partnercentral-selling/2022-07-26/service-2.json.gz",
+      "decoded_sha256": "befa968d4f889a574bf6a161ee084791e8514f58dada1afe8cee2429ffe3da45",
+      "compressed_sha256": "9f4079ca6f252fb5dabd0aad43a0a80677b9c36c4aaec3156974b00baf02f8a3",
+      "api_version": "2022-07-26"
+    },
+    {
+      "path": "data/payment-cryptography/2021-09-14/service-2.json.gz",
+      "decoded_sha256": "0ecc1e6bdf31bd7d5f9d549ec8aa5bc5804d2e0394d7b21ff8a933dcd2cd4e5f",
+      "compressed_sha256": "8d6c049be934d8fe267707cea770fbf58a637e9bddb624394e92ab0cbc53d2d3",
+      "api_version": "2021-09-14"
+    },
+    {
+      "path": "data/payment-cryptography-data/2022-02-03/service-2.json.gz",
+      "decoded_sha256": "7d08ee263494609184ead18ca1fb3fbd0bc67fe07ae60be0827d8df2f30256d9",
+      "compressed_sha256": "9c854143ff2d86b031a37f787559d1454b17d8835992815d82d73bb6c2d798b8",
+      "api_version": "2022-02-03"
+    },
+    {
+      "path": "data/pca-connector-ad/2018-05-10/service-2.json.gz",
+      "decoded_sha256": "e8c69c0c057acb47f30c56ea7c7bdda6022a76743ca4254fdd7875537f4d8053",
+      "compressed_sha256": "049eac33fa2c6eddfa9a844e59e5e6d9f822d03eb403493275132a702d84bfac",
+      "api_version": "2018-05-10"
+    },
+    {
+      "path": "data/pca-connector-scep/2018-05-10/service-2.json.gz",
+      "decoded_sha256": "69b21dba9a1b34f4f0fe7c5b9376a20767b7b177f42e78bbbc70f7fb3ffd67b9",
+      "compressed_sha256": "87dde0bca740cb7b35d61e60725c6bbcb5a0e67c445bc6485344a89b98c61ec0",
+      "api_version": "2018-05-10"
+    },
+    {
+      "path": "data/pcs/2023-02-10/service-2.json.gz",
+      "decoded_sha256": "7c76affede5ab9e260bede2647b7698da3be45909993f137993bb214168520ac",
+      "compressed_sha256": "898a333029e64ba30c11c8a2e58e808234f1cc336539b773155193bb307a183f",
+      "api_version": "2023-02-10"
+    },
+    {
+      "path": "data/personalize/2018-05-22/service-2.json.gz",
+      "decoded_sha256": "dc51956d9d8a20cb5e033b20ee6b0b54dcdefa96e0e46c5546f1af9da350e9e9",
+      "compressed_sha256": "1fc48a462ab17ca505f2efe66280e38856d5a04dd164a989f97adbf3aa6869b1",
+      "api_version": "2018-05-22"
+    },
+    {
+      "path": "data/personalize-events/2018-03-22/service-2.json.gz",
+      "decoded_sha256": "fb1182cf049929da229d58815a695a0f11f2bf5db2712fb5872d051565fde80a",
+      "compressed_sha256": "1875337ab8acc1b472be1e7bc623f59a9513cb360877616f96ade20e810f3316",
+      "api_version": "2018-03-22"
+    },
+    {
+      "path": "data/personalize-runtime/2018-05-22/service-2.json.gz",
+      "decoded_sha256": "393683f95e41b32e72ead0016de93a9685edd3d9002ce9f4d6daa732e2fa0842",
+      "compressed_sha256": "d9fea710f5c9512e4156f3f6f0554721ad3f700e1215755c468b6af1bd663cd0",
+      "api_version": "2018-05-22"
+    },
+    {
+      "path": "data/pi/2018-02-27/service-2.json.gz",
+      "decoded_sha256": "1aa60d77e203912437a8411bf7175fbb81d5695b0adcf473274b38d861ecc6e9",
+      "compressed_sha256": "5f29f5afe077d8aec7a1a2d2794bbf2dab7c0dee8424cadc450c1eb61d6934ea",
+      "api_version": "2018-02-27"
+    },
+    {
+      "path": "data/pinpoint/2016-12-01/service-2.json.gz",
+      "decoded_sha256": "795eebf2c63f444bc943002de700f1982905896740a2878eab0c3803ed364390",
+      "compressed_sha256": "bb06ecfd3dc9982d23a6454a2be8bee097a050f324dd74d6295ae599cfd17c38",
+      "api_version": "2016-12-01"
+    },
+    {
+      "path": "data/pinpoint-email/2018-07-26/service-2.json.gz",
+      "decoded_sha256": "14c28c3f5312faba3de157ea1b2a443b6ab6c564ae2d17fb5f3868be27ecf6b5",
+      "compressed_sha256": "338aa8c8ea718fede3dde96d629938a25e49fd8241bf4a88b6dd9b8bc72c113e",
+      "api_version": "2018-07-26"
+    },
+    {
+      "path": "data/pinpoint-sms-voice/2018-09-05/service-2.json.gz",
+      "decoded_sha256": "f7d0e014f3f21198cbed174ce84742a066ace2f942caca1ddff3625f5b129838",
+      "compressed_sha256": "5d914c4a05885af1b7e8ac57cb11f771f7d2d94e79038ebb80ee21dac2e603f5",
+      "api_version": "2018-09-05"
+    },
+    {
+      "path": "data/pinpoint-sms-voice-v2/2022-03-31/service-2.json.gz",
+      "decoded_sha256": "e97c28113ee2442690dd6cdaf7031f34e7e490a516529674e129e03a6bc4df90",
+      "compressed_sha256": "c2615393bcd069fbafdec719c22e99947591c94747a7a902470e227a6f83033a",
+      "api_version": "2022-03-31"
+    },
+    {
+      "path": "data/pipes/2015-10-07/service-2.json.gz",
+      "decoded_sha256": "4f077ef57656d2fb147539e618b94420febfe1ab564893416079e485bcd4011e",
+      "compressed_sha256": "60fdb319ff05e8ff57ca5cf3ebf7539d64c6373450e61502724af28cccb00318",
+      "api_version": "2015-10-07"
+    },
+    {
+      "path": "data/polly/2016-06-10/service-2.json.gz",
+      "decoded_sha256": "3e3e609facbc70c48cfc340110253b2e122127bae36cd02859fc411a65f809e7",
+      "compressed_sha256": "b8b30a2c6500d9c1ae4b56cfa11625caeb1447ec95d0afbe9a4472eeaf6cd80d",
+      "api_version": "2016-06-10"
+    },
+    {
+      "path": "data/pricing/2017-10-15/service-2.json.gz",
+      "decoded_sha256": "30fabe5781519f16c8fce21ce30dff534b7a66dc4dd4b0d2b36df6241a6891a4",
+      "compressed_sha256": "46b9d96f5a591f68e945e6f7140a3b29562935ca343034f9ef89cc1994927011",
+      "api_version": "2017-10-15"
+    },
+    {
+      "path": "data/proton/2020-07-20/service-2.json.gz",
+      "decoded_sha256": "d9b8b7d81e4dd1e25dabe569b1716a40e1696c6b60d17a2bdd9df597d497b457",
+      "compressed_sha256": "788dba0d0cfb0f49c71378922ea6e7c5c098ee817b5dffb5fb37e91c56f97817",
+      "api_version": "2020-07-20"
+    },
+    {
+      "path": "data/qapps/2023-11-27/service-2.json.gz",
+      "decoded_sha256": "6d5b35f8fec22743cc97723251709299ea0964916415651936b136156c1928df",
+      "compressed_sha256": "b955b3d5da197dcd1f6db78006ba4b0a0ba0076ab413f01446144bda4902f371",
+      "api_version": "2023-11-27"
+    },
+    {
+      "path": "data/qbusiness/2023-11-27/service-2.json.gz",
+      "decoded_sha256": "1d6673e0d7036abd5574c7f21012878ca57fe843fa8db2641dcfbbd2de763869",
+      "compressed_sha256": "63c72cef1fd5b3bf166e41db906723cda57f7ed25b0592acb8e022f62e872eb2",
+      "api_version": "2023-11-27"
+    },
+    {
+      "path": "data/qconnect/2020-10-19/service-2.json.gz",
+      "decoded_sha256": "b294345125f8a3512e555711dc4e2344b150f63975e66c7c1234be3ce43b1cbc",
+      "compressed_sha256": "2b074484353b5daf758a20263f548bac16275aeb58b8982e6a134348d0ebba92",
+      "api_version": "2020-10-19"
+    },
+    {
+      "path": "data/quicksight/2018-04-01/service-2.json.gz",
+      "decoded_sha256": "a2ebc1f0d4759826f3d596fa5a19a7f9fffe1c1afa5b8ac5d4fa314915cffa9d",
+      "compressed_sha256": "eeb92343e7c850c97388cb7e2e43f84c037932db32efeb97b751f62199c5d002",
+      "api_version": "2018-04-01"
+    },
+    {
+      "path": "data/ram/2018-01-04/service-2.json.gz",
+      "decoded_sha256": "9e352bcba40fa0641371532500a0330d527eb0a6a979fccfe828a4ef1acdc6d2",
+      "compressed_sha256": "d68faf81e3e4db086d83156dc3f5c41046d29c8699dbd5c450e4b8ba29e55b00",
+      "api_version": "2018-01-04"
+    },
+    {
+      "path": "data/rbin/2021-06-15/service-2.json.gz",
+      "decoded_sha256": "9ea37625d23f3df1ba9a2abc68da33a57908ca282ed373cd47a26266a3a8b413",
+      "compressed_sha256": "8e920c3a2faf98f569e0d268b7e0936e2598434869d52d140db694ea5e4b52e5",
+      "api_version": "2021-06-15"
+    },
+    {
+      "path": "data/rds/2014-10-31/service-2.json.gz",
+      "decoded_sha256": "54c5906783cf086259594df0ce543af93ad94fe22b8889dd018e17928f94ae93",
+      "compressed_sha256": "d8a27f7deb462d08bb17f1a01db245044ab553ec5f2245b2c2776adeff337cf8",
+      "api_version": "2014-10-31"
+    },
+    {
+      "path": "data/rds-data/2018-08-01/service-2.json.gz",
+      "decoded_sha256": "70e1b5bcb37dcd5decad502f52bded499d5eb3ba7a050f6a354e82f4e923bc16",
+      "compressed_sha256": "d98e9e7e471d7dc628edf1fc8075e5ff0157d783e6cb1747c83aea84120767cc",
+      "api_version": "2018-08-01"
+    },
+    {
+      "path": "data/redshift/2012-12-01/service-2.json.gz",
+      "decoded_sha256": "f3d5f4651615570154ee27cd70d1a0d57801b59ad2e28f0e2b9ec69a28b2802f",
+      "compressed_sha256": "3ae3854016b29404a3eaabfba0be7cb842b2fa445ce793b1ea5328d86ac3dd07",
+      "api_version": "2012-12-01"
+    },
+    {
+      "path": "data/redshift-data/2019-12-20/service-2.json.gz",
+      "decoded_sha256": "a0c7515ea9a5416a38131e75f80c806b0ac465e89a84beb2ea2a727469a3c6be",
+      "compressed_sha256": "fe69c5d54d8b98f03991cb1d3996c8681938fbd8d9261f86dfdae6044d12e04b",
+      "api_version": "2019-12-20"
+    },
+    {
+      "path": "data/redshift-serverless/2021-04-21/service-2.json.gz",
+      "decoded_sha256": "ae6713ae68bb15ef3bd6c9a9b7a2481339af9a900246742b53c368271e91fa3c",
+      "compressed_sha256": "9ea4817a0f86ba2ca9f6d02685493dda3d9a0e0918ea0d6f8b974e11a128b876",
+      "api_version": "2021-04-21"
+    },
+    {
+      "path": "data/rekognition/2016-06-27/service-2.json.gz",
+      "decoded_sha256": "d79da9785c74ca2e687d9dd55f9b0975ea01ac2a4ec3482c9f5faa31161d3fec",
+      "compressed_sha256": "38c145e6c0b407781bcc4a057d1c66859e92852cd8f628db8e6b05226b6cc9b1",
+      "api_version": "2016-06-27"
+    },
+    {
+      "path": "data/repostspace/2022-05-13/service-2.json.gz",
+      "decoded_sha256": "88a268288cd532125902aae01205c00026d970b6e2517f78421b987a3edb1ab4",
+      "compressed_sha256": "e39ee34ac12ccedda5b23dc2427e929b1149b1bb4cebea82864f327f684162bc",
+      "api_version": "2022-05-13"
+    },
+    {
+      "path": "data/resiliencehub/2020-04-30/service-2.json.gz",
+      "decoded_sha256": "128b6a761683137a1918960353bea477baf42d205d0cc899b2a0722922e7f811",
+      "compressed_sha256": "a9ce60826b62d9cea38f0caa88dd48e72bff0a7801a0765aa947e69b5e9efc35",
+      "api_version": "2020-04-30"
+    },
+    {
+      "path": "data/resiliencehubv2/2026-02-17/service-2.json.gz",
+      "decoded_sha256": "13fe32ad09fbb584aceee6fbcf6281154dbba9d571b2be80342c97db790f29f6",
+      "compressed_sha256": "ee488027141b610a8c593aff1e0feca563164ce2e3cd4809a20917c28be28f0b",
+      "api_version": "2026-02-17"
+    },
+    {
+      "path": "data/resource-explorer-2/2022-07-28/service-2.json.gz",
+      "decoded_sha256": "0ffd42f7e3604eeb9070067d1bdb3575c973839c5cb2b22db10efd1040742c3e",
+      "compressed_sha256": "dacc90614bbec8e6d0d9edbfe437c7404176c725b4dac88d02eccea6bc1c3fec",
+      "api_version": "2022-07-28"
+    },
+    {
+      "path": "data/resource-groups/2017-11-27/service-2.json.gz",
+      "decoded_sha256": "fe1b10a28f93c31b99f1cd1a861694cd8f013a925da6bec8ab6cd34ddc3ebaec",
+      "compressed_sha256": "528cf7fd065d8e8f7eb057e288a03c52b883cc50e3f795f69610ed43c2458843",
+      "api_version": "2017-11-27"
+    },
+    {
+      "path": "data/resourcegroupstaggingapi/2017-01-26/service-2.json.gz",
+      "decoded_sha256": "6794221b461989c2af1aff563f028baa7ef93a4ecaf45d8494b76b7d130138c0",
+      "compressed_sha256": "045652804912e7b4de2b9b706bc4a79a9160eaeaba84f3c71bb9f6d806c82ea0",
+      "api_version": "2017-01-26"
+    },
+    {
+      "path": "data/rolesanywhere/2018-05-10/service-2.json.gz",
+      "decoded_sha256": "a997136ba26d8ead5718d593025100f963c9dfed6ed01f12af1cad8c107406fd",
+      "compressed_sha256": "aaaa62dc2ebcdc82258ccdd4d746966757147e85a1e7a6414be13e0e7b10db67",
+      "api_version": "2018-05-10"
+    },
+    {
+      "path": "data/route53/2013-04-01/service-2.json.gz",
+      "decoded_sha256": "29dae1683f6128df6cad788a27af0e1aa1ce0e71a99e99b1c4e4d6f24e2b159b",
+      "compressed_sha256": "ed33100de8dcea52d09b228000f387556905a897fb0a1d8b3bc7a8f6e31fc733",
+      "api_version": "2013-04-01"
+    },
+    {
+      "path": "data/route53-recovery-cluster/2019-12-02/service-2.json.gz",
+      "decoded_sha256": "6594f79114925c6a92f8e7b6a3b2c3453df266d2d7e092580f92bb428b0e1205",
+      "compressed_sha256": "69734654d006318ff0971f83bfa71dfb5c9b0f99359afb7931009cf3589b7452",
+      "api_version": "2019-12-02"
+    },
+    {
+      "path": "data/route53-recovery-control-config/2020-11-02/service-2.json.gz",
+      "decoded_sha256": "e51df48fb89824ddf4650cfbc01fd691440dd9b1644d5f89a738b5a58a2b69e1",
+      "compressed_sha256": "6c2a768191e0be927342fc862333780d3ef15c3cbb390fd75589a6e1ffd3a844",
+      "api_version": "2020-11-02"
+    },
+    {
+      "path": "data/route53-recovery-readiness/2019-12-02/service-2.json.gz",
+      "decoded_sha256": "a83c54fb28c353623b2590ed04fdfbd4779e89b918ef055dcc223cea2f8ce860",
+      "compressed_sha256": "a1be900495c0502cc3031018365d7c94c89e154c6ae90a7b5b4b27fa0bde6c99",
+      "api_version": "2019-12-02"
+    },
+    {
+      "path": "data/route53domains/2014-05-15/service-2.json.gz",
+      "decoded_sha256": "9091f8a8fcbca84ee57551c408172d0622bac8476600d6a35e2e25b4d7117726",
+      "compressed_sha256": "2efbba39cecd05f5c4ad94d90a4ef420d04110a60399b2bebbca7d8510038f4c",
+      "api_version": "2014-05-15"
+    },
+    {
+      "path": "data/route53globalresolver/2022-09-27/service-2.json.gz",
+      "decoded_sha256": "b85d986b89692246a4f0ee485997f743c40ec3e4e1de5c7fd69fb7d786147e86",
+      "compressed_sha256": "a7d5f36bebaddfd8fde2b61829f11629b22b764981df2f85302c2357a2d1ccf8",
+      "api_version": "2022-09-27"
+    },
+    {
+      "path": "data/route53profiles/2018-05-10/service-2.json.gz",
+      "decoded_sha256": "8dd0b94c55f50a2b2231c30e2915eca442a9cf382430cbc14956126ea990dbbf",
+      "compressed_sha256": "688d9c28540c4e38828a4951abdbf190991d2c7ec58d67b0b49f2c2f037c788f",
+      "api_version": "2018-05-10"
+    },
+    {
+      "path": "data/route53resolver/2018-04-01/service-2.json.gz",
+      "decoded_sha256": "1e91a78cf06ddcad86f333f282402fadce692bad4eb58d36b9df55b7fc74027b",
+      "compressed_sha256": "b8416796f2f9b7a5e19805eea3d578b34ddbc53e95bb721f18e42becf3102926",
+      "api_version": "2018-04-01"
+    },
+    {
+      "path": "data/rtbfabric/2023-05-15/service-2.json.gz",
+      "decoded_sha256": "6c43899e12afd4ed5ee9cfae68ac8928688e58694b71e9347f6b6128f4917e0a",
+      "compressed_sha256": "8ddc26380a443086a251142718338d3453b58afe86f8bf4bcc06e53eb89d3dec",
+      "api_version": "2023-05-15"
+    },
+    {
+      "path": "data/rum/2018-05-10/service-2.json.gz",
+      "decoded_sha256": "4c049814508b6ca350710a4767d63161e2fbefb49cbc2800ca1f53612072b155",
+      "compressed_sha256": "9d1215f8b1561d0e831f588bac178d84fc032b64b34e297d6fdd9a6dd9f0b858",
+      "api_version": "2018-05-10"
+    },
+    {
+      "path": "data/s3/2006-03-01/service-2.json.gz",
+      "decoded_sha256": "f11e9149d16fcc226a85456d1d5d4a2258041818f1a64027007f76ce535f2eb3",
+      "compressed_sha256": "b8533a8d54fd384595788b80d8e94ac4f8ddab49481a0c18dd442ddc6ac9c795",
+      "api_version": "2006-03-01"
+    },
+    {
+      "path": "data/s3control/2018-08-20/service-2.json.gz",
+      "decoded_sha256": "040cb42c49f43924b21dece4b83542996ed9855cb43031b14c67fc518f41bb0d",
+      "compressed_sha256": "879bee64874faef7d0b7ebfb45bf92da883820304392337b6bd76adc2d90efd9",
+      "api_version": "2018-08-20"
+    },
+    {
+      "path": "data/s3files/2025-05-05/service-2.json.gz",
+      "decoded_sha256": "84f0a660c3a2e7dc852892fc7717130f1a5dbd0fb911812a225320d37c72852a",
+      "compressed_sha256": "4549adcca2083507f4f52a3f2a41900e8ee9d0d2fa8eed7b1e468f8789ed1b81",
+      "api_version": "2025-05-05"
+    },
+    {
+      "path": "data/s3outposts/2017-07-25/service-2.json.gz",
+      "decoded_sha256": "07e6868bf5e97ad69170076c5ad9bfd3433a3ab9a5c48190e83691371675be1e",
+      "compressed_sha256": "88a09237d28544c435a9234d369942a68e7b7324e243dc40c87fc59cf3b5acad",
+      "api_version": "2017-07-25"
+    },
+    {
+      "path": "data/s3tables/2018-05-10/service-2.json.gz",
+      "decoded_sha256": "2bcf245b995600d315d2a49aa71cb6348bf8377d074ac5c8829af58ada805fc1",
+      "compressed_sha256": "0306bc5b080a85e5f0a433bb88f2225bafdd295de584b4f3591aaee970f5f640",
+      "api_version": "2018-05-10"
+    },
+    {
+      "path": "data/s3vectors/2025-07-15/service-2.json.gz",
+      "decoded_sha256": "6cab96dab20f5bf83f7c0206705c041e4adc9d14db6f2a110743662810621a2c",
+      "compressed_sha256": "a5e2b8e3017fb69a97bed11559ed76f9edf7d17a07b12397157d265f2a638b3e",
+      "api_version": "2025-07-15"
+    },
+    {
+      "path": "data/sagemaker/2017-07-24/service-2.json.gz",
+      "decoded_sha256": "72558be9ef1f23d9b31954cc4fb4b49416fdeafe3d5c96fee43d23444d20601a",
+      "compressed_sha256": "957be6b078b67ac4e2a194e7478c0182d091276385cf5a4f72a5fc95c088c629",
+      "api_version": "2017-07-24"
+    },
+    {
+      "path": "data/sagemaker-a2i-runtime/2019-11-07/service-2.json.gz",
+      "decoded_sha256": "23fa0e6fd42a94ffd0a8100ae181503593ba12a20b95108f8df13c617f938339",
+      "compressed_sha256": "f6a234e9d6d53e033cf7bdee9b1327d337aa59f09962ec2700f738355b0096b1",
+      "api_version": "2019-11-07"
+    },
+    {
+      "path": "data/sagemaker-edge/2020-09-23/service-2.json.gz",
+      "decoded_sha256": "ced1e6d97a93c3fdb9fa3374cb3c3ad6794e126d73dc3b911f8d22e3176cbbc5",
+      "compressed_sha256": "db05a7aaf5c0a67aa1b2e872e6326bfe201ba044cb9f1e371b49df5e40d09413",
+      "api_version": "2020-09-23"
+    },
+    {
+      "path": "data/sagemaker-featurestore-runtime/2020-07-01/service-2.json.gz",
+      "decoded_sha256": "11d6d02644d671ca2eacfc864332d0f0fdf08a54a1972b7662948281290e5764",
+      "compressed_sha256": "6af251f2c3d1f03099fc83e6b87dde160366ee748fd67d565b6022ecaa830edc",
+      "api_version": "2020-07-01"
+    },
+    {
+      "path": "data/sagemaker-geospatial/2020-05-27/service-2.json.gz",
+      "decoded_sha256": "e7e915974c205de1ea08a9b35e1853baf8e9ae3ce35d21f4e60fdd5572decbc6",
+      "compressed_sha256": "502aea20ec76de74d478a64e3d3af098f20cb3f31b6ab83abf7c0c5f2af7579e",
+      "api_version": "2020-05-27"
+    },
+    {
+      "path": "data/sagemaker-metrics/2022-09-30/service-2.json.gz",
+      "decoded_sha256": "1ea60411bc73316a21b54c88b87c9b9cfebd8d384710749119b3f89a0af8e1b6",
+      "compressed_sha256": "77806a73eab4a1c63cf70ff5a441950e29c477d6fb0c4e559105bb408b53a666",
+      "api_version": "2022-09-30"
+    },
+    {
+      "path": "data/sagemaker-runtime/2017-05-13/service-2.json.gz",
+      "decoded_sha256": "c50951dbe8d0ba17e33754941c2ca43636f5e7255e9b2272ee5c88de8c0d7c0d",
+      "compressed_sha256": "0a1eb6a94453f85889e95d2a74951c70f3d3eda5ffe7dfeb32c8f13cf961e2c9",
+      "api_version": "2017-05-13"
+    },
+    {
+      "path": "data/savingsplans/2019-06-28/service-2.json.gz",
+      "decoded_sha256": "f435cacf7285b7537155fffd0d496263f70efefc94ec947799b4f0726ba36be0",
+      "compressed_sha256": "27695f09a7b42c2ecef45748deded5923c6fc28db8bdd4b94fe558e50e656ac7",
+      "api_version": "2019-06-28"
+    },
+    {
+      "path": "data/scheduler/2021-06-30/service-2.json.gz",
+      "decoded_sha256": "428fbc6d766436e7b5394010e98987af0c738980ccab60d541dd5e5720e643e1",
+      "compressed_sha256": "45e31f9d263db596a3c207a980b6b036cbce091793f7e7d71b2d604da9ea8489",
+      "api_version": "2021-06-30"
+    },
+    {
+      "path": "data/schemas/2019-12-02/service-2.json.gz",
+      "decoded_sha256": "43ac14a4e7639297b722109676f9307f0931dd4d47f14a6ad6fc1ffc0ed5ed47",
+      "compressed_sha256": "366f83eb0c7b9c955bfeec9e31261a3700b7b2e1bc55a0aa237596a61c380504",
+      "api_version": "2019-12-02"
+    },
+    {
+      "path": "data/sdb/2009-04-15/service-2.json.gz",
+      "decoded_sha256": "ba7af03a3afa16ffc237db4f62e70d86fe50a5f16f88c4fbec5eff1cf3f8a6b9",
+      "compressed_sha256": "1990894dd0e36be0f226894e96416f1dbd531e40be147094b7860a3518255c96",
+      "api_version": "2009-04-15"
+    },
+    {
+      "path": "data/secretsmanager/2017-10-17/service-2.json.gz",
+      "decoded_sha256": "d568532fb0db48e0ce9c3c30b6f48aae734e1657105043990ef699ec48656671",
+      "compressed_sha256": "a0fa8a4a598e16e61c11b48c4758283056925adb819fc760fa12f74a66b69611",
+      "api_version": "2017-10-17"
+    },
+    {
+      "path": "data/security-ir/2018-05-10/service-2.json.gz",
+      "decoded_sha256": "1a0546011b342d9c5e9555262a5d3e763f2dba962f52af13ab727126d086a57f",
+      "compressed_sha256": "9ec568d0ade6099c0adb523e841e9b84346c1158591c4fcdbecbac3cc81306bd",
+      "api_version": "2018-05-10"
+    },
+    {
+      "path": "data/securityagent/2025-09-06/service-2.json.gz",
+      "decoded_sha256": "653e939d436e62a9f9824e53131d45cea252fa58a3238f0780b9d1bdf2eaf370",
+      "compressed_sha256": "82f7400f881afbcbae680cfef2201bc548f686e078cbce10fc382a7537aff330",
+      "api_version": "2025-09-06"
+    },
+    {
+      "path": "data/securityhub/2018-10-26/service-2.json.gz",
+      "decoded_sha256": "1d2962323446689cd108f6921a9cd8198758e088c51b68b8ab01635a5606aafc",
+      "compressed_sha256": "80c408acf4ea17125b90b508f9c5c06c93289c1196a302249e7b3396b9482db4",
+      "api_version": "2018-10-26"
+    },
+    {
+      "path": "data/securitylake/2018-05-10/service-2.json.gz",
+      "decoded_sha256": "c56a18b805dc0d8ded6cc405d4bed63e6a0ef8431ea57138c4364bbc41cfb6bd",
+      "compressed_sha256": "83df20aff3d15609af25f2ce108136ee5f2ed00e6af8ee8c1b0a8b37342c007b",
+      "api_version": "2018-05-10"
+    },
+    {
+      "path": "data/serverlessrepo/2017-09-08/service-2.json.gz",
+      "decoded_sha256": "c1b2f0d2897ce035690e54fa7e0aea400cd4625bb08be3ce0e2faf46e2e23b6f",
+      "compressed_sha256": "07dfe192111225e543c1493ca104b2296f6fb5b0c5bf20075c4a5a1b8447018c",
+      "api_version": "2017-09-08"
+    },
+    {
+      "path": "data/service-quotas/2019-06-24/service-2.json.gz",
+      "decoded_sha256": "6da3b94fe434f230fae145cf4a5c06e318928fa7c786fc5e69e88e88f4c4eda9",
+      "compressed_sha256": "348fc24be077006e5c330adeda519481463d2dcb88ce12a217a59ef72d4171cd",
+      "api_version": "2019-06-24"
+    },
+    {
+      "path": "data/servicecatalog/2015-12-10/service-2.json.gz",
+      "decoded_sha256": "d7a545ba933809a43b8c60761e4c6115d3150f15246526bdc107d551832e3dcd",
+      "compressed_sha256": "5fca5e3078caa7ac69db51d1b7ecb0129321a835369c799e415d6c22204d7106",
+      "api_version": "2015-12-10"
+    },
+    {
+      "path": "data/servicecatalog-appregistry/2020-06-24/service-2.json.gz",
+      "decoded_sha256": "7f0458ec05566b759c8f82147e7872284efa58e6e9cb49e1f565d7025e004d28",
+      "compressed_sha256": "155575108f8353e207ceb7760120c9b1efb1eadf8d34862e3fb0066f6f8f0229",
+      "api_version": "2020-06-24"
+    },
+    {
+      "path": "data/servicediscovery/2017-03-14/service-2.json.gz",
+      "decoded_sha256": "f5cf629a560d691c693e14339fb5516b2a12b6ea929005ba434491330d7a140f",
+      "compressed_sha256": "b7cc1926c47675d2902d1a3c50876c71b914e823d8058fb91ce00719867950cc",
+      "api_version": "2017-03-14"
+    },
+    {
+      "path": "data/ses/2010-12-01/service-2.json.gz",
+      "decoded_sha256": "78f98dc6c5f4b83a60ba84091f5b76dd14b01a8a37be52cad384430b2a08b862",
+      "compressed_sha256": "0c31f027902346a6d61cb1b6f89b9dd7608c624443e4c5a7c46f4aba0226eeba",
+      "api_version": "2010-12-01"
+    },
+    {
+      "path": "data/sesv2/2019-09-27/service-2.json.gz",
+      "decoded_sha256": "a6591f2a86570805ad9a08b431b98db8a33b21b97c8d6846106165d38c85c5c4",
+      "compressed_sha256": "afd9ac67bed9eae2bb080be198b313ee43c81be94d29dfa8c45438b1bb2f8428",
+      "api_version": "2019-09-27"
+    },
+    {
+      "path": "data/shield/2016-06-02/service-2.json.gz",
+      "decoded_sha256": "7a2c20992bbff973aa0c6e71913cdbcbe370dc3e2609cdca06f50974900036db",
+      "compressed_sha256": "8cfa2f3bcea0dc0f4774bf94511ce1bbc97a1cbc636f120a7f282b22ce7cf2ea",
+      "api_version": "2016-06-02"
+    },
+    {
+      "path": "data/signer/2017-08-25/service-2.json.gz",
+      "decoded_sha256": "0b47e0a4aaf1a0661f421774e2d0a4f3519aeccc80fc849f48711cde717a85b2",
+      "compressed_sha256": "44e58033b563829b27b14fe3e6b67c922a698ebf5f4e06c2723b37a6fa6a4f2d",
+      "api_version": "2017-08-25"
+    },
+    {
+      "path": "data/signer-data/2017-08-25/service-2.json.gz",
+      "decoded_sha256": "3ec593b39fafe00498a26d98406b844657dbfb1e682daf31f4d7e42e4329ee2d",
+      "compressed_sha256": "7fc180e5a3b77b971a5a0322f3fe74f3f5258373760c6368619cf2bc43697d72",
+      "api_version": "2017-08-25"
+    },
+    {
+      "path": "data/signin/2023-01-01/service-2.json.gz",
+      "decoded_sha256": "d1ed8114c32791ce14df65ee59baa7f7c644cbab91f84fbaf2907e5a44a32e4d",
+      "compressed_sha256": "5758b930a01c284a3d569c67f612f0b30f4e14f74626f6b5d6dd610b647cb020",
+      "api_version": "2023-01-01"
+    },
+    {
+      "path": "data/simpledbv2/2025-09-26/service-2.json.gz",
+      "decoded_sha256": "65e73929c6457d997ccc9acad10cd3a5858c0431f7b3bfeeea2188e2b4dc0d4d",
+      "compressed_sha256": "32f73e2fe5c280c4ab3136c06d4611345315d28ac181f14270b2a23faf5b1cd8",
+      "api_version": "2025-09-26"
+    },
+    {
+      "path": "data/simspaceweaver/2022-10-28/service-2.json.gz",
+      "decoded_sha256": "9344d6487c622159462a20ba1f41022420add6981cd9cb49b91b152a924f374f",
+      "compressed_sha256": "a85c811eb0b6019c80983aa82e18e2d71ec5d19fa6965a3a0565224d2245c6ab",
+      "api_version": "2022-10-28"
+    },
+    {
+      "path": "data/sms-voice/2018-09-05/service-2.json.gz",
+      "decoded_sha256": "f7d0e014f3f21198cbed174ce84742a066ace2f942caca1ddff3625f5b129838",
+      "compressed_sha256": "5d914c4a05885af1b7e8ac57cb11f771f7d2d94e79038ebb80ee21dac2e603f5",
+      "api_version": "2018-09-05"
+    },
+    {
+      "path": "data/snow-device-management/2021-08-04/service-2.json.gz",
+      "decoded_sha256": "b1a9e1d5abfceda13a99434b9eeff0860aaae2665ab26ae54c7c02689d985418",
+      "compressed_sha256": "010504d59c20f795616ce76ecec709d1566d03182f05c46bd423c1f083625875",
+      "api_version": "2021-08-04"
+    },
+    {
+      "path": "data/snowball/2016-06-30/service-2.json.gz",
+      "decoded_sha256": "e5fbb457adb0ac4d7e6c68d61a9c452fd98a6fcf40a926d0bd79ed469fa50324",
+      "compressed_sha256": "60de47a887fef4b861b832d67c83ebaaca22bf271caea67bf0f69a29805b09d2",
+      "api_version": "2016-06-30"
+    },
+    {
+      "path": "data/sns/2010-03-31/service-2.json.gz",
+      "decoded_sha256": "e4b06672833165907ad13714eb5c5aa745578e8060d49106529d57a52381e5fd",
+      "compressed_sha256": "541045e43e71639d52fab4e5a571d580e2ca6ffeee00da09e62b4fa7fcee9085",
+      "api_version": "2010-03-31"
+    },
+    {
+      "path": "data/socialmessaging/2024-01-01/service-2.json.gz",
+      "decoded_sha256": "dbeca54f03da3089c7b91b4bcffef58149a79d9bb35c244a954d01098f43f538",
+      "compressed_sha256": "e8ebc66341921c2aab67f07395b26fef5ece35e028e7c2d4ff63054910c18634",
+      "api_version": "2024-01-01"
+    },
+    {
+      "path": "data/sqs/2012-11-05/service-2.json.gz",
+      "decoded_sha256": "282d08c85a2003ab91ed400a81339fe81952e446ae40a599877705903e870c0f",
+      "compressed_sha256": "ed0f74324d72fe9157942a8bdceef5a35b023fb6690d52ac9047a1f49cb257c9",
+      "api_version": "2012-11-05"
+    },
+    {
+      "path": "data/ssm/2014-11-06/service-2.json.gz",
+      "decoded_sha256": "6a7dfad0a9898625ad0fac34b1e9cd5b338c3984f2f9789a4566c44a901f380a",
+      "compressed_sha256": "5a41efc69d55f3d16b78a61935de5788ced1f22aabf434ef6f6f2e0c3a07d6ad",
+      "api_version": "2014-11-06"
+    },
+    {
+      "path": "data/ssm-contacts/2021-05-03/service-2.json.gz",
+      "decoded_sha256": "799fbceda4f31afd831587896669ec61a6287463b673411339a201d4683a7db3",
+      "compressed_sha256": "57b0c56894f0a469e585f3327a2656abbbbd2b6d4d8358810f17f5a411d12224",
+      "api_version": "2021-05-03"
+    },
+    {
+      "path": "data/ssm-guiconnect/2021-05-01/service-2.json.gz",
+      "decoded_sha256": "51997ac71cc77100b48fe48beda16fbe85dddec9ff075ea89958d387e84234b7",
+      "compressed_sha256": "1461e4d620a81c4886fb066126f6dfc5ccaaac5c3efc53ad36d50f2510886a18",
+      "api_version": "2021-05-01"
+    },
+    {
+      "path": "data/ssm-incidents/2018-05-10/service-2.json.gz",
+      "decoded_sha256": "d4906aca34cf94c5f40b5188a2dc5ea8b3f70d91420a9dc41a7d2b36ed920e8b",
+      "compressed_sha256": "99300ddcd1d61d9431d2937727e78d2083aef654b4ec474a52b6b164b8d44f26",
+      "api_version": "2018-05-10"
+    },
+    {
+      "path": "data/ssm-quicksetup/2018-05-10/service-2.json.gz",
+      "decoded_sha256": "00fea4a82f97253d0590cad4c84b1be6898abf80cc10a6c4ee7ad1af2b2a7a22",
+      "compressed_sha256": "a61d8aa5856598c5ce454dd58200c280edb67dcd842646863ac87e9311bcc290",
+      "api_version": "2018-05-10"
+    },
+    {
+      "path": "data/ssm-sap/2018-05-10/service-2.json.gz",
+      "decoded_sha256": "80dd200d65e33dbe8783442d2e97c9b10e061519dddb4d87af0474730d030649",
+      "compressed_sha256": "08a19018a9350d66dc404c98d36f639d4c0d5983adbf1ee73713b42b197b5a2b",
+      "api_version": "2018-05-10"
+    },
+    {
+      "path": "data/sso/2019-06-10/service-2.json.gz",
+      "decoded_sha256": "1ff69339e44c16723c9cb4b70cf17c221ba3cf9ada1b529f54bbce747d6e1d14",
+      "compressed_sha256": "5de101a5efc95c978faa5a6727aa29b21ae4c78280c5448ef5e6a8798c4f4831",
+      "api_version": "2019-06-10"
+    },
+    {
+      "path": "data/sso-admin/2020-07-20/service-2.json.gz",
+      "decoded_sha256": "efd454ce9ec318fb11e2167291b7b072db2a631d3bede026fa92db863ddee586",
+      "compressed_sha256": "f768b44011771ca1cb808ed458e32f231599b2470b53a4b9b2fcbbbe35ddee7d",
+      "api_version": "2020-07-20"
+    },
+    {
+      "path": "data/sso-oidc/2019-06-10/service-2.json.gz",
+      "decoded_sha256": "bbf555c27f009a2f829e95d654747d955b1a7f3c45c77806127330d059ceb2c4",
+      "compressed_sha256": "13239f4abfdb3b93fe24ff01970c0f3e0c077b7010e544449525b9fe84808427",
+      "api_version": "2019-06-10"
+    },
+    {
+      "path": "data/stepfunctions/2016-11-23/service-2.json.gz",
+      "decoded_sha256": "bfb8c218406d881b3f5287ff6c98d51b048dfae2622b45a7f7ba0a14729b36af",
+      "compressed_sha256": "e3267b14cdb2f381839f53f39389c344376c085ea4d16a63e68df10adfae692b",
+      "api_version": "2016-11-23"
+    },
+    {
+      "path": "data/storagegateway/2013-06-30/service-2.json.gz",
+      "decoded_sha256": "6d235d09caa61b69467d83163a2a1566d3783b546e168afaf1b6fd72e6936c18",
+      "compressed_sha256": "095f288192e9075608a263eb24fd4c650eff805527be182d1de2929cda9744dd",
+      "api_version": "2013-06-30"
+    },
+    {
+      "path": "data/sts/2011-06-15/service-2.json.gz",
+      "decoded_sha256": "b2c35d56d093494a539db6af3ddbcb601d614260b82e1351932323bd40cf9921",
+      "compressed_sha256": "e191cfd4c4e93e2328e55cf61df49f3b1abedda194b323d101e535108f14885c",
+      "api_version": "2011-06-15"
+    },
+    {
+      "path": "data/supplychain/2024-01-01/service-2.json.gz",
+      "decoded_sha256": "e52a5220ea7f5f0cd97e6e841b53881c17cd6571120f86f0da3b34f79b875f6d",
+      "compressed_sha256": "a3e252c5c8ea0b09acc774e5057858fc474abc1c46cf0be198708172cca769c4",
+      "api_version": "2024-01-01"
+    },
+    {
+      "path": "data/support/2013-04-15/service-2.json.gz",
+      "decoded_sha256": "8e37ecff05bac5f75dc0ba384de678f7bb57feab22aeb74bcf4691e8bdea0932",
+      "compressed_sha256": "45364aa7972ad4c7509cf7bc2e87160543a491a2344c321d2e4c5c226b44f237",
+      "api_version": "2013-04-15"
+    },
+    {
+      "path": "data/support-app/2021-08-20/service-2.json.gz",
+      "decoded_sha256": "237eb5786e37921ea171ca30ea7de47bdc1082f24f1284fe02fad7ff3efd3e5f",
+      "compressed_sha256": "49aa4ab9c2038433f1c35f1ca6cdacc96bcd72a580387b497f545af9f17105f2",
+      "api_version": "2021-08-20"
+    },
+    {
+      "path": "data/sustainability/2018-05-10/service-2.json.gz",
+      "decoded_sha256": "eec1222d34e5110ef52b4ca663e2fdc94cc72231b45fd732901289c90489dd08",
+      "compressed_sha256": "e07cf67c243d4d8a05867880c51c4caecdf2bb08973176e4c8b1ff69ddf76e5c",
+      "api_version": "2018-05-10"
+    },
+    {
+      "path": "data/swf/2012-01-25/service-2.json.gz",
+      "decoded_sha256": "b5175d201336a91a8523a042b02f527115af63a01cb9a79936ff8946420ebd73",
+      "compressed_sha256": "fdca2551974d2cae12d18ad46da985fe8515f3f62910937beae4843fc5dd21e0",
+      "api_version": "2012-01-25"
+    },
+    {
+      "path": "data/synthetics/2017-10-11/service-2.json.gz",
+      "decoded_sha256": "1aaf32436e3e75c0f6a6b1c2805f8d9fd2e037513fd04917200a65c3392fb932",
+      "compressed_sha256": "78264165925e1a9bd3f077eef681c47969da2f3fa449dfaae441624a094960a5",
+      "api_version": "2017-10-11"
+    },
+    {
+      "path": "data/taxsettings/2018-05-10/service-2.json.gz",
+      "decoded_sha256": "0e499ab47872689e3c7f6bdf6b42fa8acec5cef00d350a225e5299341aa92d0d",
+      "compressed_sha256": "9747bef97b5d2c14210ed8e7630f10d0d059afe00328bd82c53ee8464e434ab7",
+      "api_version": "2018-05-10"
+    },
+    {
+      "path": "data/textract/2018-06-27/service-2.json.gz",
+      "decoded_sha256": "34f6593bbb1b5078ada998f86947d04f560c7427f4ddf2ee0bc6af59912a14e0",
+      "compressed_sha256": "1bdb3108b99c048bdd13678ae4fda884fd30720233ef4de3314f32d55c708031",
+      "api_version": "2018-06-27"
+    },
+    {
+      "path": "data/timestream-influxdb/2023-01-27/service-2.json.gz",
+      "decoded_sha256": "088c74011b7a8ed2943d1b0b8eb240caf29f5bfc76249825f6d57b9bebafff24",
+      "compressed_sha256": "cd3a9e8076114d3afb3cf2b9471fdec21f690d5d9acd617a290c7264302e481a",
+      "api_version": "2023-01-27"
+    },
+    {
+      "path": "data/timestream-query/2018-11-01/service-2.json.gz",
+      "decoded_sha256": "a80e96d3518571ced6d41c8a5d188c7e51c21fc6755c64fae9a1401e25231f3a",
+      "compressed_sha256": "01af13c116798d1c7e057494f5f92d9f9e52b5f23e51daaf74c0df48a839a5a9",
+      "api_version": "2018-11-01"
+    },
+    {
+      "path": "data/timestream-write/2018-11-01/service-2.json.gz",
+      "decoded_sha256": "dd983b115020b1d63c6a1a327176a54274caae0ceaca0503fc3cfd32d180b5ea",
+      "compressed_sha256": "711632ea6e3420c8eb126c7ccfc62cbccfdc07a63855568a909d05e8e4f63d0d",
+      "api_version": "2018-11-01"
+    },
+    {
+      "path": "data/tnb/2008-10-21/service-2.json.gz",
+      "decoded_sha256": "097edad7182acfe062e306948e7d7d03c6450aa69554603dc437629d2e51f2c9",
+      "compressed_sha256": "385667881931719d5f44a55019d37f3315f7531a22f9196fa1df28e8eb357be0",
+      "api_version": "2008-10-21"
+    },
+    {
+      "path": "data/transcribe/2017-10-26/service-2.json.gz",
+      "decoded_sha256": "0894086cacc08ad8e73ac2d20b334b9d1fb33804185c1df35afac1bf82168783",
+      "compressed_sha256": "65ebc38bbfe29fdd0472e802a83a15f8a3ae84dd62a811b23cb2751c5eaa5853",
+      "api_version": "2017-10-26"
+    },
+    {
+      "path": "data/transfer/2018-11-05/service-2.json.gz",
+      "decoded_sha256": "3a4f4c69c06fcebfe6ccb96f4b689272471e4126306944cea6dc135922e69f81",
+      "compressed_sha256": "244dfa31e4bb4f5f0e4ea0963b8444aafe2238e8b03b329033013e4991b045a9",
+      "api_version": "2018-11-05"
+    },
+    {
+      "path": "data/translate/2017-07-01/service-2.json.gz",
+      "decoded_sha256": "3e8233923189a9f905b6a983539207247ad690bea3eff41b31d7c1e420dd0a2f",
+      "compressed_sha256": "217c3714b097b4ff510645f1fc8f8df6d9628af2bdb585f4063b09158cf20ada",
+      "api_version": "2017-07-01"
+    },
+    {
+      "path": "data/trustedadvisor/2022-09-15/service-2.json.gz",
+      "decoded_sha256": "c802418f827cd5e72efa62e093408ecc22a3adf115e5faa8f516322177d8a841",
+      "compressed_sha256": "ec6692a2437b9992bdbf212256d382356983c335a3e1146057753faa23d6e81e",
+      "api_version": "2022-09-15"
+    },
+    {
+      "path": "data/uxc/2024-07-01/service-2.json.gz",
+      "decoded_sha256": "755ca02af1f110349108006da3d751229c95c3135b0d12904c13401473ee9103",
+      "compressed_sha256": "b14db77b2d16b324929e80ae102e24afe95fd943043b845712fffe444adc317f",
+      "api_version": "2024-07-01"
+    },
+    {
+      "path": "data/verifiedpermissions/2021-12-01/service-2.json.gz",
+      "decoded_sha256": "7927cd63ae422ec44a14516892575c1cbb171d2f1b801eb31b0b8804f39447f4",
+      "compressed_sha256": "daa1e95c30cf450fd79f27dac3018641d3d74ca476d6c0270bb209ceb2e196b1",
+      "api_version": "2021-12-01"
+    },
+    {
+      "path": "data/voice-id/2021-09-27/service-2.json.gz",
+      "decoded_sha256": "780083e7e65da4635fdf81a69938f8bba913103347223a21b0ff8105f879fa54",
+      "compressed_sha256": "23c6a0ac3ae022d127b267108e281dea2eeb7442ce88ed6104c675b370da4516",
+      "api_version": "2021-09-27"
+    },
+    {
+      "path": "data/vpc-lattice/2022-11-30/service-2.json.gz",
+      "decoded_sha256": "4015dbff50a13049ab0473fbda70ed01a643b52989aa47acb8a01af0ed74dc8e",
+      "compressed_sha256": "af0c5e04ce3c4c4023763b09cd268ec7a9713f04e5568d318d8081e647e3e62e",
+      "api_version": "2022-11-30"
+    },
+    {
+      "path": "data/waf/2015-08-24/service-2.json.gz",
+      "decoded_sha256": "9ca310e83d26f2845400b6d9bc4b9cb11c0f9517606eaaf6cccd2ead3cabcca1",
+      "compressed_sha256": "d1f1032b92edf11ff34944623076e07d9fd68e132563994a9721f16683545062",
+      "api_version": "2015-08-24"
+    },
+    {
+      "path": "data/waf-regional/2016-11-28/service-2.json.gz",
+      "decoded_sha256": "ce136f520e1fc5a0533691bc73f09f8561645928e047c151f12703d2dff204e7",
+      "compressed_sha256": "990c884421cb4f96c41bca071926d390a2a2dd74b4cec52de08f3355c2d8af30",
+      "api_version": "2016-11-28"
+    },
+    {
+      "path": "data/wafv2/2019-07-29/service-2.json.gz",
+      "decoded_sha256": "ce0711f446bd0d2885075390706d22d7ab818e6c1e64b03ac327ce59983ca2dd",
+      "compressed_sha256": "ed3df6ba149b2c4d53bf70545a4bcbe6c2b8d7b919c4b5f79a330edb6dce2616",
+      "api_version": "2019-07-29"
+    },
+    {
+      "path": "data/wellarchitected/2020-03-31/service-2.json.gz",
+      "decoded_sha256": "924acaf63e0e5b6172fd252709df88a10380cb80d496598a5575fe48befd85c2",
+      "compressed_sha256": "3d73198b0587f12963b67e0c0b9885841710f8152c954d883466e5bee83cfe2f",
+      "api_version": "2020-03-31"
+    },
+    {
+      "path": "data/wickr/2024-02-01/service-2.json.gz",
+      "decoded_sha256": "258a4a04f355a8c06158c070873d4fa78a366da9eadb66bbf98dbc702f5074e5",
+      "compressed_sha256": "b6c1135c15baa2e0860bf40c8e3c501d3f528fa23793daf2c258c1317bdc6a53",
+      "api_version": "2024-02-01"
+    },
+    {
+      "path": "data/wisdom/2020-10-19/service-2.json.gz",
+      "decoded_sha256": "b79e3507a4d109fda1bb545440b38d21de3437f4fa2c081b14e6aa5285e4507a",
+      "compressed_sha256": "f90a4b42836c4cdde26562f01d1754356d064acd1a6f8d9f416bc510760345fa",
+      "api_version": "2020-10-19"
+    },
+    {
+      "path": "data/workdocs/2016-05-01/service-2.json.gz",
+      "decoded_sha256": "0e58e418a503807bf5be462fd23569d459eb97b9693508fcc56f5ad1e10422cb",
+      "compressed_sha256": "c826daf50ee3edd0ab1d8833a2038424e50678a6fb8b3d82ca66047ad6261511",
+      "api_version": "2016-05-01"
+    },
+    {
+      "path": "data/workmail/2017-10-01/service-2.json.gz",
+      "decoded_sha256": "b61d00ebdef54420946c38632e4560773365092f4d4ea673a7c7a68c0feb85d2",
+      "compressed_sha256": "1a40f403920d2c78ba09217d2c4e6f1f35955b9604f56076b960ddda11ab52c0",
+      "api_version": "2017-10-01"
+    },
+    {
+      "path": "data/workmailmessageflow/2019-05-01/service-2.json.gz",
+      "decoded_sha256": "36f3515f5171fdec8522388817c5ac021ac44ed78196c2e111bf5e17f77e51ae",
+      "compressed_sha256": "68fbe04c70cad21ef5ae7aed22a6d07d3d8a20fc19a696d208a67ee60edc5cf8",
+      "api_version": "2019-05-01"
+    },
+    {
+      "path": "data/workspaces/2015-04-08/service-2.json.gz",
+      "decoded_sha256": "57f8cf7d18d2552175c7bb78e601377b546877af4b3bf38a48f3775f90c3dd64",
+      "compressed_sha256": "f3da8f2019a8a1f6d61a5dbbc87a431b35f6ab11761d6b1ccd3661b90bae87c2",
+      "api_version": "2015-04-08"
+    },
+    {
+      "path": "data/workspaces-instances/2022-07-26/service-2.json.gz",
+      "decoded_sha256": "fbbfa73e207824a38ceb301806c22c42a847b9a10c29f639d73a5d61f28cd979",
+      "compressed_sha256": "fde1f6347c254dc312b92bf73c7f28626b4b3bf1fab890fd10fcc593dcabbb42",
+      "api_version": "2022-07-26"
+    },
+    {
+      "path": "data/workspaces-thin-client/2023-08-22/service-2.json.gz",
+      "decoded_sha256": "6dc2482bb1615ffc56a151fb5526981a1a6a0ab885f95213c7684a4848bc755a",
+      "compressed_sha256": "6aebd675477f36edfbab5961ddee248e94e8a4c4f4666d5a5c2fc54d4ceb19ff",
+      "api_version": "2023-08-22"
+    },
+    {
+      "path": "data/workspaces-web/2020-07-08/service-2.json.gz",
+      "decoded_sha256": "6ae6e9ab9d02e787d429d5ec5eefd1eb81703c50172ba1f80d2195c4684005a5",
+      "compressed_sha256": "c89381e0164a42fadc1e5d12827eb2d03d03b487147093ddef1697742c09bda8",
+      "api_version": "2020-07-08"
+    },
+    {
+      "path": "data/xray/2016-04-12/service-2.json.gz",
+      "decoded_sha256": "32a7d37ca2d0099aaa0e2f7b734c29b99d43f22e0df59497e07ee44a35372379",
+      "compressed_sha256": "4f86fc5db7bc63b81af0ed0f1b13d5e815f7709739bf82c3e84d5d7dc7ed8e08",
+      "api_version": "2016-04-12"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "default": "qwen3-0.6b-q4_0",
+  "models": [
+    {
+      "id": "qwen3-0.6b-q4_0",
+      "architecture": "qwen3",
+      "repository": "ggml-org/Qwen3-0.6B-GGUF",
+      "revision": "b5f37287796e5be0ea3dab2e7430873fb3f73e49",
+      "filename": "Qwen3-0.6B-Q4_0.gguf",
+      "sha256": "da2572f16c06133561ce56accaa822216f2391ef4d37fba427801cd6736417d4",
+      "download_url": "https://huggingface.co/ggml-org/Qwen3-0.6B-GGUF/resolve/b5f37287796e5be0ea3dab2e7430873fb3f73e49/Qwen3-0.6B-Q4_0.gguf",
+      "license": "Apache-2.0",
+      "bundled": false,
+      "accuracy_verified": false,
+      "memory_verified": false
+    }
+  ]
+}

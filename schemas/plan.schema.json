@@ -1,0 +1,126 @@
+{
+  "$id": "urn:watf:plan:1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "steps": {
+            "maxItems": 0
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "status": {
+            "const": "ok"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "questions": {
+            "maxItems": 0
+          },
+          "steps": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "questions": {
+      "items": {
+        "maxLength": 4096,
+        "pattern": "^[^\\u0000-\\u001f\\u007f]*$",
+        "type": "string"
+      },
+      "maxItems": 8,
+      "type": "array"
+    },
+    "status": {
+      "enum": [
+        "ok",
+        "needs_input",
+        "unsupported"
+      ]
+    },
+    "steps": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "after": {
+            "enum": [
+              "start",
+              "success",
+              "always",
+              "pipe"
+            ]
+          },
+          "args": {
+            "items": {
+              "maxLength": 4096,
+              "pattern": "^[^\\u0000-\\u001f\\u007f]*$",
+              "type": "string"
+            },
+            "maxItems": 64,
+            "type": "array"
+          },
+          "command": {
+            "maxLength": 4096,
+            "minLength": 1,
+            "pattern": "^[^\\u0000-\\u001f\\u007f]*$",
+            "type": "string"
+          },
+          "stdout": {
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "mode": {
+                    "enum": [
+                      "truncate",
+                      "append"
+                    ]
+                  },
+                  "path": {
+                    "maxLength": 4096,
+                    "minLength": 1,
+                    "pattern": "^[^\\u0000-\\u001f\\u007f]*$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "mode",
+                  "path"
+                ],
+                "type": "object"
+              }
+            ]
+          }
+        },
+        "required": [
+          "command",
+          "args",
+          "after",
+          "stdout"
+        ],
+        "type": "object"
+      },
+      "maxItems": 8,
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "steps",
+    "questions"
+  ],
+  "title": "watf plan v1",
+  "type": "object"
+}

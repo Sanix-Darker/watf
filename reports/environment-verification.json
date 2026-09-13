@@ -1,0 +1,9 @@
+{
+  "cargo_available": false,
+  "rustc_available": false,
+  "rustfmt_available": false,
+  "github_yaml_documents_parsed": 8,
+  "yaml_validation": "syntax only, not executed Actions workflows",
+  "shell_scripts_syntax_checked": 3,
+  "rust_tests_executed": false
+}

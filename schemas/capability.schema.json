@@ -1,0 +1,111 @@
+{
+  "$id": "urn:watf:capability:1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "aliases": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "arity": {
+      "enum": [
+        "none",
+        "one",
+        "two",
+        "optional",
+        "many",
+        "unknown"
+      ]
+    },
+    "choices": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "command": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 12,
+      "minItems": 1,
+      "type": "array"
+    },
+    "id": {
+      "type": "string"
+    },
+    "kind": {
+      "enum": [
+        "command",
+        "option",
+        "input_field",
+        "example"
+      ]
+    },
+    "name": {
+      "type": "string"
+    },
+    "required": {
+      "type": "boolean"
+    },
+    "source": {
+      "$id": "urn:watf:source:1",
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "additionalProperties": false,
+      "properties": {
+        "bytes": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "kind": {
+          "enum": [
+            "builtin",
+            "man",
+            "help",
+            "completion",
+            "local_doc",
+            "catalog"
+          ]
+        },
+        "modified_unix": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "reference": {
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-fA-F]{64}$",
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "reference"
+      ],
+      "title": "watf source v1",
+      "type": "object"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "value_type": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "command",
+    "kind",
+    "name",
+    "summary",
+    "source"
+  ],
+  "title": "watf capability v1",
+  "type": "object"
+}

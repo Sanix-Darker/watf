@@ -1,0 +1,9 @@
+Demo transfer utility
+Usage: demo [OPTIONS] SOURCE DESTINATION
+Options:
+  -r, --recursive  Recurse into directories
+  -f, --file FILE  Read input from FILE
+  --exclude PATTERN  Exclude matching names
+  --color[=WHEN]  Control colors
+Commands:
+  inspect  Inspect a transfer manifest

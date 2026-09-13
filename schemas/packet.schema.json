@@ -1,0 +1,178 @@
+{
+  "$id": "urn:watf:packet:1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "clause_count": {
+      "maximum": 8,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "estimated_tokens": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "evidence": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "aliases": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "arity": {
+            "enum": [
+              "none",
+              "one",
+              "two",
+              "optional",
+              "many",
+              "unknown"
+            ]
+          },
+          "clauses": {
+            "items": {
+              "minimum": 0,
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "command": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "command",
+              "option",
+              "input_field",
+              "example"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "program_available": {
+            "type": "boolean"
+          },
+          "source": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "summary": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "command",
+          "kind",
+          "name",
+          "arity",
+          "summary",
+          "source",
+          "program_available",
+          "clauses"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "id": {
+      "type": "string"
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "sources": {
+      "items": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false,
+        "properties": {
+          "bytes": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "freshness": {
+            "enum": [
+              "snapshot",
+              "metadata_unchanged",
+              "changed",
+              "missing",
+              "unknown"
+            ]
+          },
+          "kind": {
+            "enum": [
+              "builtin",
+              "man",
+              "help",
+              "completion",
+              "local_doc",
+              "catalog"
+            ]
+          },
+          "modified_unix": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "reference": {
+            "type": "string"
+          },
+          "sha256": {
+            "pattern": "^[0-9a-fA-F]{64}$",
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "kind",
+          "reference",
+          "freshness"
+        ],
+        "title": "watf source v1",
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "status": {
+      "enum": [
+        "evidence",
+        "partial",
+        "no_evidence"
+      ]
+    },
+    "token_estimator": {
+      "const": "utf8_bytes_div4_not_model_tokens"
+    },
+    "truncated": {
+      "type": "boolean"
+    },
+    "uncovered_clauses": {
+      "items": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "status",
+    "evidence",
+    "sources",
+    "clause_count",
+    "uncovered_clauses",
+    "truncated",
+    "estimated_tokens",
+    "token_estimator"
+  ],
+  "title": "watf packet v1",
+  "type": "object"
+}

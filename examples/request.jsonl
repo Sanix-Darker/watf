@@ -1,0 +1,3 @@
+{"schema_version":1,"id":"first","query":"stage all changes and commit with message release","max_bytes":4096}
+{"schema_version":1,"id":"second","query":"rebuild only backend and follow its logs","max_bytes":4096}
+{"schema_version":1,"id":"third","query":"EC2 instance metadata","catalog":true,"max_bytes":4096}

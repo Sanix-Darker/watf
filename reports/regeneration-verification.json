@@ -1,0 +1,17 @@
+{
+  "suite": "offline_data_regeneration",
+  "regenerated_files": 9,
+  "byte_identical": true,
+  "rust_tests_executed": false,
+  "hashes": {
+    "data/catalog.jsonl.gz": "71da55e8d4cbdf76fb7f12e1c624cd670c5ac38aefa4287a12f4c313ce08bef0",
+    "data/catalog.manifest.json": "5ef662d17c15d5ddacab1d995d7b825320dd7e42831a1a05b2a52f5581fb229e",
+    "data/core.jsonl": "73f66f4b93f3fd71d7a47695945b976d5fd06da309092d03c6e316daf07471ab",
+    "examples/complex.jsonl": "f79679da0d4a7e7839712e0fe4c5197d53584d4ff18c5a50c9a1e96149db69d7",
+    "examples/COMPLEX.md": "ff09cfdc5c700f8fbca4ee40a71498bced1c42c7848a03a71694e748de106c05",
+    "schemas/capability.schema.json": "7fb3d5ff0454dbe61eba52dcc11189eb56a782f1468408265ce4576c64907fcf",
+    "schemas/plan.schema.json": "913975ac4cf29dbb80c8fe3bc21a57e0927029276485f07aeeb135ce48754cdd",
+    "schemas/packet.schema.json": "fa0768a02d1678ba72812ae151580f65e4fd50a22221af7e134f8974302f8268",
+    "schemas/request.schema.json": "fc7c71603537f1a643bb08d8bf13170c866105526759448ec4246a2cb52d3225"
+  }
+}
