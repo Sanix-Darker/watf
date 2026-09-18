@@ -4,7 +4,7 @@ use crate::{
     packet::{Engine, Options, Packet},
     plan,
     record::{Capability, Kind},
-    Error, Result, SCHEMA_VERSION, VERSION,
+    route, Error, Result, SCHEMA_VERSION, VERSION,
 };
 use serde::{Deserialize, Serialize};
 use std::{
@@ -20,6 +20,7 @@ Local CLI capability harness for AI agents with optional native planning.
 
   watf "stage changes, commit with message 'release', then build containers"
   watf search --json --max-bytes 4096 "restart backend and follow its logs"
+  watf route --json "show current git status"
   watf plan --model /path/model.gguf --json "your complete intent"
   watf run --plan-file plan.json --json
   watf explain 'git commit -m "release"'
@@ -116,7 +117,8 @@ fn parse(input: &[String]) -> Result<Args> {
     let mut index = 0;
     if let Some(first) = input.first() {
         if [
-            "index", "search", "plan", "run", "explain", "validate", "doctor", "serve", "tui",
+            "index", "search", "route", "plan", "run", "explain", "validate", "doctor", "serve",
+            "tui",
         ]
         .contains(&first.as_str())
         {
@@ -333,6 +335,7 @@ pub struct PlanResponse {
     #[serde(flatten)]
     pub report: plan::Report,
     pub inference: infer::Metrics,
+    pub route: route::Classification,
 }
 pub fn plan_request(
     engine: &mut Engine,
@@ -345,7 +348,8 @@ pub fn plan_request(
     retrieval.max_bytes = 32768;
     retrieval.limit = 32;
     let packet = engine.lookup(query, &retrieval)?;
-    let context = plan::context(&engine.index, &packet)?;
+    let route = route::classify(&packet);
+    let context = plan::context_for(&engine.index, &packet, route.command.as_deref())?;
     let generated = infer::generate(query, &context, model)?;
     let allowed_commands = Some(context.commands.iter().map(|c| c.command.clone()).collect());
     let allowed_flags = Some(
@@ -373,6 +377,7 @@ pub fn plan_request(
     Ok(PlanResponse {
         report,
         inference: generated.metrics,
+        route,
     })
 }
 fn model_options(args: &Args) -> Result<infer::Options> {
@@ -727,6 +732,20 @@ pub fn run(input: Vec<String>) -> Result<i32> {
         "explain" => {
             explain(&engine, &args, &query)?;
             0
+        }
+        "route" => {
+            let packet = engine.lookup(&query, &args.search)?;
+            let classification = route::classify(&packet);
+            if args.json {
+                print_json(&classification)?;
+            } else {
+                println!("{}", serde_json::to_string_pretty(&classification)?);
+            }
+            if classification.command.is_some() {
+                0
+            } else {
+                3
+            }
         }
         "plan" => {
             let response = plan_request(

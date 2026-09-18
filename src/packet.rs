@@ -51,6 +51,10 @@ pub struct Evidence {
     // Internal ID avoids reparsing stable IDs. Never serialized into agent context.
     #[serde(skip)]
     pub doc: u32,
+    #[serde(skip)]
+    pub score: f32,
+    #[serde(skip)]
+    pub matched_terms: u16,
 }
 #[derive(Debug, Clone, Serialize)]
 pub struct Provenance {
@@ -246,6 +250,8 @@ impl Engine {
                     if !evidence.clauses.contains(&clause) {
                         evidence.clauses.push(clause);
                     }
+                    evidence.score = evidence.score.max(hit.score);
+                    evidence.matched_terms = evidence.matched_terms.max(hit.matched_terms);
                     continue;
                 }
                 if selected.len() >= options.limit {
@@ -279,6 +285,8 @@ impl Engine {
                     program_available: available,
                     clauses: vec![clause],
                     doc: hit.doc,
+                    score: hit.score,
+                    matched_terms: hit.matched_terms,
                 });
             }
         }

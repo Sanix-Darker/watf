@@ -115,9 +115,16 @@ pub struct OptionContext {
 /// Retrieve the smallest selected command surfaces, with no model calls. The
 /// inference adapter checks the real tokenizer budget before attempting a plan.
 pub fn context(index: &Index, packet: &Packet) -> Result<Context> {
+    context_for(index, packet, None)
+}
+
+pub fn context_for(index: &Index, packet: &Packet, command: Option<&str>) -> Result<Context> {
     let mut seen = BTreeSet::new();
     let mut commands = Vec::new();
     for evidence in &packet.evidence {
+        if command.is_some_and(|only| evidence.command != only) {
+            continue;
+        }
         if !seen.insert(evidence.command.clone()) || commands.len() >= 8 {
             continue;
         }

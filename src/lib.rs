@@ -11,6 +11,7 @@ pub mod ingest;
 pub mod packet;
 pub mod plan;
 pub mod record;
+pub mod route;
 pub mod text;
 #[cfg(feature = "tui")]
 pub mod tui;
