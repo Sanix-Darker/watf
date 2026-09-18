@@ -1,7 +1,8 @@
 # Deliberate limitations and verification gaps
 
-This project implements the retrieval-to-plan path, not every speculative feature
-from the design discussion. Important limits are explicit:
+This release implements the retrieval-to-plan portion of the agent CLI harness.
+Execution and result reduction are product gaps, not permanent exclusions.
+Important current limits are explicit:
 
 | Area | Current boundary |
 |---|---|
@@ -17,6 +18,8 @@ from the design discussion. Important limits are explicit:
 | Planning | Optional Qwen3 adapter, bounded straight-line IR, no general DAG/loop language |
 | Model quality | 0.6B multi-step accuracy not verified, no automatic model-size escalation |
 | Validation | Documented command/flag surface only, not semantic correctness or safety |
+| Execution | Not implemented yet; target is direct validated argv with cwd, timeout and bounded capture |
+| Result reduction | Not implemented yet; target is deterministic, loss-aware stdout/stderr reduction |
 | Shells | Bash renderer; no Fish/PowerShell renderer or stateful shell interpreter |
 | Output budget | Hard bytes, approximate token estimate, no model-independent token bound |
 | Networking | None in the engine; installation and proposed external tools may need it |
@@ -30,3 +33,8 @@ The model is not a mandatory final step for agents. `search` and `serve` return
 evidence directly. There is no deterministic shortcut that fabricates a complete
 multi-step command merely because retrieval scores are high. Unknown syntax may
 require importing better local documentation or abstaining.
+
+The next stage should reuse the validated typed plan rather than introducing a
+second command language or shell-string executor. It only counts as progress if
+end-to-end agent benchmarks show fewer tokens, tool calls, fallback reads, or
+retries at equivalent task success.

@@ -3,7 +3,7 @@
 Only a Qwen3 ChatML/non-thinking adapter is implemented. The native loader checks
 `general.architecture == qwen3`; other model architectures fail rather than reuse
 an untested chat template. SmolLM and arbitrary OpenAI-compatible endpoints are
-not implemented. No model is required by retrieval-only mode.
+not implemented. No model is required by the deterministic retrieval path.
 
 The provided provisioning manifest pins:
 
@@ -32,7 +32,7 @@ The runtime uses CPU layers only, actual model tokenization, a bounded context,
 chunked prefill and grammar-constrained greedy sampling. The pinned sampler's
 `sample()` already accepts its token; accepting it twice would corrupt grammar
 state. A single native initialization lock serializes inference calls. It does
-not serialize retrieval-only requests in independent engine instances.
+not serialize deterministic retrieval requests in independent engine instances.
 
 Default context is 4096, allowed 1024-8192. Default output cap is 768, allowed
 64-2048. Thread count is 1-64, default at most four available CPUs. The adapter
@@ -45,5 +45,7 @@ The grammar restricts JSON syntax and canonical command vocabulary, not intent
 correctness. Retrieved flags form a validator whitelist. Documentation and user
 text are encoded as data, with chat delimiter characters escaped. This reduces
 trivial delimiter injection but is not a complete prompt-injection defense.
-Bounded generation, independent validation and the absence of an executor remain
-essential safeguards. A model can still select an incorrect documented command.
+Bounded generation and independent validation remain essential safeguards. The
+current absence of an executor also limits impact, but the target executor must
+preserve the same boundary by accepting only validated structured argv and
+bounded execution policy. A model can still select an incorrect documented command.

@@ -9,19 +9,46 @@ local docs + optional catalog
   -> canonical deduplication
   -> immutable binary index
 
-human or agent intent
+agent intent
   -> quoted-clause splitting and lexical normalization
   -> cross-tool retrieval
   -> candidate command scopes
+  -> deterministic intent classification when score margin is sufficient
+       -> exact/grounded argv construction when possible
+       -> optional typed ambiguity classifier over retrieved candidates
   -> scoped option and documentation retrieval
   -> round-robin clause coverage and evidence deduplication
   -> bounded provenance-backed packet
-       -> agent: return evidence, no model
-       -> human plan: local GGUF + GBNF
+       -> deterministic agent retrieval: return evidence, no model
+       -> plan when needed: local GGUF + GBNF
             -> typed draft
             -> deterministic surface checks
-            -> quoted, inert Bash proposal + warnings
+            -> validated structured argv
+
+target continuation
+  -> direct process execution
+  -> bounded stdout/stderr capture
+  -> deterministic output reduction
+  -> compact actionable agent result
 ```
+
+## Routing before planning
+
+The common path should not require a generative model. An explicit command name,
+strong lexical match, local executable evidence, and a clear score margin can
+classify many CLI intents directly from the existing index. That result can feed
+typed argv construction and the existing validator.
+
+When local evidence produces several plausible command scopes, an optional typed
+classifier may choose among those candidates or abstain. Jev is a good shape for
+this role because it returns typed choices and probabilities instead of generated
+command text. It should receive a closed candidate set from retrieval, never the
+whole CLI universe, and it should not be on the default path because a network
+round trip is much slower than local index lookup.
+
+The local GGUF planner remains the final synthesis fallback for tasks that need
+free-form arguments or multi-step composition. Classification should reduce how
+often that planner is loaded or invoked.
 
 ## Module contracts and review points
 
@@ -37,8 +64,8 @@ human or agent intent
 | `packet` | Hierarchical retrieval, clause coverage, hard output cap | Evidence presence is not proof of satisfied intent |
 | `plan` | Typed steps, flag checks, evidence IDs and shell quoting | Surface validation is not semantic verification |
 | `infer` | Optional in-process Qwen3 adapter and grammar | Real model token budget, no cloud or executable fallback |
-| `cli` | Stable operations and foreground JSONL protocol | No execution flag exists |
-| `tui` | Minimal interactive view of the same engine | Planning is explicit and currently blocking |
+| `cli` | Stable operations and foreground JSONL protocol | Execution is not implemented yet |
+| `tui` | Secondary interactive view of the same engine | Must not drive agent architecture decisions |
 
 ## Retrieval mechanics
 
@@ -75,5 +102,10 @@ matters. Catalog and built-in sources remain labeled snapshots.
 A straight-line, at-most-eight-step IR was chosen instead of a general workflow
 language. Pipelines are represented explicitly and rendered with Bash pipefail.
 Model output cannot insert arbitrary shell grammar: arguments are literal strings,
-not a shell program. There is no executor, repair loop or permission system hidden
-inside the planner. The caller owns execution and authorization.
+not a shell program.
+
+The current release stops after validation and rendering. The target executor
+should consume the same structured argv directly, with explicit cwd, timeout,
+separate bounded stdout/stderr, exit status, and truncation metadata. It should
+not use `sh -c` for generated text. Authorization remains the caller's policy;
+`watf` should not grow a second agent permission framework.

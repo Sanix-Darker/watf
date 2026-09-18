@@ -1,12 +1,18 @@
 # Threat model and limits
 
-## What the engine does not do
+## Current release boundary
 
-There is no executor, child-process launcher, network client, socket listener,
+The current release has no executor, child-process launcher, network client, socket listener,
 telemetry channel, completion evaluator, roff interpreter or dynamic plugin loader
 in the Rust engine. Indexing reads documentation and executable metadata. Native
 inference is linked into the process. Downloading scripts are explicit installation
 tools, not hidden runtime dependencies.
+
+The target agent harness adds a narrow executor after deterministic validation.
+That executor must spawn validated argv directly, set an explicit working
+directory, enforce timeouts, capture stdout and stderr independently, preserve the
+exit status, bound output before it enters model context, and report truncation.
+Generated command text must not be passed to `sh -c`.
 
 ## Untrusted inputs
 
@@ -54,7 +60,9 @@ not expand. Pipelines run concurrently. These cases receive warnings, not a
 false safety certificate.
 
 Never pipe a generated proposal directly into a shell. No `--execute` option is
-provided. An external agent must retain its own approval and execution policies.
+provided in the current release. Future execution does not make validation an
+authorization decision: the calling agent must retain its own approval and
+execution policies.
 
 ## Installers and CI
 

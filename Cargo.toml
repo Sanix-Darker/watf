@@ -2,7 +2,7 @@
 name = "watf"
 version = "0.1.0"
 edition = "2021"
-description = "what tf ? Offline CLI capability retrieval and grounded local planning"
+description = "what tf ? Local agent CLI harness with grounded capability resolution and planning"
 license = "MIT"
 keywords = ["cli", "offline", "search", "llm", "agent"]
 categories = ["command-line-utilities"]

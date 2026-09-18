@@ -1,4 +1,75 @@
-# Design reviews before implementation
+# Product and design review
+
+## Competitive reality
+
+The easy versions of this project already exist.
+
+- Natural-language command generation is a standard capability of coding agents.
+- RTK and banish already proxy common developer commands and reduce shell output
+  before it reaches the model.
+- MCP smart proxies already reduce tool-schema context by exposing a small
+  discovery surface and activating tools on demand.
+- Agent terminals and coding-agent CLIs already execute shell commands with
+  permission controls.
+- Completion specs, man pages, and projects such as tldr already provide compact
+  command metadata and examples.
+
+Therefore `watf` should not compete as a shell copilot, documentation searcher,
+or output filter in isolation. The differentiated target is one local agent-native
+CLI boundary that combines:
+
+```text
+intent
+  -> capability resolution
+  -> grounded typed argv
+  -> deterministic validation
+  -> execution
+  -> bounded result reduction
+```
+
+The existential benchmark is simple: if the same successful task uses no fewer
+model tokens, tool calls, fallback reads, retries, or wall-clock time than direct
+agent shell use plus existing reducers, `watf` is not earning its extra layer.
+
+### Alternatives to benchmark
+
+| Alternative | Already solves | What `watf` must prove beyond it |
+|---|---|---|
+| RTK | Very fast command-output filtering for common developer CLIs | Resolve unfamiliar CLI intent and validated argv before execution, then reduce the result in the same call |
+| banish | Command-output compaction plus recoverable raw output | Add grounded capability discovery and typed execution rather than only wrapping known commands |
+| MCP smart proxies | Reduce prompt bloat by discovering tool schemas on demand | Resolve ordinary local CLI capabilities without turning every executable into a separate MCP schema |
+| GitHub Copilot CLI and similar agents | Model-driven shell execution, permissions, and multi-step tasks | Remove model work from routine command discovery and syntax resolution |
+| AetherShell | Agent-native typed shell, structured output, effect gating, result handles | Work with the existing CLI ecosystem without requiring a new shell language or reimplementing every command |
+| tldr and completion specs | Compact command examples, flags, and argument metadata | Join metadata to local availability, multi-command planning, validation, execution, and bounded results |
+
+### Classifier strategy
+
+Do not replace lexical retrieval with a model. Use the existing index as the
+first classifier and measure a simple confidence signal such as top-candidate
+coverage plus score margin. Exact command mentions and sufficiently separated
+matches should remain entirely local.
+
+Jev is interesting as the next rung, not the first rung. It accepts structured
+questions and returns typed probabilistic decisions, which fits choosing among a
+small retrieved command set, detecting ambiguity, or deciding whether to escalate
+to planning. It cannot generate the missing argv by itself, which is useful here:
+it keeps classification separate from synthesis.
+
+Benchmark this routing stack against direct retrieval and direct LLM planning:
+
+```text
+exact/local classifier -> validate/execute
+ambiguous -> typed classifier -> validate/execute
+needs synthesis -> local planner -> validate/execute
+```
+
+Track the percentage of intents resolved at each rung. The main classifier metric
+is not raw accuracy alone; it is successful tasks per token and per millisecond,
+including escalation cost.
+
+Do not chase feature parity with all of these projects. The shortest defensible
+product is the bridge across their gaps: existing CLI ecosystem in, minimal
+agent context out.
 
 ## Pass 1: contracts and workload
 
@@ -10,10 +81,10 @@
 | index | Immutable portable on-disk index with cheap reads | Sorted dictionary, precomputed BM25 impacts, fixed-width postings, mmap |
 | retrieval | Search multiple intent clauses across all commands | Clause coverage and command diversity, not one mandatory tool argument |
 | packet | Return useful evidence within an actual serialized byte limit | Token counts are estimates, not guarantees |
-| plan | Generate argv-based multi-step IR | No raw shell generation, no implicit execution |
+| plan | Generate argv-based multi-step IR | No raw shell generation |
 | validate | Check evidence for syntax and diagnose unsupported constructs | Never claim proof of intent satisfaction or calibrated confidence |
 | native inference | Load one local GGUF only when planning | Optional compiled-in llama.cpp, no server or model download at runtime |
-| skill | Expose deterministic retrieval to an existing agent | Retrieval-only is the default skill workflow |
+| skill | Make deterministic CLI resolution the agent's first path | Keep returned context minimal and bounded |
 
 ## Pass 2: failure modes and scope corrections
 

@@ -2,8 +2,9 @@
 
 **what tf ?**
 
-Local CLI capability retrieval for humans and agents. Find the relevant tools and
-documentation first. Load a small local model only when a plan is requested.
+Local CLI harness for AI agents. `watf` resolves an intent against local CLI
+capabilities, keeps command plans as typed argv, validates them against evidence,
+and is being built toward executing them behind a bounded result boundary.
 
 ```sh
 watf "stage src and Cargo.toml, commit as release, then rebuild the compose backend"
@@ -12,9 +13,34 @@ watf search --json --max-bytes 4096 \
   "find TODOs in Rust files, save a report, then stage and commit that report"
 ```
 
-No need to supply `git`, `rg` or `docker` separately. A query can cover several tools.
-The search command returns evidence, not a made-up command. A bare intent returns
-evidence unless a native build and `WATF_MODEL` are configured.
+No need to supply `git`, `rg` or `docker` separately. A query can cover several
+tools. The current search path returns grounded evidence and the current planner
+returns validated typed steps. The target is one agent call that can resolve,
+validate, execute, and return only the actionable result.
+
+## Product direction
+
+```text
+agent intent
+  -> local capability lookup
+  -> deterministic classification when possible
+  -> minimal typed argv plan
+  -> deterministic validation
+  -> execution boundary
+  -> bounded stdout/stderr
+  -> deterministic reduction
+  -> compact agent result
+```
+
+This is not a natural-language shell for humans. The product succeeds only when
+it reduces the complete agent CLI loop: model tokens, exploratory tool calls,
+documentation reads, retries, and latency. If `watf` only adds a lookup before an
+agent eventually performs the same shell work, it is overhead and has failed its
+purpose.
+
+The intended routing is deliberately asymmetric: common deterministic CLI intents
+stay local and avoid inference; ambiguous intents may use an optional typed
+classifier over a bounded candidate set; generative planning is the last fallback.
 
 ## Delivery status
 
@@ -32,18 +58,20 @@ No latency, RAM, model-accuracy or token-savings percentage is claimed.
 | Component | Behavior |
 |---|---|
 | Rust engine | Local files, metadata, deterministic retrieval, optional native inference |
-| Runtime subprocesses | None, including `man`, `--help`, completion scripts and generated commands |
+| Current runtime subprocesses | None, including `man`, `--help`, completion scripts and generated commands |
 | Runtime networking | No HTTP client, model downloader, cloud API, socket or telemetry |
 | Inference | Embedded llama.cpp through pinned Rust bindings, optional at compile time |
-| Agent mode | Retrieval-only JSON, no model needed |
+| Agent mode | Bounded machine-readable retrieval, no model needed |
 | Plan output | Typed steps, literal argv, dependency relations, provenance and warnings |
-| Execution | Never. The human or agent reviews and executes independently |
+| Execution | Not implemented in this release. A narrow direct-argv executor is the next product stage |
 | Installation/build | May use curl, tar, a compiler and other provisioning tools |
 
 A proposed `aws`, `docker`, `curl` or `git push` command can itself need a network.
-That does not make WATF's own retrieval online. WATF never executes the proposal.
+The current release does not execute proposals. Future execution must preserve
+that distinction: command effects belong to the invoked program, while `watf`
+owns validation, process boundaries, and bounded result capture.
 
-## Build and try the retrieval engine
+## Build and try the current agent engine
 
 Use a current stable Rust toolchain. Maintainer scripts require Python 3.11 or newer;
 Python is not a runtime dependency of `watf`.
@@ -85,7 +113,8 @@ make test-full
 make smoke
 ```
 
-`make build` enables `local-llm,tui`; `make lite` excludes both. The Rust application
+`make build` enables `local-llm,tui`; `make lite` excludes both. The TUI is a
+secondary interface, not the product center. The Rust application
 statically embeds the inference core, but a GNU/Linux build can still depend on
 system C/C++ runtime libraries. This is not a promise of a fully static musl binary.
 The release workflow records `ldd` output for every asset.
@@ -199,11 +228,14 @@ Static Bash/Zsh/Fish completion subsets are parsed as data. Dynamic callbacks,
 `.so` includes, shell substitutions and completion code are never evaluated.
 No automatic active `--help` or version probing is hidden behind indexing.
 
-## Agent skill and compact context
+## Agent-first integration and compact context
 
 The skill is provided both at `skills/watf/SKILL.md` and as a standalone
-`watf-skills/` package. Copy it to the skill location supported by your agent.
-The agent needs an existing terminal tool, not a new protocol or service.
+`watf-skills/` package. Its purpose is to make `watf` the agent's first interface
+for CLI capability discovery instead of repeatedly reading `--help`, man pages,
+and large command output. Today the agent still needs an existing terminal tool
+for execution. The target executor removes that extra round trip for validated
+plans.
 
 ```sh
 watf search --json --max-bytes 2048 \
@@ -232,7 +264,9 @@ The native model emits a constrained JSON plan, not raw shell source. Canonical
 command scopes are restricted to retrieved evidence. A deterministic validator
 then checks indexed command/flag membership, arity, required options, known enum
 values, source freshness, literal limits and dependency shape. The renderer owns
-quoting. No plan is executed.
+quoting. In the current release no plan is executed. The target executor will use
+the validated structured argv directly rather than passing rendered shell source
+to a shell.
 
 ```sh
 watf validate --json --plan-file examples/plan.json
@@ -250,9 +284,10 @@ explicit pipelines and stdout redirection. No loops, shell expansion, arbitrary
 shell programs, automatic repair loop, environment mutation, directory changes,
 parallel DAG executor or autonomous actions are implemented.
 
-## TUI
+## Secondary TUI
 
-With the `tui` feature, `watf tui` opens a small terminal interface. Enter retrieves
+The agent protocol is the primary interface. With the `tui` feature, `watf tui`
+opens a small terminal interface for manual inspection. Enter retrieves
 evidence; Ctrl+P explicitly invokes configured local planning. Arrow keys scroll;
 Esc or Ctrl+C exits. It does not load a model per keystroke, execute commands or
 call a clipboard utility. Native inference currently blocks the UI while running.

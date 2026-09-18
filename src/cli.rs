@@ -16,7 +16,7 @@ use std::{
 };
 
 pub const HELP: &str = r#"watf: what tf ?
-Offline CLI capability retrieval and optional native local planning.
+Local CLI capability harness for AI agents with optional native planning.
 
   watf "stage changes, commit with message 'release', then build containers"
   watf search --json --max-bytes 4096 "restart backend and follow its logs"
@@ -25,7 +25,7 @@ Offline CLI capability retrieval and optional native local planning.
   watf validate --plan-file plan.json --json
   watf index [--catalog data/catalog.jsonl.gz] [--no-system]
   watf doctor [--verify] [--json]
-  watf serve                 Foreground JSONL retrieval protocol
+  watf serve                 Foreground JSONL agent protocol
   watf tui                   Optional native terminal UI
 
 General: --index FILE, --no-mmap, --json, --stats, --help, --version
@@ -38,8 +38,9 @@ Plan:    --model FILE, --context N, --output-tokens N, --threads N,
          --allow-uninstalled
 Explain: --argv-json '["git","commit","-m","release"]'
 
-Runtime never downloads or executes anything. Explicit index rebuilds write the
-index. Without a model, bare queries return evidence, not guessed commands.
+This release never downloads or executes commands at runtime. Explicit index
+rebuilds write the index. Without a model, bare queries return grounded evidence,
+not guessed commands.
 Use -- before a query whose first word or argument looks like a watf option.
 "#;
 

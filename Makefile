@@ -11,7 +11,7 @@ LOCKED := $(if $(wildcard Cargo.lock),--locked,)
 
 .PHONY: help build lite native test test-full fmt fmt-check clippy bench verify smoke index demo model install install-lite lock schemas samples catalog package source-zip clean
 help:
-	@printf '%s\n' 'build: native LLM + TUI; lite: retrieval only; native: tune for this CPU' 'test/test-full, verify, smoke, bench, index, model, install, package, lock'
+	@printf '%s\n' 'build: native LLM + TUI; lite: deterministic agent core; native: tune for this CPU' 'test/test-full, verify, smoke, bench, index, model, install, package, lock'
 build:
 	$(CARGO) build $(LOCKED) --profile $(PROFILE) --features $(FEATURES)
 lite:

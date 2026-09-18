@@ -6,7 +6,7 @@ instead of inventing a sub-millisecond or sub-gigabyte result.
 
 ## Implemented work avoidance
 
-The model is absent from retrieval-only builds and never loaded by `search` or
+The model is absent from deterministic-only builds and never loaded by `search` or
 `serve`. The mmap reader checks the header and queried offsets, not the entire
 index hash per query. `doctor --verify` performs the explicit full integrity scan.
 Precomputed impacts avoid query-time logarithms for every posting. A separate
@@ -56,6 +56,33 @@ argument ordering, task correctness, or that a 0.6B model is sufficient. Review
 false matches and the ten abstention cases manually. Add adversarial and unfamiliar
 tools from held-out captured documentation before generalizing quality claims.
 
+## Primary benchmark: complete agent CLI cost
+
+Retrieval latency alone is not the product metric. Compare complete successful
+tasks with and without `watf` and record:
+
+- agent input tokens
+- agent output tokens
+- bytes returned by `watf`
+- number of external tool calls
+- fallback documentation reads
+- retries and repair loops
+- cold and warm `watf` latency
+- peak RSS
+- task success
+- routing rung used: exact, local classifier, typed classifier, or generative planner
+
+Include strong alternatives in the comparison. At minimum test direct agent
+shell use, a shell-output reducer such as RTK, and a tool-schema router when MCP
+tool bloat is part of the scenario. `watf` is only a win when the full loop is
+cheaper at equivalent task success.
+
+For classifier experiments, report the share of successful tasks resolved without
+any model, the share escalated to a typed classifier, and the share that still
+requires generative planning. Include classifier network latency in wall-clock
+cost. A higher classifier accuracy is not a win if it adds a remote round trip to
+queries the local index already resolves correctly.
+
 ## Agent context savings
 
 Measure the actual tokenizer used by the consuming agent on both complete inputs:
@@ -64,6 +91,10 @@ headers, metadata, retries, fallback reads, and any added skill instructions.
 Only compare successful tasks with equivalent evidence quality. Report local
 CPU time and memory as well as expensive-agent input/output tokens. Byte reduction
 is not a dollar savings percentage and may not correspond to fewer output tokens.
+
+Once execution exists, include raw command output, reduced command output, and
+recovery requests for omitted details. A compressor that forces frequent reruns
+or raw-output recovery can lose even when its byte ratio looks excellent.
 
 ## Native inference measurements
 

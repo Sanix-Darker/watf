@@ -1,8 +1,10 @@
 # Contributing
 
-Keep the engine small, offline and non-executing. Prefer removing work from the
-hot path over adding a framework. Preserve checked file-format bounds and honest
-provenance. Do not claim performance or correctness from an unrun test.
+Keep the engine small, local-first and agent-first. Prefer removing work from the
+hot path over adding a framework. Preserve checked file-format bounds, validation,
+bounded outputs and honest provenance. The current release is non-executing; the
+target executor must consume validated structured argv directly instead of shell
+source. Do not claim performance or correctness from an unrun test.
 
 ```sh
 make fmt
@@ -18,6 +20,11 @@ Add regression fixtures for parser boundaries, stale sources, invalid flags,
 quoting, literal values, command-scope isolation and byte budgets. Keep model
 smoke tests opt-in so retrieval CI does not download hundreds of megabytes.
 Native model smoke results are not semantic evaluation results.
+
+For new agent-path work, benchmark the complete successful task loop rather than
+isolated lookup speed. Prefer deterministic routing first, optional typed
+classification for ambiguity, and generative planning only when synthesis is
+actually required.
 
 Any corpus update must provide source/license hashes, separate commands/options
 from nested fields, and avoid counting aliases or enums as new capabilities.
