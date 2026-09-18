@@ -3,7 +3,10 @@ use common::*;
 use std::io::Cursor;
 use watf::{
     cli,
+    discover::Executable,
+    index::{self, Index},
     packet::{Engine, Options},
+    record::Kind,
 };
 #[test]
 fn query_does_not_require_a_command() {
@@ -78,6 +81,63 @@ fn stream_returns_one_response_per_request() {
         assert!(v.get("id").is_some());
         assert!(line.len() + 1 <= 4096);
     }
+}
+
+#[cfg(unix)]
+#[test]
+fn stream_run_validates_and_executes_in_one_call() {
+    use std::{fs, os::unix::fs::PermissionsExt};
+
+    let temp = Temp::new();
+    let program = temp.path("fixture");
+    fs::write(&program, "#!/bin/sh\nprintf '%s' \"$1\"\n").unwrap();
+    fs::set_permissions(&program, fs::Permissions::from_mode(0o700)).unwrap();
+    let index_path = temp.path("run.widx");
+    index::build(
+        &index_path,
+        vec![cap(
+            "fixture",
+            "fixture",
+            "Print one literal argument",
+            Kind::Command,
+        )],
+    )
+    .unwrap();
+    let mut engine = Engine::new(Index::open(&index_path, true).unwrap());
+    engine.inventory.insert(
+        "fixture".into(),
+        Executable {
+            path: program,
+            bytes: 0,
+            modified_unix: None,
+        },
+    );
+    let request = serde_json::json!({
+        "id": "run-1",
+        "op": "run",
+        "query": "",
+        "cwd": temp.0,
+        "max_bytes": 4096,
+        "max_output_bytes": 256,
+        "plan": {
+            "status": "ok",
+            "steps": [{
+                "command": "fixture",
+                "args": ["literal $(no-shell)"],
+                "after": "start",
+                "stdout": null
+            }],
+            "questions": []
+        }
+    });
+    let mut out = Vec::new();
+    cli::serve(&mut engine, Cursor::new(format!("{request}\n")), &mut out).unwrap();
+    let response: serde_json::Value = serde_json::from_slice(&out).unwrap();
+    assert_eq!(response["status"], "ok");
+    assert_eq!(
+        response["execution"]["steps"][0]["stdout"]["text"],
+        "literal $(no-shell)"
+    );
 }
 #[test]
 fn bad_stream_request_does_not_poison_following_request() {

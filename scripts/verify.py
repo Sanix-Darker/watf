@@ -74,7 +74,9 @@ def main() -> None:
     rust_files=list((ROOT/'src').rglob('*.rs'))
     for path in rust_files:
         source=path.read_text()
-        for forbidden in ['std::process::Command','Command::new(', 'TcpStream::connect', 'reqwest::','unimplemented!(', 'todo!(']:
+        forbidden=['TcpStream::connect','reqwest::','unimplemented!(', 'todo!(']
+        if path.name!='execute.rs':forbidden += ['std::process::Command','Command::new(']
+        for forbidden in forbidden:
             require(forbidden not in source,f'forbidden runtime primitive {forbidden} in {path}')
     python_files=[];json_files=[];text_files=0
     for path in sorted(ROOT.rglob('*')):

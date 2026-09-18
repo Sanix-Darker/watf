@@ -510,6 +510,7 @@ struct Request {
     id: String,
     #[serde(default = "search_op")]
     op: String,
+    #[serde(default)]
     query: String,
     #[serde(default = "default_bytes")]
     max_bytes: usize,
@@ -523,6 +524,14 @@ struct Request {
     installed_only: bool,
     #[serde(default)]
     command: Option<String>,
+    #[serde(default)]
+    plan: Option<plan::Draft>,
+    #[serde(default)]
+    cwd: Option<PathBuf>,
+    #[serde(default = "default_timeout_ms")]
+    timeout_ms: u64,
+    #[serde(default = "default_output_bytes")]
+    max_output_bytes: usize,
 }
 fn schema_one() -> u32 {
     1
@@ -536,6 +545,43 @@ fn default_bytes() -> usize {
 fn default_limit() -> usize {
     16
 }
+fn default_timeout_ms() -> u64 {
+    30_000
+}
+fn default_output_bytes() -> usize {
+    1024
+}
+
+fn execute_draft(
+    engine: &Engine,
+    draft: &plan::Draft,
+    cwd: PathBuf,
+    timeout_ms: u64,
+    max_output_bytes: usize,
+) -> Result<(plan::Report, execute::Execution)> {
+    let report = plan::validate(
+        &engine.index,
+        draft,
+        &engine.inventory,
+        &plan::ValidationOptions::default(),
+    )?;
+    if !report.accepted {
+        return Err(Error::message(format!(
+            "plan rejected: {}",
+            report.errors.join("; ")
+        )));
+    }
+    let execution = execute::execute(
+        &report,
+        &engine.inventory,
+        &execute::Options {
+            cwd,
+            timeout_ms,
+            max_output_bytes,
+        },
+    )?;
+    Ok((report, execution))
+}
 
 /// Persistent foreground engine. stdin/stdout only, no sockets or daemonization.
 pub fn serve<R: BufRead, W: Write>(engine: &mut Engine, mut input: R, mut output: W) -> Result<()> {
@@ -545,9 +591,9 @@ pub fn serve<R: BufRead, W: Write>(engine: &mut Engine, mut input: R, mut output
         }
         let response = (|| -> Result<Vec<u8>> {
             let request: Request = serde_json::from_slice(&line)?;
-            if request.schema_version != 1 || request.op != "search" || request.id.len() > 64 {
+            if request.schema_version != 1 || request.id.len() > 64 {
                 return Err(Error::message(
-                    "unsupported schema/op or request id longer than 64 bytes",
+                    "unsupported schema or request id longer than 64 bytes",
                 ));
             }
             let options = Options {
@@ -559,30 +605,80 @@ pub fn serve<R: BufRead, W: Write>(engine: &mut Engine, mut input: R, mut output
                 command: request.command,
                 project_hints: false,
             };
-            let mut packet = engine.lookup(&request.query, &options)?;
-            let extra = serde_json::to_vec(&request.id)?.len() + 6;
-            // Reserve a few bytes for the full-envelope token estimate changing width.
-            packet.fit(request.max_bytes.saturating_sub(extra + 8))?;
-            #[derive(Serialize)]
-            struct Response<'a> {
-                id: &'a str,
-                #[serde(flatten)]
-                packet: Packet,
+            match request.op.as_str() {
+                "search" => {
+                    let mut packet = engine.lookup(&request.query, &options)?;
+                    let extra = serde_json::to_vec(&request.id)?.len() + 6;
+                    // Reserve a few bytes for the full-envelope token estimate changing width.
+                    packet.fit(request.max_bytes.saturating_sub(extra + 8))?;
+                    #[derive(Serialize)]
+                    struct Response<'a> {
+                        id: &'a str,
+                        #[serde(flatten)]
+                        packet: Packet,
+                    }
+                    let mut response = Response {
+                        id: &request.id,
+                        packet,
+                    };
+                    for _ in 0..4 {
+                        response.packet.estimated_tokens =
+                            (serde_json::to_vec(&response)?.len() + 1).div_ceil(4);
+                    }
+                    let mut bytes = serde_json::to_vec(&response)?;
+                    bytes.push(b'\n');
+                    if bytes.len() > request.max_bytes {
+                        return Err(Error::message("response budget too small"));
+                    }
+                    Ok(bytes)
+                }
+                "route" => {
+                    let packet = engine.lookup(&request.query, &options)?;
+                    let classification = route::classify(&packet);
+                    let mut bytes = serde_json::to_vec(&serde_json::json!({
+                        "schema_version": SCHEMA_VERSION,
+                        "id": request.id,
+                        "route": classification,
+                    }))?;
+                    bytes.push(b'\n');
+                    if bytes.len() > request.max_bytes {
+                        return Err(Error::message("response budget too small"));
+                    }
+                    Ok(bytes)
+                }
+                "run" => {
+                    let draft = request
+                        .plan
+                        .as_ref()
+                        .ok_or_else(|| Error::message("run request needs plan"))?;
+                    let cwd = match request.cwd {
+                        Some(path) => path,
+                        None => std::env::current_dir()?,
+                    };
+                    let (report, execution) = execute_draft(
+                        engine,
+                        draft,
+                        cwd,
+                        request.timeout_ms,
+                        request.max_output_bytes,
+                    )?;
+                    let mut bytes = serde_json::to_vec(&serde_json::json!({
+                        "schema_version": SCHEMA_VERSION,
+                        "id": request.id,
+                        "status": execution.status,
+                        "validation_scope": report.validation_scope,
+                        "warnings": report.warnings,
+                        "evidence": report.evidence,
+                        "execution": execution,
+                    }))?;
+                    bytes.push(b'\n');
+                    if bytes.len() > request.max_bytes {
+                        return Err(Error::message("response budget too small"));
+                    }
+                    Ok(bytes)
+                }
+                _ => Err(Error::message("unsupported operation")),
             }
-            let mut response = Response {
-                id: &request.id,
-                packet,
-            };
-            for _ in 0..4 {
-                response.packet.estimated_tokens =
-                    (serde_json::to_vec(&response)?.len() + 1).div_ceil(4);
-            }
-            let mut bytes = serde_json::to_vec(&response)?;
-            bytes.push(b'\n');
-            if bytes.len() > request.max_bytes {
-                return Err(Error::message("response budget too small"));
-            }
-            Ok(bytes)
         })();
         match response {
             Ok(bytes) => output.write_all(&bytes)?,
@@ -676,57 +772,36 @@ pub fn run(input: Vec<String>) -> Result<i32> {
                 .plan_file
                 .as_ref()
                 .ok_or_else(|| Error::message("run needs --plan-file"))?;
-            let draft = read_plan(file)?;
-            let report = plan::validate(
-                &engine.index,
-                &draft,
-                &engine.inventory,
-                &plan::ValidationOptions {
-                    allow_uninstalled: false,
-                    ..Default::default()
-                },
+            let cwd = match &args.cwd {
+                Some(path) => path.clone(),
+                None => std::env::current_dir()?,
+            };
+            let (report, execution) = execute_draft(
+                &engine,
+                &read_plan(file)?,
+                cwd,
+                args.timeout_ms,
+                args.max_output_bytes,
             )?;
-            if !report.accepted {
-                if args.json {
-                    print_json(&report)?;
-                } else {
-                    print_report(&report)?;
-                }
-                3
+            #[derive(Serialize)]
+            struct RunResponse<'a> {
+                schema_version: u32,
+                validation: &'a plan::Report,
+                execution: &'a execute::Execution,
+            }
+            if args.json {
+                print_json(&RunResponse {
+                    schema_version: SCHEMA_VERSION,
+                    validation: &report,
+                    execution: &execution,
+                })?;
             } else {
-                let cwd = match &args.cwd {
-                    Some(path) => path.clone(),
-                    None => std::env::current_dir()?,
-                };
-                let execution = execute::execute(
-                    &report,
-                    &engine.inventory,
-                    &execute::Options {
-                        cwd,
-                        timeout_ms: args.timeout_ms,
-                        max_output_bytes: args.max_output_bytes,
-                    },
-                )?;
-                #[derive(Serialize)]
-                struct RunResponse<'a> {
-                    schema_version: u32,
-                    validation: &'a plan::Report,
-                    execution: &'a execute::Execution,
-                }
-                if args.json {
-                    print_json(&RunResponse {
-                        schema_version: SCHEMA_VERSION,
-                        validation: &report,
-                        execution: &execution,
-                    })?;
-                } else {
-                    println!("{}", serde_json::to_string_pretty(&execution)?);
-                }
-                if execution.status == "ok" {
-                    0
-                } else {
-                    3
-                }
+                println!("{}", serde_json::to_string_pretty(&execution)?);
+            }
+            if execution.status == "ok" {
+                0
+            } else {
+                3
             }
         }
         "explain" => {
