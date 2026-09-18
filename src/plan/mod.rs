@@ -1,5 +1,4 @@
 //! Bounded plan IR, documented-surface validation, and inert shell rendering.
-//! There is deliberately no executor in this module or elsewhere in the crate.
 mod render;
 mod validate;
 

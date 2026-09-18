@@ -1,9 +1,10 @@
-//! Offline, evidence-first command discovery. The library never launches processes.
+//! Local agent CLI capability resolution, validation, and bounded execution.
 #![deny(unsafe_op_in_unsafe_fn)]
 
 pub mod cli;
 pub mod discover;
 pub mod error;
+pub mod execute;
 pub mod index;
 pub mod infer;
 pub mod ingest;

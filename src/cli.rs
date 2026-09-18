@@ -1,6 +1,6 @@
 //! Small argument parser and interfaces. No subprocesses, HTTP clients, or shell eval.
 use crate::{
-    discover, index, infer, ingest,
+    discover, execute, index, infer, ingest,
     packet::{Engine, Options, Packet},
     plan,
     record::{Capability, Kind},
@@ -21,6 +21,7 @@ Local CLI capability harness for AI agents with optional native planning.
   watf "stage changes, commit with message 'release', then build containers"
   watf search --json --max-bytes 4096 "restart backend and follow its logs"
   watf plan --model /path/model.gguf --json "your complete intent"
+  watf run --plan-file plan.json --json
   watf explain 'git commit -m "release"'
   watf validate --plan-file plan.json --json
   watf index [--catalog data/catalog.jsonl.gz] [--no-system]
@@ -36,6 +37,7 @@ Index:   --catalog FILE, --no-catalog, --no-system, --man-dir DIR,
          --completion-shell fish|bash|zsh, --command SCOPE, --import FILE
 Plan:    --model FILE, --context N, --output-tokens N, --threads N,
          --allow-uninstalled
+Run:     --plan-file FILE, --cwd DIR, --timeout-ms N, --max-output-bytes N
 Explain: --argv-json '["git","commit","-m","release"]'
 
 This release never downloads or executes commands at runtime. Explicit index
@@ -71,6 +73,9 @@ struct Args {
     verify: bool,
     plan_file: Option<PathBuf>,
     argv_json: Option<String>,
+    cwd: Option<PathBuf>,
+    timeout_ms: u64,
+    max_output_bytes: usize,
 }
 impl Default for Args {
     fn default() -> Self {
@@ -100,6 +105,9 @@ impl Default for Args {
             verify: false,
             plan_file: None,
             argv_json: None,
+            cwd: None,
+            timeout_ms: 30_000,
+            max_output_bytes: 4096,
         }
     }
 }
@@ -108,7 +116,7 @@ fn parse(input: &[String]) -> Result<Args> {
     let mut index = 0;
     if let Some(first) = input.first() {
         if [
-            "index", "search", "plan", "explain", "validate", "doctor", "serve", "tui",
+            "index", "search", "plan", "run", "explain", "validate", "doctor", "serve", "tui",
         ]
         .contains(&first.as_str())
         {
@@ -163,6 +171,9 @@ fn parse(input: &[String]) -> Result<Args> {
             "--verify" => args.verify = true,
             "--plan-file" => args.plan_file = Some(value(&mut index)?.into()),
             "--argv-json" => args.argv_json = Some(value(&mut index)?),
+            "--cwd" => args.cwd = Some(value(&mut index)?.into()),
+            "--timeout-ms" => args.timeout_ms = number(&value(&mut index)?, key)?,
+            "--max-output-bytes" => args.max_output_bytes = number(&value(&mut index)?, key)?,
             _ if key.starts_with('-') => {
                 return Err(Error::message(format!(
                     "unknown option {key}; use -- before literal query arguments"
@@ -614,7 +625,7 @@ pub fn run(input: Vec<String>) -> Result<i32> {
                 "records":engine.index.len(),"terms":engine.index.term_count(),"index_bytes":engine.index.file_bytes(),
                 "installed_programs":engine.inventory.len(),"integrity_verified":args.verify,
                 "local_llm_compiled":cfg!(feature="local-llm"),"tui_compiled":cfg!(feature="tui"),
-                "model_exists":args.model.as_ref().is_some_and(|p|p.is_file()),"network_client":false,"executor":false});
+                "model_exists":args.model.as_ref().is_some_and(|p|p.is_file()),"network_client":false,"executor":true});
             if args.json {
                 print_json(&info)?;
             } else {
@@ -653,6 +664,64 @@ pub fn run(input: Vec<String>) -> Result<i32> {
                 0
             } else {
                 3
+            }
+        }
+        "run" => {
+            let file = args
+                .plan_file
+                .as_ref()
+                .ok_or_else(|| Error::message("run needs --plan-file"))?;
+            let draft = read_plan(file)?;
+            let report = plan::validate(
+                &engine.index,
+                &draft,
+                &engine.inventory,
+                &plan::ValidationOptions {
+                    allow_uninstalled: false,
+                    ..Default::default()
+                },
+            )?;
+            if !report.accepted {
+                if args.json {
+                    print_json(&report)?;
+                } else {
+                    print_report(&report)?;
+                }
+                3
+            } else {
+                let cwd = match &args.cwd {
+                    Some(path) => path.clone(),
+                    None => std::env::current_dir()?,
+                };
+                let execution = execute::execute(
+                    &report,
+                    &engine.inventory,
+                    &execute::Options {
+                        cwd,
+                        timeout_ms: args.timeout_ms,
+                        max_output_bytes: args.max_output_bytes,
+                    },
+                )?;
+                #[derive(Serialize)]
+                struct RunResponse<'a> {
+                    schema_version: u32,
+                    validation: &'a plan::Report,
+                    execution: &'a execute::Execution,
+                }
+                if args.json {
+                    print_json(&RunResponse {
+                        schema_version: SCHEMA_VERSION,
+                        validation: &report,
+                        execution: &execution,
+                    })?;
+                } else {
+                    println!("{}", serde_json::to_string_pretty(&execution)?);
+                }
+                if execution.status == "ok" {
+                    0
+                } else {
+                    3
+                }
             }
         }
         "explain" => {
