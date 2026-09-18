@@ -11,31 +11,50 @@ use llama_cpp_2::{
     sampling::LlamaSampler,
     send_logs_to_tracing, LogOptions,
 };
-use std::{num::NonZeroU32, sync::Mutex, time::Instant};
+use std::{num::NonZeroU32, path::PathBuf, sync::Mutex, time::Instant};
 
 // llama backend initialization and global log settings are process-wide. Keep
 // embedding calls serialized; this CLI is not a multi-tenant inference server.
-static GENERATION: Mutex<()> = Mutex::new(());
+struct Native {
+    backend: LlamaBackend,
+    model: Option<(PathBuf, LlamaModel)>,
+}
+static NATIVE: Mutex<Option<Native>> = Mutex::new(None);
 fn native_error(e: impl std::fmt::Display) -> Error {
     Error::message(format!("native inference: {e}"))
 }
 
 pub(super) fn generate(query: &str, context: &Context, options: &Options) -> Result<Generated> {
-    let _guard = GENERATION
+    let mut guard = NATIVE
         .lock()
         .map_err(|_| Error::message("inference state poisoned"))?;
-    send_logs_to_tracing(LogOptions::default().with_logs_enabled(false));
     let start = Instant::now();
-    let backend = LlamaBackend::init().map_err(native_error)?;
-    let params = LlamaModelParams::default().with_n_gpu_layers(0);
-    let model =
-        LlamaModel::load_from_file(&backend, &options.model, &params).map_err(native_error)?;
-    let architecture = model
-        .meta_val_str("general.architecture")
-        .map_err(native_error)?;
-    if architecture != "qwen3" {
-        return Err(Error::message("this prompt adapter supports Qwen3 GGUF only; other architectures need a tested chat adapter"));
+    if guard.is_none() {
+        send_logs_to_tracing(LogOptions::default().with_logs_enabled(false));
+        *guard = Some(Native {
+            backend: LlamaBackend::init().map_err(native_error)?,
+            model: None,
+        });
     }
+    let native = guard.as_mut().expect("native initialized above");
+    let reload = native
+        .model
+        .as_ref()
+        .is_none_or(|(path, _)| path != &options.model);
+    if reload {
+        let params = LlamaModelParams::default().with_n_gpu_layers(0);
+        let model = LlamaModel::load_from_file(&native.backend, &options.model, &params)
+            .map_err(native_error)?;
+        let architecture = model
+            .meta_val_str("general.architecture")
+            .map_err(native_error)?;
+        if architecture != "qwen3" {
+            return Err(Error::message("this prompt adapter supports Qwen3 GGUF only; other architectures need a tested chat adapter"));
+        }
+        native.model = Some((options.model.clone(), model));
+    }
+    let load_ms = start.elapsed().as_millis();
+    let model = &native.model.as_ref().expect("model loaded above").1;
     let prompt = prompt::qwen3(query, context)?;
     let tokens = model
         .str_to_token(&prompt, AddBos::Always)
@@ -50,12 +69,11 @@ pub(super) fn generate(query: &str, context: &Context, options: &Options) -> Res
         .with_n_threads(options.threads)
         .with_n_threads_batch(options.threads);
     let mut ctx = model
-        .new_context(&backend, parameters)
+        .new_context(&native.backend, parameters)
         .map_err(native_error)?;
     let grammar = grammar::for_context(context)?;
     let constrained = LlamaSampler::grammar(&model, &grammar, "root").map_err(native_error)?;
     let mut sampler = LlamaSampler::chain_simple([constrained, LlamaSampler::greedy()]);
-    let load_ms = start.elapsed().as_millis();
     let prefill = Instant::now();
     let mut batch = LlamaBatch::new(512, 1);
     for (chunk_index, chunk) in tokens.chunks(512).enumerate() {
