@@ -6,7 +6,7 @@ Important current limits are explicit:
 
 | Area | Current boundary |
 |---|---|
-| Verification | Rust builds/tests/model runs were not possible in the assembly environment |
+| Verification | Lite and local-LLM builds compile; Rust tests pass; real GGUF inference remains unmeasured |
 | Corpus size | 124,530 typed records, including 41,613 nested fields; only 82,917 direct commands/options |
 | Corpus coverage | Primarily AWS; 117 common-tool bootstrap scopes are a conservative subset |
 | Installed compatibility | Root executable detection only; no active version or plugin probing |

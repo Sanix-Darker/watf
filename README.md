@@ -46,12 +46,11 @@ classifier over a bounded candidate set; generative planning is the last fallbac
 
 This archive contains the source implementation, corpus, tests, agent skill,
 installer, Makefile and GitHub workflows. It does **not** contain a prebuilt binary
-or model. The assembly environment did not have Rust or network access for
-installing a toolchain. Rust compilation, the 102 Rust tests, native inference and
-performance measurements are therefore **not verified here**. Source/corpus
-checks and six shell installer fixture tests were executed successfully.
-See [the verification report](reports/VERIFICATION.md) before relying on the build.
-No latency, RAM, model-accuracy or token-savings percentage is claimed.
+or model. The current tree compiles with the lite feature set and with
+`local-llm`; the Rust suite passes, and the native retrieval benchmark has been
+measured on Linux x86_64. Model inference quality is still unmeasured because no
+GGUF model was provisioned for this verification. Historical source-assembly
+evidence remains in [the verification report](reports/VERIFICATION.md).
 
 ## The boundaries
 
@@ -312,7 +311,7 @@ guarantees. See [performance methodology](docs/PERFORMANCE.md).
 `examples/complex.jsonl` and [COMPLEX.md](examples/COMPLEX.md) contain exactly **100
 complex inputs** across ten categories, including ten deliberate abstention cases.
 They are evaluation inputs with constraints and hazards, not 100 certified
-successful model outputs. The Rust test suite contains 102 test functions.
+successful model outputs. The current Rust source contains 106 test functions.
 
 ## Repository map
 
