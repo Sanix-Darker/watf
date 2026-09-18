@@ -59,6 +59,14 @@ pub fn classify(packet: &Packet) -> Classification {
             reason: "no_evidence",
         };
     };
+    if packet.clause_count != 1 {
+        return Classification {
+            status: "ambiguous",
+            command: None,
+            candidates,
+            reason: "multi_clause_requires_planning",
+        };
+    }
     if top.clause_coverage < packet.clause_count {
         return Classification {
             status: "ambiguous",
@@ -67,11 +75,12 @@ pub fn classify(packet: &Packet) -> Classification {
             reason: "incomplete_clause_coverage",
         };
     }
-    let decisive = match candidates.get(1) {
-        None => true,
-        Some(second) if top.clause_coverage > second.clause_coverage => true,
-        Some(second) => top.matched_terms >= 2 && top.score >= second.score * 1.35,
-    };
+    let decisive = top.matched_terms >= 2
+        && match candidates.get(1) {
+            None => true,
+            Some(second) if top.clause_coverage > second.clause_coverage => true,
+            Some(second) => top.score >= second.score * 1.35,
+        };
     let command = decisive.then(|| top.command.clone());
     Classification {
         status: if decisive { "resolved" } else { "ambiguous" },
@@ -148,6 +157,6 @@ mod tests {
         assert_eq!(ambiguous.status, "ambiguous");
 
         let partial = classify(&packet(vec![evidence("git status", 10.0, &[0], 3)], 2));
-        assert_eq!(partial.reason, "incomplete_clause_coverage");
+        assert_eq!(partial.reason, "multi_clause_requires_planning");
     }
 }
