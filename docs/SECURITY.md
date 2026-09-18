@@ -1,18 +1,17 @@
 # Threat model and limits
 
-## Current release boundary
+## Runtime boundary
 
-The current release has no executor, child-process launcher, network client, socket listener,
-telemetry channel, completion evaluator, roff interpreter or dynamic plugin loader
-in the Rust engine. Indexing reads documentation and executable metadata. Native
+The engine can execute validated plans. It has no runtime network client, socket
+listener, telemetry channel, completion evaluator, roff interpreter or dynamic
+plugin loader. Indexing reads documentation and executable metadata. Native
 inference is linked into the process. Downloading scripts are explicit installation
 tools, not hidden runtime dependencies.
 
-The target agent harness adds a narrow executor after deterministic validation.
-That executor must spawn validated argv directly, set an explicit working
-directory, enforce timeouts, capture stdout and stderr independently, preserve the
-exit status, bound output before it enters model context, and report truncation.
-Generated command text must not be passed to `sh -c`.
+Execution spawns validated argv directly, sets an explicit working directory,
+enforces timeouts, captures stdout and stderr independently, preserves exit status,
+bounds output before it enters model context, and reports truncation. Generated
+command text is never passed to `sh -c`.
 
 ## Untrusted inputs
 
@@ -59,10 +58,9 @@ changes. A grep no-match exit can break a success chain. A literal wildcard does
 not expand. Pipelines run concurrently. These cases receive warnings, not a
 false safety certificate.
 
-Never pipe a generated proposal directly into a shell. No `--execute` option is
-provided in the current release. Future execution does not make validation an
-authorization decision: the calling agent must retain its own approval and
-execution policies.
+Never pipe a generated proposal directly into a shell. `watf run` validates the
+typed plan again before execution. Validation does not grant authorization: the
+calling agent must retain its own approval and execution policies.
 
 ## Installers and CI
 

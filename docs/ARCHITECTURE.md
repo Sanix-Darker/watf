@@ -25,7 +25,7 @@ agent intent
             -> deterministic surface checks
             -> validated structured argv
 
-target continuation
+validated continuation
   -> direct process execution
   -> bounded stdout/stderr capture
   -> deterministic output reduction
@@ -64,7 +64,9 @@ often that planner is loaded or invoked.
 | `packet` | Hierarchical retrieval, clause coverage, hard output cap | Evidence presence is not proof of satisfied intent |
 | `plan` | Typed steps, flag checks, evidence IDs and shell quoting | Surface validation is not semantic verification |
 | `infer` | Optional in-process Qwen3 adapter and grammar | Real model token budget, no cloud or executable fallback |
-| `cli` | Stable operations and foreground JSONL protocol | Execution is not implemented yet |
+| `execute` | Direct argv spawn, pipelines, timeout, bounded capture | Never evaluates generated shell source |
+| `route` | Fail-closed deterministic command classification | Relevance margin is not a correctness probability |
+| `cli` | Stable operations and foreground JSONL protocol | Search, route, and run stay bounded |
 | `tui` | Secondary interactive view of the same engine | Must not drive agent architecture decisions |
 
 ## Retrieval mechanics
@@ -104,8 +106,6 @@ language. Pipelines are represented explicitly and rendered with Bash pipefail.
 Model output cannot insert arbitrary shell grammar: arguments are literal strings,
 not a shell program.
 
-The current release stops after validation and rendering. The target executor
-should consume the same structured argv directly, with explicit cwd, timeout,
-separate bounded stdout/stderr, exit status, and truncation metadata. It should
-not use `sh -c` for generated text. Authorization remains the caller's policy;
-`watf` should not grow a second agent permission framework.
+The executor consumes the validated structured argv directly, with explicit cwd,
+timeout, separate bounded stdout/stderr, exit status, and truncation metadata. It
+does not use `sh -c` for generated text. Authorization remains the caller's policy.

@@ -46,6 +46,5 @@ correctness. Retrieved flags form a validator whitelist. Documentation and user
 text are encoded as data, with chat delimiter characters escaped. This reduces
 trivial delimiter injection but is not a complete prompt-injection defense.
 Bounded generation and independent validation remain essential safeguards. The
-current absence of an executor also limits impact, but the target executor must
-preserve the same boundary by accepting only validated structured argv and
-bounded execution policy. A model can still select an incorrect documented command.
+executor accepts only validated structured argv under bounded execution policy.
+A model can still select an incorrect documented command.

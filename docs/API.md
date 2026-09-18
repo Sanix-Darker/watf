@@ -8,13 +8,15 @@ are supplemented by stricter UTF-8 byte and semantic limits in the Rust engine.
 | Command | Result |
 |---|---|
 | `watf search QUERY` | Deterministic documentation evidence |
+| `watf route QUERY` | Deterministic command-scope classification or abstention |
 | `watf plan QUERY` | Local model plan plus surface validation |
+| `watf run --plan-file FILE` | Validate then execute direct argv with bounded output |
 | `watf QUERY` | Plan when compiled/configured; otherwise evidence |
 | `watf explain --argv-json JSON` | Indexed explanation of one literal argv |
 | `watf validate --plan-file FILE` | Validate an existing draft without inference |
 | `watf index` | Rebuild from built-ins, installed catalog and local manuals |
 | `watf doctor --verify --json` | Index structure/hash verification and feature metadata |
-| `watf serve` | Persistent foreground JSONL agent engine, search-only in this release |
+| `watf serve` | Persistent foreground JSONL engine for search, route, and run |
 | `watf tui` | Optional terminal interface |
 
 Common options: `--index FILE`, `--json`, `--stats`, `--no-mmap`.
@@ -56,8 +58,9 @@ measure, not a confidence or correctness score.
 ```
 
 `command` is an optional exact scope. Schema version and op default to 1 and search;
-ID and query are required. Unknown keys reject the request. ID is at most 64 UTF-8
-bytes; query is at most 16 KiB; a request line is at most 64 KiB.
+ID is required. Search/route require a query. Run requires a plan. Unknown keys
+reject the request. ID is at most 64 UTF-8 bytes; query is at most 16 KiB; a
+request line is at most 64 KiB.
 
 Successful packets echo `id` at top level. Error records do not echo untrusted IDs;
 responses are sequential, so correlate errors by request order. Parsing/validation
@@ -67,25 +70,20 @@ terminates the stream. No socket or background service is created.
 The process retains one index and PATH snapshot. Atomic replacement of an index
 file does not change an existing mapping; restart to observe a new index.
 
-## Target agent contract, not shipped yet
+## Agent execution contract
 
-The final machine interface should collapse the normal agent CLI loop into one
-bounded request. It should accept intent plus execution constraints, route through
-the cheapest sufficient resolver, validate structured argv, execute directly, and
-return only the information needed for the next agent decision.
+The machine interface can validate and execute an already-grounded typed plan in
+one bounded request. Route remains a separate deterministic operation so callers
+can avoid model planning when retrieval is decisive.
 
 Conceptually:
 
 ```json
-{"op":"run","query":"show the last failing test","cwd":"/repo","timeout_ms":10000,"max_output_bytes":4096}
+{"id":"r2","op":"run","cwd":"/repo","timeout_ms":10000,"max_output_bytes":4096,"plan":{"status":"ok","steps":[{"command":"cargo test","args":[],"after":"start","stdout":null}],"questions":[]}}
 ```
 
-The response should expose the route used (`exact`, `local`, `classifier`, or
-`planner`), validated argv/steps, exit status, bounded stdout/stderr, truncation,
-timing, and provenance. It must not imply that validation grants authorization.
-
-`run` is a target operation, not part of schema version 1. Do not add it to the
-published schema until the executor and output reducer are implemented and tested.
+The response exposes validation scope, evidence, warnings, exit status, argv,
+bounded stdout/stderr, truncation, and timing. `run` is part of schema version 1.
 
 ## Plan schema
 
@@ -100,9 +98,9 @@ Redirection mode is `truncate` or `append`. A pipeline producer cannot also redi
 stdout to a file. The renderer emits Bash, not portable POSIX sh, when pipefail is
 required. Fish and PowerShell renderers are not implemented.
 
-`accepted` means documented surface checks passed. In schema version 1,
-`executed` is always false and
-`approval_required` is always true. `shell` is absent on rejected plans. Always
+`accepted` means documented surface checks passed. Validation reports keep
+`executed` false because execution is represented separately by a run result.
+`approval_required` remains true. `shell` is absent on rejected plans. Always
 read warnings and verify intent independently, even for an accepted plan.
 
 ## Exit codes and errors

@@ -2,9 +2,9 @@
 
 **what tf ?**
 
-Local CLI harness for AI agents. `watf` resolves an intent against local CLI
-capabilities, keeps command plans as typed argv, validates them against evidence,
-and is being built toward executing them behind a bounded result boundary.
+Local CLI harness for AI agents. `watf` resolves intent against local CLI
+capabilities, keeps plans as typed argv, validates them against evidence, executes
+validated plans directly, and returns bounded stdout/stderr.
 
 ```sh
 watf "stage src and Cargo.toml, commit as release, then rebuild the compose backend"
@@ -58,18 +58,17 @@ No latency, RAM, model-accuracy or token-savings percentage is claimed.
 | Component | Behavior |
 |---|---|
 | Rust engine | Local files, metadata, deterministic retrieval, optional native inference |
-| Current runtime subprocesses | None, including `man`, `--help`, completion scripts and generated commands |
+| Runtime subprocesses | Validated plan execution only; indexing never executes documentation or completions |
 | Runtime networking | No HTTP client, model downloader, cloud API, socket or telemetry |
 | Inference | Embedded llama.cpp through pinned Rust bindings, optional at compile time |
 | Agent mode | Bounded machine-readable retrieval, no model needed |
 | Plan output | Typed steps, literal argv, dependency relations, provenance and warnings |
-| Execution | Not implemented in this release. A narrow direct-argv executor is the next product stage |
+| Execution | Direct validated argv, explicit cwd, timeout, pipelines, redirection, bounded stdout/stderr |
 | Installation/build | May use curl, tar, a compiler and other provisioning tools |
 
 A proposed `aws`, `docker`, `curl` or `git push` command can itself need a network.
-The current release does not execute proposals. Future execution must preserve
-that distinction: command effects belong to the invoked program, while `watf`
-owns validation, process boundaries, and bounded result capture.
+Command effects belong to the invoked program. `watf` owns validation, direct
+process spawning, timeout handling, and bounded result capture.
 
 ## Build and try the current agent engine
 
@@ -233,9 +232,8 @@ No automatic active `--help` or version probing is hidden behind indexing.
 The skill is provided both at `skills/watf/SKILL.md` and as a standalone
 `watf-skills/` package. Its purpose is to make `watf` the agent's first interface
 for CLI capability discovery instead of repeatedly reading `--help`, man pages,
-and large command output. Today the agent still needs an existing terminal tool
-for execution. The target executor removes that extra round trip for validated
-plans.
+and large command output. Validated plans can be executed directly through
+`watf run` or the foreground JSONL `run` operation.
 
 ```sh
 watf search --json --max-bytes 2048 \
@@ -264,12 +262,12 @@ The native model emits a constrained JSON plan, not raw shell source. Canonical
 command scopes are restricted to retrieved evidence. A deterministic validator
 then checks indexed command/flag membership, arity, required options, known enum
 values, source freshness, literal limits and dependency shape. The renderer owns
-quoting. In the current release no plan is executed. The target executor will use
-the validated structured argv directly rather than passing rendered shell source
-to a shell.
+quoting. `watf run` executes validated structured argv directly rather than
+passing rendered shell source to a shell.
 
 ```sh
 watf validate --json --plan-file examples/plan.json
+watf run --json --plan-file examples/plan.json --timeout-ms 10000 --max-output-bytes 4096
 watf explain --json --argv-json '["git","commit","-m","release"]'
 ```
 

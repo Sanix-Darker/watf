@@ -1,6 +1,6 @@
 ---
 name: watf
-description: Use watf as the first local CLI capability interface for an AI agent. Resolve multi-tool intents into compact provenance-backed evidence and validated argv before falling back to large help/man reads. The current release retrieves and plans without executing commands.
+description: Use watf as the first local CLI capability interface for an AI agent. Resolve intents into compact provenance-backed evidence, route deterministically when possible, validate typed argv, and execute validated plans with bounded output.
 license: MIT
 compatibility: An installed watf binary, a built local index and an agent with a terminal tool. Optional local planning requires a native-feature build and a local Qwen3 GGUF model.
 ---
@@ -80,14 +80,9 @@ It opens one immutable index and environment snapshot. Restart after rebuilding
 the index or changing PATH. No socket, background service or MCP setup is needed.
 Never include secrets in queries unless local storage/output handling is suitable.
 
-## Current boundary and target
+## Execution boundary
 
-The current engine does not run `man`, `--help`, shells, completion scripts,
-package managers or generated commands. It reads files and metadata. Captured
-help and local docs must be imported explicitly.
-
-The target product adds a narrow direct-argv execution boundary with timeout,
-bounded stdout/stderr, exit status, truncation metadata, and deterministic output
-reduction. Until that implementation exists, use the agent's existing terminal
-tool for execution. This skill cannot make an unavailable program exist and
-cannot grant the agent additional execution privileges.
+The engine does not run `man`, `--help`, shells, completion scripts, or package
+managers during discovery/indexing. `watf run` executes only validated structured
+argv, with explicit cwd, timeout, bounded stdout/stderr, exit status, and
+truncation metadata. This skill cannot grant additional execution privileges.

@@ -2,9 +2,9 @@
 
 Keep the engine small, local-first and agent-first. Prefer removing work from the
 hot path over adding a framework. Preserve checked file-format bounds, validation,
-bounded outputs and honest provenance. The current release is non-executing; the
-target executor must consume validated structured argv directly instead of shell
-source. Do not claim performance or correctness from an unrun test.
+bounded outputs and honest provenance. The executor consumes validated structured
+argv directly instead of shell source. Do not claim performance or correctness
+from an unrun test.
 
 ```sh
 make fmt
