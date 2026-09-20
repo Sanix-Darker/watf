@@ -555,9 +555,9 @@ fn stream_exec_keeps_status_when_response_budget_omits_output() {
     fs::set_permissions(&program, fs::Permissions::from_mode(0o700)).unwrap();
     let no_raw_dir = temp.path("no-raw");
     fs::create_dir(&no_raw_dir).unwrap();
-    let long_raw_dir = temp.path(&"raw-path-dir-".repeat(8));
-    fs::create_dir(&long_raw_dir).unwrap();
-    fs::write(long_raw_dir.join("unrelated.raw"), "not this run").unwrap();
+    let raw_dir = temp.path("raw");
+    fs::create_dir(&raw_dir).unwrap();
+    fs::write(raw_dir.join("unrelated.raw"), "not this run").unwrap();
     let index_path = temp.path("exec-budget.widx");
     index::build(
         &index_path,
@@ -618,9 +618,9 @@ fn stream_exec_keeps_status_when_response_budget_omits_output() {
         "op": "exec",
         "argv": ["fixture", "both"],
         "cwd": temp.0,
-        "max_bytes": 460,
+        "max_bytes": 512,
         "max_output_bytes": 1024,
-        "raw_output_dir": long_raw_dir
+        "raw_output_dir": raw_dir
     });
     let mut out = Vec::new();
     cli::serve(&mut engine, Cursor::new(format!("{request}\n")), &mut out).unwrap();
@@ -628,26 +628,40 @@ fn stream_exec_keeps_status_when_response_budget_omits_output() {
     assert_eq!(response["status"], "ok");
     assert_eq!(response["exit_codes"], serde_json::json!([0]));
     assert_eq!(response["output_omitted"], true);
-    assert_eq!(response["raw_files"], 2);
-    assert!(response.get("raw_paths").is_none());
-    assert!(out.len() <= 460);
-    let raw_prefix = response["raw_prefix"].as_str().unwrap();
-    let mut raw_files: Vec<_> = fs::read_dir(raw_prefix)
-        .unwrap()
-        .map(|entry| entry.unwrap().file_name().into_string().unwrap())
-        .collect();
-    raw_files.sort();
-    assert_eq!(raw_files, vec!["step-0-stderr.raw", "step-0-stdout.raw"]);
+    assert!(out.len() <= 512);
+    let mut raw_paths = if let Some(paths) = response.get("raw_paths") {
+        paths
+            .as_array()
+            .unwrap()
+            .iter()
+            .map(|path| std::path::PathBuf::from(path.as_str().unwrap()))
+            .collect::<Vec<_>>()
+    } else {
+        assert_eq!(response["raw_files"], 2);
+        fs::read_dir(response["raw_prefix"].as_str().unwrap())
+            .unwrap()
+            .map(|entry| entry.unwrap().path())
+            .collect::<Vec<_>>()
+    };
+    raw_paths.sort();
+    assert_eq!(raw_paths.len(), 2);
     assert_eq!(
-        fs::read_to_string(std::path::Path::new(raw_prefix).join("step-0-stdout.raw")).unwrap(),
+        raw_paths
+            .iter()
+            .map(|path| path.file_name().unwrap().to_str().unwrap())
+            .collect::<Vec<_>>(),
+        vec!["step-0-stderr.raw", "step-0-stdout.raw"]
+    );
+    assert_eq!(
+        fs::read_to_string(&raw_paths[1]).unwrap(),
         "0123456789abcdef0123456789abcdef\n".repeat(100)
     );
     assert_eq!(
-        fs::read_to_string(std::path::Path::new(raw_prefix).join("step-0-stderr.raw")).unwrap(),
+        fs::read_to_string(&raw_paths[0]).unwrap(),
         "fedcba9876543210fedcba9876543210\n".repeat(100)
     );
     assert_eq!(
-        fs::read_to_string(temp.path(&"raw-path-dir-".repeat(8)).join("unrelated.raw")).unwrap(),
+        fs::read_to_string(raw_dir.join("unrelated.raw")).unwrap(),
         "not this run"
     );
 }

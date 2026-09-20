@@ -2385,6 +2385,66 @@ mod tests {
     }
 
     #[test]
+    fn compact_execution_response_falls_back_to_shared_raw_prefix() {
+        let raw_prefix = Path::new("/tmp/watf-compact-recovery");
+        let stdout = raw_prefix.join("step-0-stdout.raw");
+        let stderr = raw_prefix.join("step-0-stderr.raw");
+        let raw_paths = [stdout.as_path(), stderr.as_path()];
+        let exit_codes = [Some(0)];
+        let prefix_response = compact_execution_response(
+            CompactExecution {
+                id: "compact",
+                status: "ok",
+                exit_codes: &exit_codes,
+                timed_out: false,
+                elapsed_ms: serde_json::json!(1),
+                raw_paths: &[],
+                raw_prefix: Some(raw_prefix),
+                raw_files: 2,
+            },
+            usize::MAX,
+        )
+        .unwrap();
+        let exact_response = compact_execution_response(
+            CompactExecution {
+                id: "compact",
+                status: "ok",
+                exit_codes: &exit_codes,
+                timed_out: false,
+                elapsed_ms: serde_json::json!(1),
+                raw_paths: &raw_paths,
+                raw_prefix: Some(raw_prefix),
+                raw_files: 2,
+            },
+            usize::MAX,
+        )
+        .unwrap();
+        assert!(prefix_response.len() < exact_response.len());
+
+        let max_bytes = prefix_response.len();
+        let compact = compact_execution_response(
+            CompactExecution {
+                id: "compact",
+                status: "ok",
+                exit_codes: &exit_codes,
+                timed_out: false,
+                elapsed_ms: serde_json::json!(1),
+                raw_paths: &raw_paths,
+                raw_prefix: Some(raw_prefix),
+                raw_files: 2,
+            },
+            max_bytes,
+        )
+        .unwrap();
+        let response: serde_json::Value = serde_json::from_slice(&compact).unwrap();
+        assert!(response.get("raw_paths").is_none());
+        assert_eq!(response["raw_files"], 2);
+        assert_eq!(response["raw_prefix"], serde_json::json!(raw_prefix));
+        assert_eq!(compact.last(), Some(&b'\n'));
+        assert!(compact.len() <= max_bytes);
+    }
+
+    #[test]
     fn decisive_grounded_route_skips_inference_but_unknown_literal_escalates() {
         let path = std::env::temp_dir().join(format!(
             "watf-route-plan-{}-{}.widx",
