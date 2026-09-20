@@ -1,5 +1,6 @@
 {
   "suite": "offline_data_regeneration",
+  "snapshot": "historical source-assembly state; not the current worktree",
   "regenerated_files": 9,
   "byte_identical": true,
   "rust_tests_executed": false,

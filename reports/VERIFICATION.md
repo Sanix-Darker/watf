@@ -1,4 +1,8 @@
-# Source delivery verification
+# Historical source-assembly verification
+
+> Historical snapshot. The numbers and status below describe the original
+> assembly environment. They do not describe the current worktree or the 0.0.1
+> release candidate and are preserved without rewriting.
 
 ## Executed in the assembly environment
 

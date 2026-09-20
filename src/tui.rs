@@ -64,7 +64,8 @@ pub fn run(engine: &mut Engine, options: &Options, model: Option<&infer::Options
                 KeyCode::Char('c') if key.modifiers.contains(KeyModifiers::CONTROL) => break,
                 KeyCode::Char('p') if key.modifiers.contains(KeyModifiers::CONTROL) => {
                     rows = if let Some(model) = model {
-                        match crate::cli::plan_request(engine, &input, options, model, false) {
+                        match crate::cli::plan_request(engine, &input, options, Some(model), false)
+                        {
                             Ok(response) => {
                                 let mut lines = response
                                     .report

@@ -1,11 +1,25 @@
 [package]
 name = "watf"
-version = "0.1.0"
+version = "0.0.1"
 edition = "2021"
-description = "what tf ? Local agent CLI harness with grounded capability resolution and planning"
+rust-version = "1.88"
+description = "Local CLI harness for agents with indexed validation and bounded execution"
 license = "MIT"
+repository = "https://github.com/Sanix-Darker/watf"
+homepage = "https://watf.sanixdk.xyz"
+documentation = "https://docs.rs/watf"
+readme = "README.md"
 keywords = ["cli", "offline", "search", "llm", "agent"]
 categories = ["command-line-utilities"]
+include = [
+    "/Cargo.toml",
+    "/Cargo.lock",
+    "/README.md",
+    "/CHANGELOG.md",
+    "/LICENSE",
+    "/src/**",
+    "/data/core.jsonl",
+]
 
 [features]
 default = []
@@ -23,15 +37,18 @@ llama-cpp-sys-2 = { version = "=0.1.156", optional = true, default-features = fa
 encoding_rs = { version = "0.8", optional = true }
 crossterm = { version = "0.29", optional = true, default-features = false, features = ["events"] }
 
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"
+
 [profile.release]
 opt-level = 3
-lto = "thin"
+lto = "fat"
 codegen-units = 1
-strip = "debuginfo"
+panic = "abort"
+strip = "symbols"
 
 [profile.dist]
 inherits = "release"
-lto = "fat"
 
 [[bench]]
 name = "retrieval"

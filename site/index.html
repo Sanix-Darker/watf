@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="watf resolves indexed CLI intent, validates argv, executes directly, and returns bounded output.">
+  <link rel="canonical" href="https://watf.sanixdk.xyz/">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles.css">
+  <title>watf: local CLI harness for agents</title>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a class="wordmark" href="/" aria-label="watf home">watf/</a>
+    <nav aria-label="Main navigation">
+      <a href="#boundary">Boundary</a>
+      <a href="#install">Install</a>
+      <a href="https://github.com/Sanix-Darker/watf">GitHub</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">LOCAL RUST AGENT HARNESS</p>
+        <h1 id="hero-title">Local CLI harness for agents.</h1>
+        <p class="lede">watf resolves an agent request against indexed command evidence. It keeps the plan as typed argv, validates the command surface, starts the process directly, and bounds stdout and stderr.</p>
+        <div class="hero-actions">
+          <a class="install-cta" href="#install"><code>cargo install watf --version 0.0.1 --locked</code></a>
+          <a class="text-link" href="https://github.com/Sanix-Darker/watf/blob/main/docs/PERFORMANCE.md">Read measured evidence</a>
+        </div>
+      </div>
+
+      <div class="protocol-scene" aria-label="Deterministic protocol example">
+        <article class="protocol-card" tabindex="0">
+          <div class="card-bar">
+            <span>resolve_exec</span>
+            <span>schema 1</span>
+          </div>
+          <dl class="protocol-lines">
+            <div>
+              <dt>intent</dt>
+              <dd><code>show git status short</code></dd>
+            </div>
+            <div>
+              <dt>argv</dt>
+              <dd><code>["git","status","--short"]</code></dd>
+            </div>
+            <div>
+              <dt>protocol_calls</dt>
+              <dd><code>1</code></dd>
+            </div>
+            <div>
+              <dt>model_calls</dt>
+              <dd><code>0</code></dd>
+            </div>
+            <div>
+              <dt>result</dt>
+              <dd><code>ok · exit 0 · bounded</code></dd>
+            </div>
+          </dl>
+        </article>
+      </div>
+    </section>
+
+    <section class="boundary" id="boundary" aria-labelledby="boundary-title">
+      <div>
+        <p class="eyebrow">EXECUTION BOUNDARY</p>
+        <h2 id="boundary-title">Execution uses structured argv.</h2>
+      </div>
+      <ol>
+        <li><strong>Resolve.</strong> Match the intent to bounded indexed evidence.</li>
+        <li><strong>Validate.</strong> Check the documented command and option surface.</li>
+        <li><strong>Execute.</strong> Spawn argv directly with an explicit directory and timeout.</li>
+        <li><strong>Return.</strong> Keep exit status and bounded stdout and stderr.</li>
+      </ol>
+      <p class="boundary-note">An ambiguous or unsupported request returns a compact abstention before process spawn. watf does not send generated text through a shell. Validation does not grant permission or prove that an action is safe. The calling agent must authorize execution first.</p>
+    </section>
+
+    <section class="install" id="install" aria-labelledby="install-title">
+      <div>
+        <p class="eyebrow">INSTALL 0.0.1</p>
+        <h2 id="install-title">Install watf 0.0.1.</h2>
+        <p>The crates.io package embeds 608 core records and needs no model. It does not contain the offline catalog. Install that data separately and rebuild the index when catalog search is required.</p>
+      </div>
+      <div class="install-options">
+        <section class="install-path" aria-labelledby="direct-install-title">
+          <h3 id="direct-install-title">Direct CLI install</h3>
+          <div class="commands" aria-label="CLI installation commands">
+            <div>
+              <span>01</span>
+              <code>cargo install watf --version 0.0.1 --locked</code>
+            </div>
+            <div>
+              <span>02</span>
+              <code>watf index</code>
+            </div>
+          </div>
+        </section>
+        <section class="install-path" aria-labelledby="skill-install-title">
+          <h3 id="skill-install-title">Agent skill install</h3>
+          <div class="commands" aria-label="Agent skill installation command">
+            <div>
+              <span>01</span>
+              <code>npx skills add sanix-darker/watf-skills --skill watf</code>
+            </div>
+          </div>
+          <p>The skill pins watf 0.0.1 and builds the default index when it is absent.</p>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>watf 0.0.1</strong> · MIT License</p>
+    <nav aria-label="Footer navigation">
+      <a href="https://github.com/Sanix-Darker/watf">Source</a>
+      <a href="https://docs.rs/watf">Rust docs</a>
+      <a href="https://github.com/Sanix-Darker/watf/blob/main/docs/API.md">Protocol</a>
+      <a href="https://github.com/Sanix-Darker/watf/blob/main/docs/PERFORMANCE.md">Performance</a>
+    </nav>
+  </footer>
+</body>
+</html>

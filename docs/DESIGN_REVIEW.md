@@ -1,8 +1,8 @@
 # Product and design review
 
-## Competitive reality
+## Existing tools
 
-The easy versions of this project already exist.
+Existing tools already cover parts of this workflow.
 
 - Natural-language command generation is a standard capability of coding agents.
 - RTK and banish already proxy common developer commands and reduce shell output
@@ -14,9 +14,7 @@ The easy versions of this project already exist.
 - Completion specs, man pages, and projects such as tldr already provide compact
   command metadata and examples.
 
-Therefore `watf` should not compete as a shell copilot, documentation searcher,
-or output filter in isolation. The differentiated target is one local agent-native
-CLI boundary that combines:
+`watf` combines these operations behind one local agent interface:
 
 ```text
 intent
@@ -27,11 +25,11 @@ intent
   -> bounded result reduction
 ```
 
-The existential benchmark is simple: if the same successful task uses no fewer
-model tokens, tool calls, fallback reads, retries, or wall-clock time than direct
-agent shell use plus existing reducers, `watf` is not earning its extra layer.
+Complete-loop benchmarks must compare task success, model tokens, tool calls,
+fallback reads, retries, bytes, and wall-clock time with direct shell use and
+existing reducers.
 
-### Alternatives to benchmark
+### Comparison set
 
 | Alternative | Already solves | What `watf` must prove beyond it |
 |---|---|---|
@@ -42,36 +40,33 @@ agent shell use plus existing reducers, `watf` is not earning its extra layer.
 | AetherShell | Agent-native typed shell, structured output, effect gating, result handles | Work with the existing CLI ecosystem without requiring a new shell language or reimplementing every command |
 | tldr and completion specs | Compact command examples, flags, and argument metadata | Join metadata to local availability, multi-command planning, validation, execution, and bounded results |
 
-### Classifier strategy
+### Routing evaluation
 
 Do not replace lexical retrieval with a model. Use the existing index as the
 first classifier and measure a simple confidence signal such as top-candidate
 coverage plus score margin. Exact command mentions and sufficiently separated
 matches should remain entirely local.
 
-Jev is interesting as the next rung, not the first rung. It accepts structured
-questions and returns typed probabilistic decisions, which fits choosing among a
-small retrieved command set, detecting ambiguity, or deciding whether to escalate
-to planning. It cannot generate the missing argv by itself, which is useful here:
-it keeps classification separate from synthesis.
+A typed ambiguity classifier is a target direction, not a shipped 0.0.1 path. It
+may choose or abstain only among a closed set of retrieved commands and must not
+invent command names or flags. This keeps classification separate from synthesis.
 
 Benchmark this routing stack against direct retrieval and direct LLM planning:
 
 ```text
-exact/local classifier -> validate/execute
-ambiguous -> typed classifier -> validate/execute
-needs synthesis -> local planner -> validate/execute
+exact/local classifier -> grounded argv -> validate/direct execute
+ambiguous -> future typed classifier -> grounded argv -> validate/direct execute
+needs synthesis -> optional local planner -> validate/direct execute
 ```
 
 Track the percentage of intents resolved at each rung. The main classifier metric
 is not raw accuracy alone; it is successful tasks per token and per millisecond,
 including escalation cost.
 
-Do not chase feature parity with all of these projects. The shortest defensible
-product is the bridge across their gaps: existing CLI ecosystem in, minimal
-agent context out.
+The project scope is one local interface for indexed capability resolution,
+validated argv, direct execution, and bounded results.
 
-## Pass 1: contracts and workload
+## Module contracts
 
 | Module | Contract | Decision |
 |---|---|---|
@@ -86,11 +81,11 @@ agent context out.
 | native inference | Load one local GGUF only when planning | Optional compiled-in llama.cpp, no server or model download at runtime |
 | skill | Make deterministic CLI resolution the agent's first path | Keep returned context minimal and bounded |
 
-## Pass 2: failure modes and scope corrections
+## Known failure modes
 
-The earlier conversation overstated what lexical retrieval and a 0.6B model can
-prove. This implementation treats both retrieval quality and model planning
-quality as benchmark questions. A zero hallucination promise is not made.
+Lexical retrieval and the 0.6B model do not prove intent correctness. Retrieval
+quality and model planning quality require measured task results. The project does
+not claim zero hallucinations.
 
 An installed executable does not prove that catalog flags match its version.
 Installed availability, source origin, captured version, and source staleness
@@ -105,8 +100,10 @@ stop a valid workflow. Pipeline success, redirections, literal filenames,
 existing staged changes, and missing commit messages require review. There is
 no automatic parallel execution or guessed commit message.
 
-The fast path returns evidence, not guessed commands based on a high BM25 score.
-BM25 is a relevance score and is never exposed as a correctness probability.
+The deterministic fast path returns grounded validated argv when its routing and
+construction checks pass, including through `resolve_exec`; otherwise it returns
+evidence or abstains. BM25 is a relevance score and is never exposed as a
+correctness probability.
 
 A large cloud-derived catalog must not dominate small local tools. Generic
 queries suppress catalog records unless the user asks for catalog search or
@@ -115,20 +112,20 @@ mentions the catalog tool. Nested fields stay out of normal command planning.
 Input limits, atomic index publication, safe quoting, no executable completion
 parsing, no network client, and an explicit capability schema are mandatory.
 
-Rust compilation and model inference must be tested in a Rust-enabled build
-host before release. Source inspection or a Python reference benchmark is not
-reported as a successful Rust test run.
+Rust compilation, tests, runtime smoke, and model observations have been run on
+the current Linux verification host. The optional model remains non-default and
+its smoke result is evidence, not semantic validation.
 
-## Final cross-module pass
+## Cross-module verification
 
-The review corrected duplicate evidence being mistaken for truncation, made the
-persistent protocol's approximate token count include its request-ID envelope,
-and bounded the owned index read even if a file grows after its metadata check.
-Regression cases cover those packet behaviors and malformed source digests/control
-characters. These are source changes reviewed by inspection, not claims of Rust
-test execution. The actual suite now contains 102 Rust test functions.
+Packet handling distinguishes duplicate evidence from truncation. The persistent
+protocol's approximate token count includes its request-ID envelope. Owned index
+reads stay bounded if a file grows after its metadata check. Regression cases
+cover these boundaries, malformed source digests, and control characters on the
+recorded Linux verification host.
 
 Installer tests exercise checksum failure, rejected repository/version arguments,
-restricted named-member extraction and explicit no-index behavior using an inert
-fixture executable. Release generation refuses to package an absent executable or
-a missing Cargo.lock. Source delivery remains distinct from a verified binary release.
+restricted named-member extraction, and explicit no-index behavior using an inert
+fixture executable. Package, install, verification, and runtime-smoke gates cover
+the 0.0.1 release candidate. Tag assets are configured and remain unpublished
+until the release tag exists.

@@ -24,13 +24,15 @@
     "data": 10,
     "abstain": 10
   },
-  "rust_test_functions_present": 102,
+  "rust_test_functions_present": 136,
   "rust_tests_executed": false,
   "rust_compilation_verified": false,
   "model_inference_verified": false,
   "performance_measured": false,
-  "python_sources_parsed": 12,
-  "json_documents_parsed": 11,
-  "text_files_without_em_dash": 102,
-  "json_schema_checks": "four schemas checked, core records and example plan validated"
+  "python_sources_parsed": 17,
+  "json_documents_parsed": 13,
+  "toml_documents_parsed": 0,
+  "toml_parser": "unavailable on this Python",
+  "text_files_without_em_dash": 116,
+  "json_schema_checks": "not available: optional jsonschema package"
 }

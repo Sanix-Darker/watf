@@ -1,0 +1,26 @@
+{"id":"routine-001","query":"show git status short","expected":{"command":"git status","argv":["git","status","--short"]}}
+{"id":"routine-002","query":"run docker compose up in the background","expected":{"command":"docker compose up","argv":["docker","compose","up","--detach"]}}
+{"id":"routine-003","query":"show current git branch","expected":{"command":"git branch","argv":["git","branch","--show-current"]}}
+{"id":"routine-004","query":"show git working tree status","expected":{"command":"git status","argv":["git","status"]}}
+{"id":"routine-005","query":"show git history oneline","expected":{"command":"git log","argv":["git","log","--oneline"]}}
+{"id":"routine-006","query":"show all git branches","expected":{"command":"git branch","argv":["git","branch","--all"]}}
+{"id":"routine-007","query":"show git diff staged","expected":{"command":"git diff","argv":["git","diff","--cached"]}}
+{"id":"routine-008","query":"show cargo test release","expected":{"command":"cargo test","argv":["cargo","test","--release"]}}
+{"id":"routine-009","query":"show docker compose config quiet","expected":{"command":"docker compose config","argv":["docker","compose","config","--quiet"]}}
+{"id":"routine-010","query":"show docker compose containers","expected":{"command":"docker compose ps","argv":["docker","compose","ps"]}}
+{"id":"routine-011","query":"show docker compose defined services","expected":{"command":"docker compose config","argv":["docker","compose","config","--services"]}}
+{"id":"routine-012","query":"show docker resource usage once","expected":{"command":"docker stats","argv":["docker","stats","--no-stream"]}}
+{"id":"routine-013","query":"show git status without short","expected":null,"reason":"negation"}
+{"id":"routine-014","query":"run docker compose up not in the background","expected":null,"reason":"negation"}
+{"id":"routine-015","query":"show git status banana","expected":null,"reason":"unknown_literal"}
+{"id":"routine-016","query":"show docker compose containers frobnitz","expected":null,"reason":"unknown_literal"}
+{"id":"routine-017","query":"show git log max count 5","expected":null,"reason":"value_bearing_option"}
+{"id":"routine-018","query":"show docker compose logs tail 20","expected":null,"reason":"value_bearing_option"}
+{"id":"routine-019","query":"list directory entries sort","expected":null,"reason":"ambiguous_option_term"}
+{"id":"routine-020","query":"find files match","expected":null,"reason":"ambiguous_option_term"}
+{"id":"routine-021","query":"remove files","expected":null,"reason":"route_ambiguity"}
+{"id":"routine-022","query":"show logs","expected":null,"reason":"route_ambiguity"}
+{"id":"routine-023","query":"show current","expected":null,"reason":"generic_word_collision"}
+{"id":"routine-024","query":"please display current","expected":null,"reason":"generic_word_collision"}
+{"id":"routine-025","query":"show docker logs","expected":{"command":"docker logs","argv":["docker","logs"]}}
+{"id":"routine-026","query":"show docker compose logs","expected":{"command":"docker compose logs","argv":["docker","compose","logs"]}}

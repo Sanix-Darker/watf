@@ -112,10 +112,15 @@ impl Packet {
         loop {
             self.refresh();
             // Fixed-point estimate includes the full response, not only descriptions.
-            for _ in 0..4 {
-                self.estimated_tokens = self.json()?.len().div_ceil(4);
-            }
-            if self.json()?.len() <= max_bytes {
+            let bytes = loop {
+                let bytes = self.json()?;
+                let estimated = bytes.len().div_ceil(4);
+                if estimated == self.estimated_tokens {
+                    break bytes;
+                }
+                self.estimated_tokens = estimated;
+            };
+            if bytes.len() <= max_bytes {
                 return Ok(());
             }
             if self.evidence.pop().is_none() {
@@ -196,13 +201,14 @@ impl Engine {
                 continue;
             }
             let mut commands = BTreeSet::new();
-            let mut queue = Vec::new();
+            let mut heads = Vec::new();
+            let mut details = Vec::new();
             for hit in hits {
                 let command = self.index.command_key(hit.doc)?.to_owned();
                 if !commands.insert(command.clone()) {
                     continue;
                 }
-                if commands.len() > 3 {
+                if commands.len() > 4 {
                     break;
                 }
                 let scoped_ids = self.index.ids_for_command(&command)?;
@@ -210,23 +216,25 @@ impl Engine {
                     .into_iter()
                     .find(|&id| self.index.kind_code(id).is_ok_and(|kind| kind == 0))
                 {
-                    queue.push(Hit {
+                    heads.push(Hit {
                         doc: id,
                         score: hit.score,
                         matched_terms: hit.matched_terms,
                     });
                 }
                 base.command = Some(command);
-                base.limit = 8;
+                base.limit = 6;
                 let (fine, found) = self.index.search(clause, &base, &mut self.scratch)?;
                 add_stats(&mut stats, &found);
-                queue.extend(
+                details.extend(
                     fine.into_iter()
                         .filter(|h| self.index.kind_code(h.doc).is_ok_and(|k| k == 1 || k == 3)),
                 );
                 base.command = options.command.clone();
                 base.limit = 64;
             }
+            heads.extend(details);
+            let queue = heads;
             queues.push(queue);
         }
         let available = queues
@@ -280,7 +288,7 @@ impl Engine {
                     name: capability.name,
                     aliases: capability.aliases,
                     arity: capability.arity,
-                    summary: text::compact(&capability.summary, 240),
+                    summary: text::compact(&capability.summary, 160),
                     source,
                     program_available: available,
                     clauses: vec![clause],

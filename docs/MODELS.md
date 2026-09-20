@@ -13,12 +13,16 @@ The provided provisioning manifest pins:
 - SHA256: `da2572f16c06133561ce56accaa822216f2391ef4d37fba427801cd6736417d4`
 - Model license: Apache-2.0
 
-Source: https://huggingface.co/ggml-org/Qwen3-0.6B-GGUF/blob/main/Qwen3-0.6B-Q4_0.gguf
+Source: https://huggingface.co/ggml-org/Qwen3-0.6B-GGUF/blob/b5f37287796e5be0ea3dab2e7430873fb3f73e49/Qwen3-0.6B-Q4_0.gguf
 
-Disk size is not peak RSS. The selected model was not downloaded or run in the
-assembly environment. Accuracy, speed and fitting in 1-2 GB remain measurements
-to perform. Do not infer that a 0.6B model reliably handles eight-step tasks merely
-because its grammar prevents malformed JSON.
+Disk size is not peak RSS. The current
+[`model-smoke.json`](../reports/model-smoke.json) records one deterministic request
+accepted with zero inference and two model-planned complex requests rejected
+fail-closed for dropped literals or order. Semantic accuracy remains unverified,
+and the model is unsuitable as the default planner. New runs of
+`scripts/model_smoke.py` record a UTC generation time and SHA-256 values for the
+model, binary, and index. The current report contains those provenance fields.
+Grammar-constrained JSON does not establish multi-step task reliability.
 
 ## Integration
 

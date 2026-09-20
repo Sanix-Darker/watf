@@ -72,7 +72,7 @@ pub(super) fn generate(query: &str, context: &Context, options: &Options) -> Res
         .new_context(&native.backend, parameters)
         .map_err(native_error)?;
     let grammar = grammar::for_context(context)?;
-    let constrained = LlamaSampler::grammar(&model, &grammar, "root").map_err(native_error)?;
+    let constrained = LlamaSampler::grammar(model, &grammar, "root").map_err(native_error)?;
     let mut sampler = LlamaSampler::chain_simple([constrained, LlamaSampler::greedy()]);
     let prefill = Instant::now();
     let mut batch = LlamaBatch::new(512, 1);
@@ -90,15 +90,13 @@ pub(super) fn generate(query: &str, context: &Context, options: &Options) -> Res
     let generating = Instant::now();
     let mut decoder = encoding_rs::UTF_8.new_decoder();
     let mut output = String::new();
-    let mut generated = 0;
-    for n in 0..options.output_tokens {
+    for (generated, n) in (0..options.output_tokens).enumerate() {
         // sample() already accepts the token in this pinned binding version.
         // Accepting twice corrupts the grammar state.
         let token = sampler.sample(&ctx, batch.n_tokens() - 1);
         if model.is_eog_token(token) {
             break;
         }
-        generated += 1;
         output.push_str(
             &model
                 .token_to_piece(token, &mut decoder, false, None)
@@ -112,7 +110,7 @@ pub(super) fn generate(query: &str, context: &Context, options: &Options) -> Res
                 draft,
                 metrics: Metrics {
                     prompt_tokens: tokens.len(),
-                    generated_tokens: generated,
+                    generated_tokens: generated + 1,
                     load_ms,
                     prefill_ms,
                     generation_ms: generating.elapsed().as_millis(),

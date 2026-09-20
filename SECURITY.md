@@ -1,12 +1,13 @@
 # Security policy
 
-WATF is a source-delivered early implementation, not a security-audited product.
-The assembly environment could not compile or execute its Rust code. Read
-`reports/VERIFICATION.md` and run CI before using it with sensitive workloads.
+WATF 0.0.1 is a release candidate, not a security-audited product. See
+[`docs/SECURITY.md`](docs/SECURITY.md) for the threat model and current controls.
+The original source-assembly limitations remain available only in the
+[historical verification report](reports/VERIFICATION.md).
 
-Do not open public issues containing credentials, private documentation or private
-paths. Once this project is hosted, use that repository's private vulnerability
-reporting mechanism if enabled. No maintainer email address or hosted reporting
-endpoint is invented by this archive.
-
-See `docs/SECURITY.md` for the threat model, controls and remaining risks.
+Report vulnerabilities through the repository's
+[GitHub Security Advisories](https://github.com/Sanix-Darker/watf/security/advisories/new)
+when private vulnerability reporting is available. Otherwise open a
+[GitHub issue](https://github.com/Sanix-Darker/watf/issues) without credentials,
+private documentation, private paths, or exploit details and request a private
+contact route.

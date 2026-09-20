@@ -28,7 +28,7 @@ nicer shell for people unless they also improve the agent path.
 1. Agent first. Optimize the machine interface before interactive UI.
 2. Deterministic before inference. Retrieval, parsing, validation, filtering,
    and known command transforms should not require an LLM.
-3. Context is a cost. Every byte returned to an agent must justify itself.
+3. Return only the context bytes needed for the agent to act or decide.
 4. One intent may span multiple commands and tools.
 5. Keep plans as structured argv for as long as possible. Do not turn them into
    shell source just to execute them.
@@ -50,8 +50,8 @@ Route each intent through the first stage that is sufficient:
 1. Exact syntax and explicit command names.
 2. Local deterministic classification from indexed terms, command scopes, local
    availability, clause coverage, and score margin.
-3. Optional fast typed classifier for genuine ambiguity. Jev is a candidate here:
-   give it only the bounded state and a closed choice set produced by retrieval.
+3. Optional fast typed classifier for genuine ambiguity, using only bounded state
+   and a closed choice set produced by retrieval.
 4. Local generative planning only when the task requires free-form synthesis or
    a multi-command plan that the earlier stages cannot construct.
 5. Deterministic validation always runs before execution.
@@ -78,12 +78,12 @@ successful task loop:
 - peak RSS
 - task success
 
-The project only has a reason to exist if this loop is materially cheaper than
-letting a capable agent use ordinary shell tools directly.
+Keep this layer only when complete-loop benchmarks show lower agent cost than
+ordinary shell tools at equivalent task success.
 
 ## Execution contract
 
-The intended executor is deliberately narrow:
+The executor accepts this bounded operation set:
 
 ```text
 validated structured argv
@@ -142,8 +142,8 @@ Before adding a feature, ask which existing category already solves it:
 - generic shell executors and MCP shell servers
 
 Do not clone a competitor feature unless it closes the full `watf` loop better.
-The defensible target is one small local interface that combines capability
-resolution, grounded argv, validation, execution, and bounded results.
+The target is one small local interface for capability resolution, grounded argv,
+validation, execution, and bounded results.
 
 ## Change discipline
 

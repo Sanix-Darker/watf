@@ -9,9 +9,9 @@ PROFILE ?= release
 BIN := target/$(PROFILE)/watf
 LOCKED := $(if $(wildcard Cargo.lock),--locked,)
 
-.PHONY: help build lite native test test-full fmt fmt-check clippy bench verify smoke index demo model install install-lite lock schemas samples catalog package source-zip clean
+.PHONY: help build lite native test test-full fmt fmt-check clippy bench bench-loop bench-plan bench-agent-loop verify smoke index demo model install install-lite lock schemas samples catalog package source-zip clean
 help:
-	@printf '%s\n' 'build: native LLM + TUI; lite: deterministic agent core; native: tune for this CPU' 'test/test-full, verify, smoke, bench, index, model, install, package, lock'
+	@printf '%s\n' 'build: native LLM + TUI; lite: deterministic agent core; native: tune for this CPU' 'test/test-full, verify, smoke, bench, bench-loop, bench-plan, bench-agent-loop, index, model, install, package, lock'
 build:
 	$(CARGO) build $(LOCKED) --profile $(PROFILE) --features $(FEATURES)
 lite:
@@ -31,6 +31,12 @@ clippy:
 	$(CARGO) clippy $(LOCKED) --all-targets --features $(FEATURES)
 bench:
 	$(CARGO) bench $(LOCKED) --bench retrieval
+bench-loop: lite
+	$(PYTHON) scripts/bench_loop.py --binary $(BIN)
+bench-plan: lite
+	$(PYTHON) scripts/bench_plan.py --binary $(BIN)
+bench-agent-loop: lite
+	$(PYTHON) scripts/bench_agent_loop.py --binary $(BIN)
 verify:
 	$(PYTHON) scripts/verify.py
 smoke:

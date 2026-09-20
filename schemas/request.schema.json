@@ -2,7 +2,54 @@
   "$id": "urn:watf:request:1",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "op": {
+            "const": "resolve_exec"
+          }
+        },
+        "required": [
+          "op"
+        ]
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "argv"
+              ]
+            },
+            {
+              "required": [
+                "plan"
+              ]
+            }
+          ]
+        },
+        "properties": {
+          "query": {
+            "minLength": 1
+          }
+        },
+        "required": [
+          "query"
+        ]
+      }
+    }
+  ],
   "properties": {
+    "argv": {
+      "items": {
+        "maxLength": 4096,
+        "pattern": "^[^\\u0000-\\u001f\\u007f]*$",
+        "type": "string"
+      },
+      "maxItems": 76,
+      "type": "array"
+    },
     "catalog": {
       "type": "boolean"
     },
@@ -55,7 +102,9 @@
       "enum": [
         "search",
         "route",
-        "run"
+        "run",
+        "exec",
+        "resolve_exec"
       ]
     },
     "plan": {
@@ -194,6 +243,16 @@
     "query": {
       "maxLength": 16384,
       "type": "string"
+    },
+    "raw_output_dir": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
     },
     "schema_version": {
       "const": 1

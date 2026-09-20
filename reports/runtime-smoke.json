@@ -1,0 +1,72 @@
+{
+  "suite": "actual_rust_binary_cli_smoke",
+  "binary": "supplied-release-binary",
+  "checks": [
+    {
+      "operation": "index",
+      "elapsed_ms": 5810.5781259946525,
+      "exit": 0
+    },
+    {
+      "operation": "doctor",
+      "elapsed_ms": 904.1678829817101,
+      "exit": 0
+    },
+    {
+      "operation": "search",
+      "elapsed_ms": 30.39333608467132,
+      "exit": 0
+    },
+    {
+      "operation": "search",
+      "elapsed_ms": 32.425863086245954,
+      "exit": 0
+    },
+    {
+      "operation": "search",
+      "elapsed_ms": 43.54559909552336,
+      "exit": 0
+    },
+    {
+      "operation": "validate",
+      "elapsed_ms": 29.660744010470808,
+      "exit": 0
+    },
+    {
+      "operation": "validate",
+      "elapsed_ms": 24.37328197993338,
+      "exit": 3
+    },
+    {
+      "operation": "serve_resolve_exec",
+      "elapsed_ms": 35.62917199451476,
+      "exit": 0,
+      "response_bytes": 464
+    }
+  ],
+  "resolve_exec": {
+    "authorized_fixture_commands": 1,
+    "abstentions": 1,
+    "model_calls": 0,
+    "resolved_argv": [
+      "git",
+      "status",
+      "--short"
+    ],
+    "abstention_route_reason": "retrieval_margin",
+    "abstention_candidates": [
+      "git status",
+      "git rev-parse",
+      "git show",
+      "git branch"
+    ],
+    "response_bytes": 464,
+    "abstention_response_bytes": 648,
+    "stdout_bytes": 15,
+    "stderr_bytes": 13,
+    "marker_spawns": 1,
+    "server_shutdown_clean": true
+  },
+  "proposed_commands_executed": true,
+  "execution_scope": "authorized controlled local fixture with marker-only side effect; no generated shell"
+}

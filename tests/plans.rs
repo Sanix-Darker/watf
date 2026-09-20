@@ -293,10 +293,105 @@ fn scoped_evidence_is_enforced() {
             allow_uninstalled: true,
             allowed_commands: Some(["git log".into()].into()),
             allowed_flags: None,
+            ..Default::default()
         },
     )
     .unwrap();
     assert!(!r.accepted);
+}
+
+#[test]
+fn synthesized_plan_must_preserve_explicit_literals() {
+    let (_, i) = builtins();
+    let r = plan::validate(
+        &i,
+        &draft(vec![step("git commit", &[], After::Start)]),
+        &BTreeMap::new(),
+        &ValidationOptions {
+            allow_uninstalled: true,
+            required_literals: ["release".into()].into(),
+            ..Default::default()
+        },
+    )
+    .unwrap();
+    assert!(!r.accepted);
+    assert!(r.errors.iter().any(|error| error.contains("release")));
+}
+#[test]
+fn synthesized_plan_must_preserve_required_options() {
+    let (_, i) = builtins();
+    let r = plan::validate(
+        &i,
+        &draft(vec![step("docker compose up", &[], After::Start)]),
+        &BTreeMap::new(),
+        &ValidationOptions {
+            allow_uninstalled: true,
+            required_flags: [("docker compose up".into(), ["--detach".into()].into())].into(),
+            ..Default::default()
+        },
+    )
+    .unwrap();
+    assert!(!r.accepted);
+    assert!(r.errors.iter().any(|error| error.contains("--detach")));
+}
+#[test]
+fn synthesized_plan_must_follow_retrieved_clause_order() {
+    let (_, i) = builtins();
+    let command_clauses = || {
+        Some(
+            [
+                ("git add".into(), [0].into()),
+                ("git commit".into(), [1].into()),
+            ]
+            .into(),
+        )
+    };
+    let omitted = plan::validate(
+        &i,
+        &draft(vec![step("git add", &[], After::Start)]),
+        &BTreeMap::new(),
+        &ValidationOptions {
+            allow_uninstalled: true,
+            command_clauses: command_clauses(),
+            ..Default::default()
+        },
+    )
+    .unwrap();
+    assert!(!omitted.accepted);
+    assert!(omitted.errors.iter().any(|error| error.contains("omitted")));
+
+    let ordered = plan::validate(
+        &i,
+        &draft(vec![
+            step("git add", &[], After::Start),
+            step("git commit", &[], After::Success),
+        ]),
+        &BTreeMap::new(),
+        &ValidationOptions {
+            allow_uninstalled: true,
+            command_clauses: command_clauses(),
+            ..Default::default()
+        },
+    )
+    .unwrap();
+    assert!(ordered.accepted);
+
+    let r = plan::validate(
+        &i,
+        &draft(vec![
+            step("git commit", &[], After::Start),
+            step("git add", &[], After::Success),
+        ]),
+        &BTreeMap::new(),
+        &ValidationOptions {
+            allow_uninstalled: true,
+            command_clauses: command_clauses(),
+            ..Default::default()
+        },
+    )
+    .unwrap();
+    assert!(!r.accepted);
+    assert!(r.errors.iter().any(|error| error.contains("clause order")));
 }
 #[test]
 fn jq_two_values_are_required() {

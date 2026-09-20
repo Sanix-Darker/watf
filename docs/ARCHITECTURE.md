@@ -13,9 +13,9 @@ agent intent
   -> quoted-clause splitting and lexical normalization
   -> cross-tool retrieval
   -> candidate command scopes
-  -> deterministic intent classification when score margin is sufficient
-       -> exact/grounded argv construction when possible
-       -> optional typed ambiguity classifier over retrieved candidates
+  -> deterministic route
+       -> exact or grounded argv when checks pass
+       -> abstention when checks do not pass
   -> scoped option and documentation retrieval
   -> round-robin clause coverage and evidence deduplication
   -> bounded provenance-backed packet
@@ -34,21 +34,12 @@ validated continuation
 
 ## Routing before planning
 
-The common path should not require a generative model. An explicit command name,
-strong lexical match, local executable evidence, and a clear score margin can
-classify many CLI intents directly from the existing index. That result can feed
-typed argv construction and the existing validator.
-
-When local evidence produces several plausible command scopes, an optional typed
-classifier may choose among those candidates or abstain. Jev is a good shape for
-this role because it returns typed choices and probabilities instead of generated
-command text. It should receive a closed candidate set from retrieval, never the
-whole CLI universe, and it should not be on the default path because a network
-round trip is much slower than local index lookup.
-
-The local GGUF planner remains the final synthesis fallback for tasks that need
-free-form arguments or multi-step composition. Classification should reduce how
-often that planner is loaded or invoked.
+The implemented route uses explicit command terms, lexical matches, local
+availability, clause coverage, and score margin. It constructs grounded argv when
+the checks pass and otherwise abstains or uses the optional local GGUF synthesis
+fallback. Every accepted path uses the same validator. A typed classifier is a
+future option for choosing or abstaining among bounded retrieved candidates; none
+ships in 0.0.1, and it must not invent command names or flags.
 
 ## Module contracts and review points
 
@@ -66,7 +57,7 @@ often that planner is loaded or invoked.
 | `infer` | Optional in-process Qwen3 adapter and grammar | Real model token budget, no cloud or executable fallback |
 | `execute` | Direct argv spawn, pipelines, timeout, bounded capture | Never evaluates generated shell source |
 | `route` | Fail-closed deterministic command classification | Relevance margin is not a correctness probability |
-| `cli` | Stable operations and foreground JSONL protocol | Search, route, and run stay bounded |
+| `cli` | Stable operations and foreground JSONL protocol | Search, route, run, exact exec, and deterministic resolve plus exec stay bounded |
 | `tui` | Secondary interactive view of the same engine | Must not drive agent architecture decisions |
 
 ## Retrieval mechanics

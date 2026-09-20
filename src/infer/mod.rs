@@ -45,7 +45,7 @@ impl Options {
         Ok(())
     }
 }
-#[derive(Debug, Clone, Serialize)]
+#[derive(Debug, Clone, Default, Serialize)]
 pub struct Metrics {
     pub prompt_tokens: usize,
     pub generated_tokens: usize,

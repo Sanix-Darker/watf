@@ -35,6 +35,7 @@ def main() -> None:
     info = {'version': version, 'flavor': args.flavor, 'target': args.target,
             'build_os': platform.platform(), 'source_revision': os.environ.get('GITHUB_SHA', 'unknown'),
             'rustc': subprocess.check_output(['rustc', '-Vv'], text=True).strip(),
+            'binary_bytes': binary.stat().st_size,
             'binary_sha256': hashlib.sha256(binary.read_bytes()).hexdigest(),
             'cargo_lock_sha256': hashlib.sha256(lock.read_bytes()).hexdigest(),
             'model_bundled': False, 'test_status': 'consult associated CI artifacts'}

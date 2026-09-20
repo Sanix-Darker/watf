@@ -1,37 +1,49 @@
-# Releasing
+# Releasing 0.0.1
 
-No public repository or endpoint is assumed. Before enabling a curl install URL:
+Release from `main` with a clean worktree and the committed `Cargo.lock`. Confirm
+that `Cargo.toml`, `Cargo.lock`, the changelog, skills, and installer all name
+version 0.0.1.
 
-1. Create the actual repository and review licenses and provenance.
-2. Run `make fmt`, generate a real `Cargo.lock`, review it, and commit both changes.
-3. Run core/native tests, the CLI smoke script and the offline verifier.
-4. Run opt-in native model evaluation on supported hardware and review failures.
-5. Run representative benchmarks and record hardware/cache conditions.
-6. Set the version in Cargo.toml, update the changelog and installer default.
-7. Push a matching `vX.Y.Z` tag. Review the generated draft before publishing it.
+Before any irreversible publication:
 
-`release.yml` uses one resolved lockfile across its Linux x86_64/aarch64 and
-lite/full matrix. It tests each build, packages a flat archive, emits individual
-SHA256 files and creates a release draft. The model is not bundled. Binary assets
-include source licenses, corpus/manifest, skill, model manifest, Cargo.lock and
-build metadata. Dynamic library requirements are separate release assets.
+1. Run `make fmt-check`, `make test`,
+   `LIBCLANG_PATH=/usr/lib/llvm-10/lib cargo clippy --locked --all-targets --all-features -- -D warnings`,
+   `LIBCLANG_PATH=/usr/lib/llvm-10/lib make test-full`, `make verify`, and
+   `make smoke`. Adjust `LIBCLANG_PATH` for the host toolchain.
+2. Run the benchmarks needed for release claims and record host and cache
+   conditions. Native model evaluation is useful evidence, but it is not a blocker
+   for the default model-free crate.
+3. Run `cargo package --locked`, inspect the file list and size, and test the
+   extracted crate before publication:
 
-Portable releases must not set `target-cpu=native`. GNU/Linux x86_64 is built on
-Ubuntu 22.04; aarch64 uses Ubuntu 24.04. Inspect resulting library requirements,
-and test on your actual minimum target OS before claiming compatibility. These
-runner choices do not prove support for every Linux distribution or older glibc.
+   ```sh
+   cargo install --locked --path target/package/watf-0.0.1 \
+     --root target/install-smoke --force
+   test "$(target/install-smoke/bin/watf --version)" = "watf 0.0.1"
+   ```
 
-The initial source archive has no Cargo.lock because dependency resolution could
-not run in its assembly environment. CI can bootstrap one and preserve it as an
-artifact. This is a starting aid, not a substitute for committing a reviewed lock
-before a production release. Cargo manifests pin the native wrapper/sys pair;
-other dependency resolution is not frozen until a real lock is generated.
+4. Confirm the two skill copies are byte-identical and review the standalone
+   skill README and license.
 
-Release-drafter maintains change notes on main. The tagged build workflow creates
-a versioned binary draft separately. Review or remove an older notes-only draft
-when publishing to avoid leaving duplicate drafts. Dependabot groups native
-wrapper/sys updates, but maintainers must still inspect their ABI/API compatibility.
+The following publication steps are irreversible or externally visible and must
+be performed explicitly by a maintainer:
 
-Regenerate the standalone `watf-skills` ZIP from the same canonical SKILL.md and
-keep protocol version compatibility explicit. No workflow publishes an unrelated
-skill repository or modifies user agent configuration automatically.
+1. Publish the crate with `cargo publish --locked`.
+2. After crates.io indexing completes, test the published crate:
+
+   ```sh
+   cargo install watf --version 0.0.1 --locked \
+     --root target/crates-io-install-smoke
+   test "$(target/crates-io-install-smoke/bin/watf --version)" = "watf 0.0.1"
+   ```
+
+3. Push `v0.0.1` from `main`. The tag workflow is configured to publish a Linux
+   x86_64 GNU lite binary plus source and skill archives.
+4. Publish `watf-skills` to its standalone repository after independent review.
+5. Deploy `site/` through operator-managed infrastructure, then perform a real
+   public `GET` of `https://watf.sanixdk.xyz/` and confirm the 0.0.1 page content.
+
+The model is not bundled. Full local-model builds and additional targets remain
+maintainer builds. Release binaries must not use `target-cpu=native`. The current
+tag workflow targets Ubuntu 22.04 GNU x86_64; this does not establish broader
+Linux, macOS, or Windows compatibility. Release Drafter targets `main`.

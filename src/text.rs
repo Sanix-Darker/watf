@@ -133,7 +133,7 @@ pub fn clauses(s: &str) -> Vec<String> {
                 6
             } else if rest.starts_with(" && ") {
                 4
-            } else if c == b';' || c == b'\n' {
+            } else if c == b';' || c == b'\n' || (c == b',' && comma_starts_action(&s[i + 1..])) {
                 1
             } else {
                 0
@@ -159,6 +159,52 @@ pub fn clauses(s: &str) -> Vec<String> {
         out.push(s.trim().to_owned());
     }
     out
+}
+
+fn comma_starts_action(rest: &str) -> bool {
+    let first = rest
+        .trim_start()
+        .split(|c: char| !c.is_alphabetic())
+        .next()
+        .unwrap_or("")
+        .to_ascii_lowercase();
+    matches!(
+        first.as_str(),
+        "add"
+            | "apply"
+            | "archive"
+            | "build"
+            | "check"
+            | "commit"
+            | "compare"
+            | "convert"
+            | "copy"
+            | "create"
+            | "display"
+            | "download"
+            | "extract"
+            | "fetch"
+            | "find"
+            | "follow"
+            | "inspect"
+            | "list"
+            | "move"
+            | "print"
+            | "pull"
+            | "push"
+            | "remove"
+            | "restart"
+            | "run"
+            | "save"
+            | "search"
+            | "show"
+            | "stage"
+            | "start"
+            | "stop"
+            | "upload"
+            | "validate"
+            | "verify"
+    )
 }
 
 pub fn compact(s: &str, max_chars: usize) -> String {
@@ -197,6 +243,16 @@ mod tests {
     #[test]
     fn quoted_conjunction_is_literal() {
         assert_eq!(clauses("commit 'salt and pepper' then build").len(), 2);
+    }
+    #[test]
+    fn comma_separated_actions_are_clauses() {
+        assert_eq!(
+            clauses("show the diff, stage the file, commit it, then display the latest commit")
+                .len(),
+            4
+        );
+        assert_eq!(clauses("show files, directories, and links").len(), 2);
+        assert_eq!(clauses("print 'build, run, verify', then stop").len(), 2);
     }
     #[test]
     fn unicode_is_safe() {

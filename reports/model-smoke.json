@@ -1,0 +1,407 @@
+{
+  "generated_at_utc": "2026-09-20T05:13:15.696241Z",
+  "provenance": {
+    "model_sha256": "da2572f16c06133561ce56accaa822216f2391ef4d37fba427801cd6736417d4",
+    "binary_sha256": "dbfd598a5a3d432d13a364dffaa2115895191d63be93242eea108d823392648a",
+    "index_sha256": "cb52cbcce3db810f255f4d3c105305ee392406a045d5f7f37b9969d606257b7e"
+  },
+  "observations": [
+    {
+      "query": "show git working tree status",
+      "exit": 0,
+      "elapsed_ms": 58.60733101144433,
+      "stderr": "",
+      "response": {
+        "schema_version": 1,
+        "status": "ok",
+        "accepted": true,
+        "executed": false,
+        "approval_required": true,
+        "validation_scope": "documented_command_and_option_surface_not_semantic_correctness",
+        "steps": [
+          {
+            "command": "git status",
+            "args": [],
+            "after": "start",
+            "stdout": null
+          }
+        ],
+        "evidence": [
+          {
+            "step": 0,
+            "ids": [
+              "git/status#command"
+            ],
+            "program_available": true
+          }
+        ],
+        "errors": [],
+        "warnings": [
+          "bundled or unversioned documentation is not proof of compatibility with the installed binary",
+          "positional arguments, resource existence, permissions, shell state, option interactions and task intent are not proven by this validator"
+        ],
+        "questions": [],
+        "shell": "git status",
+        "shell_dialect": "bash",
+        "inference": {
+          "prompt_tokens": 0,
+          "generated_tokens": 0,
+          "load_ms": 0,
+          "prefill_ms": 0,
+          "generation_ms": 0
+        },
+        "route": {
+          "status": "resolved",
+          "command": "git status",
+          "candidates": [
+            {
+              "command": "git status",
+              "score": 75.0479,
+              "clause_coverage": 1,
+              "matched_terms": 4,
+              "program_available": true
+            },
+            {
+              "command": "git clean",
+              "score": 48.149853,
+              "clause_coverage": 1,
+              "matched_terms": 3,
+              "program_available": true
+            },
+            {
+              "command": "git reset",
+              "score": 48.149853,
+              "clause_coverage": 1,
+              "matched_terms": 3,
+              "program_available": true
+            },
+            {
+              "command": "git restore",
+              "score": 48.149853,
+              "clause_coverage": 1,
+              "matched_terms": 3,
+              "program_available": true
+            }
+          ],
+          "reason": "retrieval_margin"
+        }
+      }
+    },
+    {
+      "query": "stage src and commit with message 'release'",
+      "exit": 3,
+      "elapsed_ms": 24816.675456939265,
+      "stderr": "",
+      "response": {
+        "schema_version": 1,
+        "status": "ok",
+        "accepted": false,
+        "executed": false,
+        "approval_required": true,
+        "validation_scope": "documented_command_and_option_surface_not_semantic_correctness",
+        "steps": [
+          {
+            "command": "git add",
+            "args": [],
+            "after": "start",
+            "stdout": null
+          },
+          {
+            "command": "git commit",
+            "args": [],
+            "after": "success",
+            "stdout": null
+          }
+        ],
+        "evidence": [
+          {
+            "step": 0,
+            "ids": [
+              "git/add#command"
+            ],
+            "program_available": true
+          },
+          {
+            "step": 1,
+            "ids": [
+              "git/commit#command"
+            ],
+            "program_available": true
+          }
+        ],
+        "errors": [
+          "explicit literal \"release\" was dropped from synthesized argv",
+          "explicit literal \"src\" was dropped from synthesized argv"
+        ],
+        "warnings": [
+          "bundled or unversioned documentation is not proof of compatibility with the installed binary",
+          "git commit may include changes already staged before this plan; inspect git status first",
+          "positional arguments, resource existence, permissions, shell state, option interactions and task intent are not proven by this validator"
+        ],
+        "questions": [],
+        "shell": null,
+        "shell_dialect": "bash",
+        "inference": {
+          "prompt_tokens": 591,
+          "generated_tokens": 77,
+          "load_ms": 898,
+          "prefill_ms": 11699,
+          "generation_ms": 11760
+        },
+        "route": {
+          "status": "ambiguous",
+          "candidates": [
+            {
+              "command": "git commit",
+              "score": 46.51909,
+              "clause_coverage": 2,
+              "matched_terms": 2,
+              "program_available": true
+            },
+            {
+              "command": "git add",
+              "score": 28.297577,
+              "clause_coverage": 1,
+              "matched_terms": 3,
+              "program_available": true
+            },
+            {
+              "command": "cargo build",
+              "score": 24.946585,
+              "clause_coverage": 1,
+              "matched_terms": 1,
+              "program_available": true
+            },
+            {
+              "command": "cargo test",
+              "score": 24.946585,
+              "clause_coverage": 1,
+              "matched_terms": 1,
+              "program_available": true
+            },
+            {
+              "command": "cargo clean",
+              "score": 24.820744,
+              "clause_coverage": 1,
+              "matched_terms": 1,
+              "program_available": true
+            },
+            {
+              "command": "git worktree add",
+              "score": 7.315519,
+              "clause_coverage": 1,
+              "matched_terms": 1,
+              "program_available": true
+            },
+            {
+              "command": "git stash push",
+              "score": 6.8402615,
+              "clause_coverage": 1,
+              "matched_terms": 1,
+              "program_available": true
+            }
+          ],
+          "reason": "multi_clause_requires_planning"
+        }
+      }
+    },
+    {
+      "query": "rebuild the compose backend in the background and then follow its logs",
+      "exit": 3,
+      "elapsed_ms": 139635.96800202504,
+      "stderr": "",
+      "response": {
+        "schema_version": 1,
+        "status": "ok",
+        "accepted": false,
+        "executed": false,
+        "approval_required": true,
+        "validation_scope": "documented_command_and_option_surface_not_semantic_correctness",
+        "steps": [
+          {
+            "command": "docker compose up",
+            "args": [],
+            "after": "start",
+            "stdout": null
+          },
+          {
+            "command": "docker compose logs",
+            "args": [],
+            "after": "success",
+            "stdout": null
+          },
+          {
+            "command": "docker compose build",
+            "args": [],
+            "after": "success",
+            "stdout": null
+          },
+          {
+            "command": "docker compose logs",
+            "args": [],
+            "after": "success",
+            "stdout": null
+          },
+          {
+            "command": "docker compose logs",
+            "args": [],
+            "after": "success",
+            "stdout": null
+          },
+          {
+            "command": "docker compose logs",
+            "args": [],
+            "after": "success",
+            "stdout": null
+          },
+          {
+            "command": "docker compose logs",
+            "args": [],
+            "after": "success",
+            "stdout": null
+          }
+        ],
+        "evidence": [
+          {
+            "step": 0,
+            "ids": [
+              "docker/compose/up#command"
+            ],
+            "program_available": true
+          },
+          {
+            "step": 1,
+            "ids": [
+              "docker/compose/logs#command"
+            ],
+            "program_available": true
+          },
+          {
+            "step": 2,
+            "ids": [
+              "docker/compose/build#command"
+            ],
+            "program_available": true
+          },
+          {
+            "step": 3,
+            "ids": [
+              "docker/compose/logs#command"
+            ],
+            "program_available": true
+          },
+          {
+            "step": 4,
+            "ids": [
+              "docker/compose/logs#command"
+            ],
+            "program_available": true
+          },
+          {
+            "step": 5,
+            "ids": [
+              "docker/compose/logs#command"
+            ],
+            "program_available": true
+          },
+          {
+            "step": 6,
+            "ids": [
+              "docker/compose/logs#command"
+            ],
+            "program_available": true
+          }
+        ],
+        "errors": [
+          "explicit literal \"backend\" was dropped from synthesized argv",
+          "step 3: command order contradicts retrieved query clause order"
+        ],
+        "warnings": [
+          "bundled or unversioned documentation is not proof of compatibility with the installed binary",
+          "positional arguments, resource existence, permissions, shell state, option interactions and task intent are not proven by this validator",
+          "step 1: proposed command may access the network or external infrastructure; watf itself remains offline",
+          "step 2: proposed command may access the network or external infrastructure; watf itself remains offline",
+          "step 3: proposed command may access the network or external infrastructure; watf itself remains offline",
+          "step 4: proposed command may access the network or external infrastructure; watf itself remains offline",
+          "step 5: proposed command may access the network or external infrastructure; watf itself remains offline",
+          "step 6: proposed command may access the network or external infrastructure; watf itself remains offline",
+          "step 7: proposed command may access the network or external infrastructure; watf itself remains offline"
+        ],
+        "questions": [],
+        "shell": null,
+        "shell_dialect": "bash",
+        "inference": {
+          "prompt_tokens": 1339,
+          "generated_tokens": 252,
+          "load_ms": 1314,
+          "prefill_ms": 34438,
+          "generation_ms": 103353
+        },
+        "route": {
+          "status": "ambiguous",
+          "candidates": [
+            {
+              "command": "docker compose up",
+              "score": 44.294518,
+              "clause_coverage": 1,
+              "matched_terms": 3,
+              "program_available": true
+            },
+            {
+              "command": "kubectl logs",
+              "score": 42.219807,
+              "clause_coverage": 1,
+              "matched_terms": 2,
+              "program_available": false
+            },
+            {
+              "command": "docker logs",
+              "score": 41.994453,
+              "clause_coverage": 1,
+              "matched_terms": 2,
+              "program_available": true
+            },
+            {
+              "command": "docker compose logs",
+              "score": 41.472885,
+              "clause_coverage": 1,
+              "matched_terms": 2,
+              "program_available": true
+            },
+            {
+              "command": "git log",
+              "score": 29.986998,
+              "clause_coverage": 1,
+              "matched_terms": 2,
+              "program_available": true
+            },
+            {
+              "command": "terraform init",
+              "score": 25.18112,
+              "clause_coverage": 1,
+              "matched_terms": 1,
+              "program_available": false
+            },
+            {
+              "command": "docker compose build",
+              "score": 25.069643,
+              "clause_coverage": 1,
+              "matched_terms": 2,
+              "program_available": true
+            },
+            {
+              "command": "docker run",
+              "score": 24.774035,
+              "clause_coverage": 1,
+              "matched_terms": 2,
+              "program_available": true
+            }
+          ],
+          "reason": "multi_clause_requires_planning"
+        }
+      }
+    }
+  ],
+  "semantic_accuracy_verified": false,
+  "proposals_executed": false
+}

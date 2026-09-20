@@ -95,20 +95,24 @@ pub struct Report {
 #[derive(Debug, Clone, Serialize)]
 pub struct Context {
     pub commands: Vec<CommandContext>,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
     pub uncovered_clauses: Vec<usize>,
 }
 #[derive(Debug, Clone, Serialize)]
 pub struct CommandContext {
     pub command: String,
+    #[serde(skip_serializing_if = "String::is_empty")]
     pub summary: String,
     pub options: Vec<OptionContext>,
 }
 #[derive(Debug, Clone, Serialize)]
 pub struct OptionContext {
     pub name: String,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
     pub aliases: Vec<String>,
     pub arity: crate::record::Arity,
     pub required: bool,
+    #[serde(skip_serializing_if = "String::is_empty")]
     pub description: String,
 }
 
@@ -125,7 +129,7 @@ pub fn context_for(index: &Index, packet: &Packet, command: Option<&str>) -> Res
         if command.is_some_and(|only| evidence.command != only) {
             continue;
         }
-        if !seen.insert(evidence.command.clone()) || commands.len() >= 8 {
+        if !seen.insert(evidence.command.clone()) || commands.len() >= 12 {
             continue;
         }
         let records: Vec<Capability> = index

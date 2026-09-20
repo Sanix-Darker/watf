@@ -21,3 +21,4 @@
 debug/
 target/debug/
 target/release/
+/.watf/

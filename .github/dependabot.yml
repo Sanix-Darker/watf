@@ -1,0 +1,15 @@
+version: 2
+updates:
+  - package-ecosystem: cargo
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      llama-cpp:
+        patterns:
+          - llama-cpp-2
+          - llama-cpp-sys-2
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

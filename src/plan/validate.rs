@@ -14,6 +14,12 @@ pub struct ValidationOptions {
     pub allowed_commands: Option<BTreeSet<String>>,
     /// When provided, reject flags outside the actual model evidence context.
     pub allowed_flags: Option<BTreeMap<String, BTreeSet<String>>>,
+    /// Option semantics uniquely required by the user's synthesis request.
+    pub required_flags: BTreeMap<String, BTreeSet<String>>,
+    /// Retrieved query clauses each synthesized command is grounded to.
+    pub command_clauses: Option<BTreeMap<String, BTreeSet<usize>>>,
+    /// Explicit user literals that a synthesized plan must preserve as argv.
+    pub required_literals: BTreeSet<String>,
 }
 
 fn literal(value: &str) -> bool {
@@ -43,7 +49,7 @@ fn flags(
     allowed: Option<&BTreeSet<String>>,
     errors: &mut Vec<String>,
     ids: &mut BTreeSet<String>,
-) {
+) -> BTreeSet<String> {
     let mut seen = BTreeSet::new();
     let mut index = 0;
     while index < args.len() {
@@ -163,6 +169,7 @@ fn flags(
             errors.push(format!("missing required option {}", cap.name));
         }
     }
+    seen
 }
 
 pub fn validate(
@@ -208,7 +215,34 @@ pub fn validate(
             .push("plan must contain 1..8 steps".to_owned());
         return Ok(report);
     }
+    for required in &options.required_literals {
+        if !draft
+            .steps
+            .iter()
+            .flat_map(|step| step.args.iter())
+            .any(|arg| {
+                arg == required
+                    || arg.strip_prefix("--").is_some_and(|arg| {
+                        arg.split_once('=')
+                            .is_some_and(|(_, value)| value == required)
+                    })
+            })
+        {
+            report.errors.push(format!(
+                "explicit literal {required:?} was dropped from synthesized argv"
+            ));
+        }
+    }
     let mut snapshots = false;
+    let mut last_clause = None;
+    let required_clauses = options.command_clauses.as_ref().map(|command_clauses| {
+        command_clauses
+            .values()
+            .flat_map(|clauses| clauses.iter().copied())
+            .collect::<BTreeSet<_>>()
+    });
+    let mut assigned_clauses = BTreeSet::new();
+    let mut seen_flags = BTreeMap::<String, BTreeSet<String>>::new();
     for (n, step) in draft.steps.iter().enumerate() {
         let mut errors = Vec::new();
         if (n == 0 && step.after != After::Start) || (n > 0 && step.after == After::Start) {
@@ -243,6 +277,37 @@ pub fn validate(
         {
             errors.push("command absent from retrieved synthesis evidence".to_owned());
         }
+        if let Some(command_clauses) = &options.command_clauses {
+            match command_clauses.get(&step.command) {
+                Some(clauses) => {
+                    let eligible = clauses
+                        .iter()
+                        .copied()
+                        .filter(|clause| last_clause.is_none_or(|last| *clause >= last));
+                    let mut fallback = None;
+                    let mut assigned = None;
+                    for clause in eligible {
+                        fallback.get_or_insert(clause);
+                        if !assigned_clauses.contains(&clause) {
+                            assigned = Some(clause);
+                            break;
+                        }
+                    }
+                    match assigned.or(fallback) {
+                        Some(clause) => {
+                            last_clause = Some(clause);
+                            assigned_clauses.insert(clause);
+                        }
+                        None => errors.push(
+                            "command order contradicts retrieved query clause order".to_owned(),
+                        ),
+                    }
+                }
+                None => {
+                    errors.push("command is not grounded to a retrieved query clause".to_owned())
+                }
+            }
+        }
         let caps: Vec<_> = index
             .ids_for_command(&step.command)?
             .into_iter()
@@ -266,7 +331,11 @@ pub fn validate(
             .allowed_flags
             .as_ref()
             .and_then(|set| set.get(&step.command));
-        flags(&step.args, &caps, allowed, &mut errors, &mut ids);
+        let flags = flags(&step.args, &caps, allowed, &mut errors, &mut ids);
+        seen_flags
+            .entry(step.command.clone())
+            .or_default()
+            .extend(flags);
         for cap in caps.iter().filter(|r| ids.contains(&r.id)) {
             match discover::freshness(&cap.source) {
                 Freshness::Changed | Freshness::Missing => {
@@ -328,6 +397,23 @@ pub fn validate(
         report
             .errors
             .extend(errors.into_iter().map(|e| format!("step {}: {e}", n + 1)));
+    }
+    for (command, required) in &options.required_flags {
+        let seen = seen_flags.get(command);
+        for flag in required {
+            if seen.is_none_or(|seen| !seen.contains(flag)) {
+                report.errors.push(format!(
+                    "synthesized plan dropped required option {flag} for {command}"
+                ));
+            }
+        }
+    }
+    if let Some(required_clauses) = required_clauses {
+        for clause in required_clauses.difference(&assigned_clauses) {
+            report.errors.push(format!(
+                "retrieved query clause {clause} was omitted from synthesized plan"
+            ));
+        }
     }
     if snapshots {
         report.warnings.push("bundled or unversioned documentation is not proof of compatibility with the installed binary".to_owned());

@@ -30,7 +30,7 @@ compressed and decoded SHA256. It also hashes the generated compressed and decod
 catalog. These hashes support reproducibility/corruption checks, not authenticity
 against a compromised upstream package or malicious same-origin release.
 
-## Regenerate explicitly
+## Regenerate
 
 Python and botocore are maintainer-time dependencies only:
 

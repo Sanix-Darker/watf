@@ -181,7 +181,7 @@ impl Index {
                     let end = start
                         .checked_add(count.checked_mul(POSTING).ok_or_else(invalid)?)
                         .ok_or_else(invalid)?;
-                    if offset % POSTING != 0 || end > self.records {
+                    if !offset.is_multiple_of(POSTING) || end > self.records {
                         return Err(invalid());
                     }
                     return Ok(Some((start, count)));

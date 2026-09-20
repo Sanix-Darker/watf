@@ -70,7 +70,7 @@ members by stdout, never arbitrary archive paths. It does not edit shell/agent
 configuration. Review downloaded scripts before execution.
 
 Pull-request builds have read-only repository permissions and do not use
-`pull_request_target`. Release publication uses a separate write-permission job
-and creates drafts for manual review. Actions currently use version tags or the
-Rust toolchain branch; pin audited action SHAs for higher-assurance deployments.
-No claim of a fully hermetic supply chain or verified reproducible binary is made.
+`pull_request_target`. The tag workflow uses a separate write-permission job and
+publishes the matching release after its build and verification jobs pass.
+Write-enabled actions are pinned to reviewed commit SHAs. No claim of a fully
+hermetic supply chain or verified reproducible binary is made.

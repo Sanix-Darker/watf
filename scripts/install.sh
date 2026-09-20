@@ -3,9 +3,9 @@
 set -eu
 umask 077
 fail() { printf 'watf install: %s\n' "$*" >&2; exit 1; }
-repo=${WATF_REPO:-}
-version=${WATF_VERSION:-v0.1.0}
-flavor=full
+repo=${WATF_REPO:-Sanix-Darker/watf}
+version=${WATF_VERSION:-v0.0.1}
+flavor=lite
 bin_dir=${WATF_BIN_DIR:-${HOME:?HOME is required}/.local/bin}
 data_dir=${WATF_DATA_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/watf}
 with_model=0
@@ -26,7 +26,7 @@ while [ "$#" -gt 0 ]; do
         --no-model) with_model=0; shift;;
         --no-index) build_index=0; shift;;
         --help|-h)
-            printf '%s\n' 'Usage: install.sh --repo OWNER/REPO [--version v0.1.0] [--flavor full|lite]' '  --with-model: download the pinned 429 MB Qwen3 model' '  --no-index: install files without building the local index' '  --local-archive FILE --sha256 HEX: install a predownloaded release' 'No repository is assumed. Publish releases before using the online installer.'
+            printf '%s\n' 'Usage: install.sh [--repo OWNER/REPO] [--version v0.0.1] [--flavor lite]' '  --with-model: download the pinned 429 MB Qwen3 model for a compatible local full archive' '  --no-index: install files without building the local index' '  --local-archive FILE --sha256 HEX: install a predownloaded release' 'Online releases currently publish Linux x86_64 lite only.'
             exit 0;;
         *) fail "unknown option $1";;
     esac
@@ -62,6 +62,8 @@ if [ -n "$archive" ]; then
     [ -n "$expected" ] || fail '--local-archive requires --sha256'
     cp "$archive" "$tmp/release.tar.gz"
 else
+    [ "$target" = x86_64-unknown-linux-gnu ] || fail 'online releases currently publish Linux x86_64 only; use --local-archive for other packaged targets'
+    [ "$flavor" = lite ] || fail 'online releases currently publish the lite flavor only; use --local-archive for a manually packaged full build'
     case "$repo" in *[!A-Za-z0-9_./-]*|'') fail 'set --repo OWNER/REPO after publishing the project';; esac
     case "$repo" in */*) owner=${repo%%/*}; project=${repo#*/};; *) fail 'repository must be OWNER/REPO';; esac
     case "$owner/$project" in */*/*) fail 'repository must contain exactly one slash';; esac

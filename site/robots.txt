@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://watf.sanixdk.xyz/sitemap.xml

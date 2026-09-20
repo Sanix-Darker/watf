@@ -9,7 +9,10 @@ import json
 from pathlib import Path
 import re
 import sys
-import tomllib
+try:
+    import tomllib
+except ModuleNotFoundError:
+    tomllib = None
 
 ROOT=Path(__file__).resolve().parents[1]
 HEX=re.compile(r'[0-9a-f]{64}')
@@ -71,6 +74,16 @@ def main() -> None:
     model=json.loads((ROOT/'data/models.json').read_text())['models'][0]
     for script in ['scripts/install.sh','scripts/fetch-model.sh']:
         text=(ROOT/script).read_text();require(model['sha256'] in text and model['download_url'] in text,'model pins drifted')
+    site=ROOT/'site';site_html=(site/'index.html').read_text();site_css=(site/'styles.css').read_text()
+    require(all((site/path).is_file() for path in ['index.html','styles.css','robots.txt','sitemap.xml','README.md','deploy/Caddyfile.example']),'site files missing')
+    require('<link rel="canonical" href="https://watf.sanixdk.xyz/">' in site_html,'site canonical URL')
+    require('cargo install watf --version 0.0.1 --locked' in site_html and 'watf 0.0.1' in site_html,'site version or install command')
+    require(not re.search(r'<(?:script|img|source|iframe|video|audio)\b',site_html,re.I) and not re.search(r'\s(?:src|poster)=',site_html,re.I),'site executable or media asset')
+    require(not re.search(r'<link[^>]+rel="stylesheet"[^>]+https?://',site_html,re.I),'remote site stylesheet')
+    require('@import' not in site_css.lower() and not re.search(r'url\(\s*["\']?https?://',site_css,re.I),'remote CSS asset')
+    robots=(site/'robots.txt').read_text();sitemap=(site/'sitemap.xml').read_text()
+    require('Sitemap: https://watf.sanixdk.xyz/sitemap.xml' in robots,'robots sitemap URL')
+    require('<loc>https://watf.sanixdk.xyz/</loc>' in sitemap,'sitemap site URL')
     rust_files=list((ROOT/'src').rglob('*.rs'))
     for path in rust_files:
         source=path.read_text()
@@ -78,7 +91,7 @@ def main() -> None:
         if path.name!='execute.rs':forbidden += ['std::process::Command','Command::new(']
         for forbidden in forbidden:
             require(forbidden not in source,f'forbidden runtime primitive {forbidden} in {path}')
-    python_files=[];json_files=[];text_files=0
+    python_files=[];json_files=[];toml_files=0;text_files=0
     for path in sorted(ROOT.rglob('*')):
         if not path.is_file() or any(part in {'target','.git','.watf','.venv','venv','__pycache__','.pytest_cache','node_modules','dist'} for part in path.relative_to(ROOT).parts):continue
         if path.suffix in {'.gz','.zip','.png','.gguf'}:continue
@@ -88,7 +101,8 @@ def main() -> None:
         require('\u2014' not in text,f'forbidden em dash in {path.relative_to(ROOT)}')
         if path.suffix=='.py':ast.parse(text,filename=str(path));python_files.append(str(path.relative_to(ROOT)))
         if path.suffix=='.json':json.loads(text);json_files.append(str(path.relative_to(ROOT)))
-        if path.suffix=='.toml':tomllib.loads(text)
+        if path.suffix=='.toml' and tomllib is not None:
+            tomllib.loads(text);toml_files+=1
     schema_status='not available: optional jsonschema package'
     try:
         from jsonschema import Draft202012Validator
@@ -106,7 +120,9 @@ def main() -> None:
             'complex_samples':len(samples),'sample_categories':dict(Counter(s['category'] for s in samples)),
             'rust_test_functions_present':tests,'rust_tests_executed':False,'rust_compilation_verified':False,
             'model_inference_verified':False,'performance_measured':False,'python_sources_parsed':len(python_files),
-            'json_documents_parsed':len(json_files),'text_files_without_em_dash':text_files,'json_schema_checks':schema_status}
+            'json_documents_parsed':len(json_files),'toml_documents_parsed':toml_files,
+            'toml_parser':'stdlib tomllib' if tomllib is not None else 'unavailable on this Python',
+            'text_files_without_em_dash':text_files,'json_schema_checks':schema_status}
     (ROOT/'reports').mkdir(exist_ok=True)
     (ROOT/'reports/artifact-verification.json').write_text(json.dumps(result,indent=2)+'\n')
     print(json.dumps(result,indent=2))

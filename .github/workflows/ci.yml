@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  core:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo fmt --all -- --check
+      - run: cargo clippy --locked --all-targets --no-default-features -- -D warnings
+      - run: cargo test --locked --no-default-features --lib --bins --tests
+      - run: cargo build --locked --release --no-default-features
+      - run: python3 scripts/verify.py
+      - run: python3 scripts/smoke.py --binary target/release/watf
+
+  full:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: Install libclang
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libclang-dev
+          libclang="$(find /usr/lib/llvm-* -maxdepth 2 -name libclang.so -print -quit)"
+          test -n "$libclang"
+          echo "LIBCLANG_PATH=$(dirname "$libclang")" >> "$GITHUB_ENV"
+      - run: cargo test --locked --features local-llm,tui --lib --bins --tests

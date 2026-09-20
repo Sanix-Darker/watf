@@ -1,0 +1,59 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*.*.*"]
+
+permissions:
+  contents: write
+
+jobs:
+  linux-x86_64:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: dtolnay/rust-toolchain@6bed0761d98439e5a578e2877258200ad565ba87 # stable
+        with:
+          components: rustfmt, clippy
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.11"
+      - uses: Swatinem/rust-cache@49a0bdc70d2e1b713ca9e2869b211fcce03d3c1c # v2
+      - name: Verify tag and source
+        run: |
+          version="$(sed -n 's/^version = "\([^"]*\)"/\1/p' Cargo.toml | head -n1)"
+          test "v${version}" = "$GITHUB_REF_NAME"
+          cargo fmt --all -- --check
+          cargo clippy --locked --all-targets --no-default-features -- -D warnings
+          cargo test --locked --no-default-features --lib --bins --tests
+          cargo package --locked
+          cargo install --locked --path "target/package/watf-${version}" --root target/install-smoke
+          test "$(target/install-smoke/bin/watf --version)" = "watf ${version}"
+          python3 scripts/verify.py
+      - name: Build and package
+        env:
+          SOURCE_DATE_EPOCH: "0"
+        run: |
+          cargo build --locked --profile dist --no-default-features
+          test "$(stat -c %s target/dist/watf)" -le 2097152
+          python3 scripts/smoke.py --binary target/dist/watf
+          python3 scripts/package.py --binary target/dist/watf --flavor lite --target x86_64-unknown-linux-gnu
+          python3 scripts/source_archive.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: release-assets
+          path: dist/*
+          if-no-files-found: error
+
+  publish:
+    needs: linux-x86_64
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: release-assets
+          path: dist
+      - uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2
+        with:
+          files: dist/*
+          generate_release_notes: true

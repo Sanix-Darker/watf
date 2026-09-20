@@ -9,4 +9,5 @@ The Qwen3 GGUF is not included. Its model license is Apache-2.0 and its immutabl
 revision/hash are recorded in `data/models.json`. Review the upstream model card
 before redistribution. Native inference dependencies retain their own upstream
 licenses. Release maintainers should inventory the complete resolved Cargo/native
-dependency tree after generating Cargo.lock; no fabricated complete SBOM is shipped.
+dependency tree recorded by the committed `Cargo.lock`; no complete SBOM is
+shipped.

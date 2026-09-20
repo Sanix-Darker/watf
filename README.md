@@ -1,24 +1,25 @@
 # watf
 
-**what tf ?**
+[watf.sanixdk.xyz](https://watf.sanixdk.xyz/)
 
-Local CLI harness for AI agents. `watf` resolves intent against local CLI
-capabilities, keeps plans as typed argv, validates them against evidence, executes
-validated plans directly, and returns bounded stdout/stderr.
+The name is short for "what tf?"
+
+`watf` is a local CLI harness for agents. It resolves intent against indexed
+command evidence, validates typed argv, executes direct processes, and returns
+bounded stdout and stderr.
 
 ```sh
-watf "stage src and Cargo.toml, commit as release, then rebuild the compose backend"
+watf plan --json "show git status short"
 
 watf search --json --max-bytes 4096 \
-  "find TODOs in Rust files, save a report, then stage and commit that report"
+  "show docker compose defined services"
 ```
 
-No need to supply `git`, `rg` or `docker` separately. A query can cover several
-tools. The current search path returns grounded evidence and the current planner
-returns validated typed steps. The target is one agent call that can resolve,
-validate, execute, and return only the actionable result.
+The query can name a task rather than a program. Search returns grounded evidence.
+Planning returns typed steps only when deterministic checks or the optional model
+and validator accept them.
 
-## Product direction
+## Agent path
 
 ```text
 agent intent
@@ -32,25 +33,23 @@ agent intent
   -> compact agent result
 ```
 
-This is not a natural-language shell for humans. The product succeeds only when
-it reduces the complete agent CLI loop: model tokens, exploratory tool calls,
-documentation reads, retries, and latency. If `watf` only adds a lookup before an
-agent eventually performs the same shell work, it is overhead and has failed its
-purpose.
+The primary interface serves agent tool loops. Benchmarks track task success,
+bytes, tool calls, documentation reads, retries, and latency. Deterministic routes
+avoid inference. The optional local model handles requests that require synthesis.
 
-The intended routing is deliberately asymmetric: common deterministic CLI intents
-stay local and avoid inference; ambiguous intents may use an optional typed
-classifier over a bounded candidate set; generative planning is the last fallback.
+## Release status
 
-## Delivery status
+Version 0.0.1 is a public release candidate. The default model-free crate, full
+native feature build, test suites, strict Clippy, package installation, runtime
+smoke, and offline verification pass on the current Linux host. The tag workflow
+is configured to publish a Linux x86_64 GNU lite binary plus source and skill
+archives when the matching tag exists. No release asset or model is bundled yet.
 
-This archive contains the source implementation, corpus, tests, agent skill,
-installer, Makefile and GitHub workflows. It does **not** contain a prebuilt binary
-or model. The current tree compiles with the lite feature set and with
-`local-llm`; the Rust suite passes, and the native retrieval benchmark has been
-measured on Linux x86_64. Model inference quality is still unmeasured because no
-GGUF model was provisioned for this verification. Historical source-assembly
-evidence remains in [the verification report](reports/VERIFICATION.md).
+The current [model smoke report](reports/model-smoke.json) records one
+deterministic plan accepted with zero inference and two model-planned cases
+rejected fail-closed for dropped literals or order. Semantic model accuracy remains
+unverified, so model planning is unsuitable as the default path. The original
+source-assembly evidence is retained only as a [historical report](reports/VERIFICATION.md).
 
 ## The boundaries
 
@@ -86,15 +85,14 @@ make verify
   --catalog data/catalog.jsonl.gz --no-system
 
 ./target/release/watf search --index .watf/index.widx --json --max-bytes 4096 \
-  "stage selected files, commit as release, then rebuild the compose stack"
+  "show docker compose defined services"
 
 ./target/release/watf doctor --index .watf/index.widx --verify --json
 ```
 
-`make lock` resolves real dependencies. Review and commit the generated `Cargo.lock`
-before publishing a release. No fabricated lockfile is included. `make fmt` applies
-Rust's formatter; the source was not run through rustfmt in the assembly environment.
-CI retains a formatting patch to make that first normalization reviewable.
+`Cargo.lock` is committed. Release and maintainer build commands use `--locked`
+where dependency resolution must remain fixed. `make fmt-check` verifies that the
+current Rust source matches the committed formatter output.
 
 To index actual local manuals as well, omit `--no-system`. Only plain and gzip
 manuals are read, without launching a formatter or shell. Unsupported files are
@@ -115,7 +113,9 @@ make smoke
 secondary interface, not the product center. The Rust application
 statically embeds the inference core, but a GNU/Linux build can still depend on
 system C/C++ runtime libraries. This is not a promise of a fully static musl binary.
-The release workflow records `ldd` output for every asset.
+Release packaging records build metadata for generated assets. The tag workflow
+is configured for a Linux x86_64 GNU lite binary; full local-LLM builds remain a
+maintainer build until release verification covers them.
 
 Provision the model explicitly, once:
 
@@ -124,7 +124,7 @@ make model
 export WATF_MODEL="$HOME/.local/share/watf/models/Qwen3-0.6B-Q4_0.gguf"
 
 ./target/release/watf plan --index .watf/index.widx --json \
-  "stage src, commit with message 'release', then rebuild the compose backend"
+  "show repository status, then list defined compose services"
 ```
 
 The pinned Qwen3 0.6B Q4_0 file is approximately 429 MB and is downloaded separately.
@@ -146,6 +146,16 @@ before attributing an improvement to these flags.
 
 ## Install
 
+From crates.io:
+
+```sh
+cargo install watf --version 0.0.1 --locked
+watf index
+```
+
+The crate embeds the core records only. Install the offline cloud catalog data
+separately before indexing if catalog search is needed.
+
 From source:
 
 ```sh
@@ -156,20 +166,20 @@ watf index
 `PREFIX` and `DATA_DIR` are configurable Makefile variables. A non-default data
 location must also be set with `WATF_DATA_DIR` when running the engine.
 
-A curl installer is included, but no repository, release or domain has been
-published as part of this archive. After publishing this project and its release
-assets, substitute the real owner/repository:
+A curl installer is configured for the tagged release assets. This command works
+after `v0.0.1` is published from the `main` branch:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/OWNER/REPO/main/scripts/install.sh \
-  | sh -s -- --repo OWNER/REPO --version v0.1.0 --with-model
+curl -fsSL https://raw.githubusercontent.com/Sanix-Darker/watf/main/scripts/install.sh \
+  | sh -s -- --version v0.0.1
 ```
 
 For stronger review, download and inspect that script before running it. The
 installer verifies archive and model SHA256 values, installs without sudo,
-never edits shell configuration, and optionally builds the index. `--flavor lite`
-and omission of `--with-model` avoid the inference/model download. Linux x86_64
-and aarch64 GNU release layouts are supported. Checksums detect corruption;
+never edits shell configuration, and optionally builds the index. The tag workflow
+is configured for Linux x86_64 GNU lite archives only. Manually packaged compatible
+archives, including other targets or full builds, can still be installed with
+`--local-archive`. Checksums detect corruption;
 checksums from the same release location are not independent signatures.
 
 Offline installation of a previously downloaded release is also supported:
@@ -179,7 +189,7 @@ sh scripts/install.sh --local-archive /absolute/path/release.tar.gz \
   --sha256 VERIFIED_SHA256 --no-index
 ```
 
-## Corpus, with honest counts
+## Corpus
 
 The bundled bulk catalog contains **124,530 unique typed records** derived from
 425 real AWS service models in botocore 1.43.18:
@@ -226,13 +236,15 @@ Static Bash/Zsh/Fish completion subsets are parsed as data. Dynamic callbacks,
 `.so` includes, shell substitutions and completion code are never evaluated.
 No automatic active `--help` or version probing is hidden behind indexing.
 
-## Agent-first integration and compact context
+## Agent integration
 
 The skill is provided both at `skills/watf/SKILL.md` and as a standalone
 `watf-skills/` package. Its purpose is to make `watf` the agent's first interface
 for CLI capability discovery instead of repeatedly reading `--help`, man pages,
 and large command output. Validated plans can be executed directly through
-`watf run` or the foreground JSONL `run` operation.
+`watf run` or the foreground JSONL `run` operation. Explicit indexed syntax can
+skip retrieval and inference entirely with `watf exec` or the JSONL `exec`
+operation, which plan, validate, execute, and bound the result in one request.
 
 ```sh
 watf search --json --max-bytes 2048 \
@@ -248,6 +260,16 @@ stdin. It is a foreground process, not a daemon or network server:
 
 ```sh
 watf serve < examples/request.jsonl
+```
+
+For exact indexed syntax:
+
+```sh
+watf exec --json -- git status --short
+```
+
+```json
+{"id":"r1","op":"exec","argv":["git","status","--short"],"cwd":"/repo","max_bytes":8192,"max_output_bytes":4096}
 ```
 
 Each request has an ID; each successful response echoes that ID. Invalid requests
@@ -299,19 +321,21 @@ neural query rewrite. Safety bounds remain enabled.
 
 ```sh
 make bench
+make bench-loop
 WATF_BENCH_INDEX="$PWD/.watf/index.widx" make bench
 python3 scripts/compare_bench.py before.json after.json
 ```
 
-The benchmark measures p50/p95/p99, throughput, packet bytes, posting visits,
-reference-scope recall and peak RSS where available. It marks whether indexing is
-included in RSS. Shared CI runners are for observations, not absolute performance
-guarantees. See [performance methodology](docs/PERFORMANCE.md).
+The current end-to-end harness completed all 150 direct and 150 WATF read-only Git
+tasks with exact expected argv and output. Each WATF task used one protocol call,
+one workload spawn, and zero model calls, fallback reads, or retries. These results
+are host-specific. See the [performance methodology](docs/PERFORMANCE.md) for
+latency, response bytes, fixture scope, and caveats.
 
 `examples/complex.jsonl` and [COMPLEX.md](examples/COMPLEX.md) contain exactly **100
 complex inputs** across ten categories, including ten deliberate abstention cases.
 They are evaluation inputs with constraints and hazards, not 100 certified
-successful model outputs. The current Rust source contains 106 test functions.
+successful model outputs.
 
 ## Repository map
 
@@ -329,9 +353,9 @@ schemas/             JSON Schema contracts
 tests/               Rust regression tests and documentation fixtures
 benches/             actual native retrieval benchmark
 scripts/             build, verification, installer and release tooling
-.github/             CI, releases, security, benchmarks and Dependabot
+.github/             CI, release notes, security, benchmarks and Dependabot
 docs/                architecture, limitations, security and release guides
-reports/             verification evidence, never invented benchmark results
+reports/             verification evidence and measured reports
 ```
 
 MIT for project code. Apache-2.0 for the derived botocore catalog and its source
