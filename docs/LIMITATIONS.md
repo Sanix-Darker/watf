@@ -25,8 +25,8 @@ a model. The optional model handles synthesis fallback.
 | User interface | Basic TUI; no shell widget, clipboard utility or asynchronous model cancellation |
 | Index updates | Full rebuild, imports must be repeated, no incremental watcher |
 | Persistent mode | Foreground stdio only; no daemon, hot reload, MCP or network server |
-| Portability | Linux release layouts and Linux CI; no macOS or Windows release contract |
-| Distribution | The tag workflow is configured to publish a Linux x86_64 GNU lite binary plus source and skill archives when the release tag exists. Full local-model and additional targets remain manual; no model is bundled |
+| Portability | The published `x86_64-unknown-linux-musl` asset passes ELF/readelf checks. The published asset passed a release-session smoke test on a glibc 2.31 host. No repository report records that run. This does not establish broad Linux, macOS, or Windows compatibility |
+| Distribution | The crates.io 0.0.1 package, GitHub release with the musl asset, and standalone skill release are published. Full local-model and additional targets remain manual; no model is bundled |
 
 `search` and `serve` return evidence directly, and exact indexed command syntax
 with documented option arity can be planned without a model. Single-clause routed natural language may also

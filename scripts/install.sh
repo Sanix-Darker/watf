@@ -26,7 +26,7 @@ while [ "$#" -gt 0 ]; do
         --no-model) with_model=0; shift;;
         --no-index) build_index=0; shift;;
         --help|-h)
-            printf '%s\n' 'Usage: install.sh [--repo OWNER/REPO] [--version v0.0.1] [--flavor lite]' '  --with-model: download the pinned 429 MB Qwen3 model for a compatible local full archive' '  --no-index: install files without building the local index' '  --local-archive FILE --sha256 HEX: install a predownloaded release' 'Online releases currently publish Linux x86_64 lite only.'
+            printf '%s\n' 'Usage: install.sh [--repo OWNER/REPO] [--version v0.0.1] [--flavor lite]' '  --with-model: download the pinned 429 MB Qwen3 model for a compatible local full archive' '  --no-index: install files without building the local index' '  --local-archive FILE --sha256 HEX: install a predownloaded release' 'Online releases currently publish Linux x86_64 musl lite only.'
             exit 0;;
         *) fail "unknown option $1";;
     esac
@@ -53,7 +53,7 @@ fetch() {
     curl --proto '=https' --proto-redir '=https' --tlsv1.2 -fL --retry 3 --connect-timeout 20 --output "$2" "$1"
 }
 case "$(uname -s)" in Linux) ;; *) fail 'prebuilt installer currently supports Linux; build from source on other systems';; esac
-case "$(uname -m)" in x86_64|amd64) target=x86_64-unknown-linux-gnu;; aarch64|arm64) target=aarch64-unknown-linux-gnu;; *) fail 'unsupported CPU architecture';; esac
+case "$(uname -m)" in x86_64|amd64) target=x86_64-unknown-linux-musl;; aarch64|arm64) target=aarch64-unknown-linux-musl;; *) fail 'unsupported CPU architecture';; esac
 tmp=$(mktemp -d "${TMPDIR:-/tmp}/watf-install.XXXXXXXX")
 trap 'rm -rf "$tmp"' EXIT HUP INT TERM
 asset="watf-${version}-${target}-${flavor}.tar.gz"
@@ -62,7 +62,7 @@ if [ -n "$archive" ]; then
     [ -n "$expected" ] || fail '--local-archive requires --sha256'
     cp "$archive" "$tmp/release.tar.gz"
 else
-    [ "$target" = x86_64-unknown-linux-gnu ] || fail 'online releases currently publish Linux x86_64 only; use --local-archive for other packaged targets'
+    [ "$target" = x86_64-unknown-linux-musl ] || fail 'online releases currently publish Linux x86_64 musl only; use --local-archive for other packaged targets'
     [ "$flavor" = lite ] || fail 'online releases currently publish the lite flavor only; use --local-archive for a manually packaged full build'
     case "$repo" in *[!A-Za-z0-9_./-]*|'') fail 'set --repo OWNER/REPO after publishing the project';; esac
     case "$repo" in */*) owner=${repo%%/*}; project=${repo#*/};; *) fail 'repository must be OWNER/REPO';; esac

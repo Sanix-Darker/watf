@@ -126,6 +126,8 @@ recorded Linux verification host.
 
 Installer tests exercise checksum failure, rejected repository/version arguments,
 restricted named-member extraction, and explicit no-index behavior using an inert
-fixture executable. Package, install, verification, and runtime-smoke gates cover
-the 0.0.1 release candidate. Tag assets are configured and remain unpublished
-until the release tag exists.
+fixture executable. Repository package, install, verifier, and runtime-smoke gates
+cover the checked-in source and package paths. A separate release-session test ran
+the live published musl asset on a glibc 2.31 host; no repository report records
+that run. The 0.0.1 crate, GitHub asset, and standalone skill are published. No
+model is bundled.

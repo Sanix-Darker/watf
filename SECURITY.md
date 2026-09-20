@@ -1,6 +1,6 @@
 # Security policy
 
-WATF 0.0.1 is a release candidate, not a security-audited product. See
+WATF 0.0.1 is published, but it is not a security-audited product. See
 [`docs/SECURITY.md`](docs/SECURITY.md) for the threat model and current controls.
 The original source-assembly limitations remain available only in the
 [historical verification report](reports/VERIFICATION.md).

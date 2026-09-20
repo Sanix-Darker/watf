@@ -39,11 +39,12 @@ avoid inference. The optional local model handles requests that require synthesi
 
 ## Release status
 
-Version 0.0.1 is a public release candidate. The default model-free crate, full
-native feature build, test suites, strict Clippy, package installation, runtime
-smoke, and offline verification pass on the current Linux host. The tag workflow
-is configured to publish a Linux x86_64 GNU lite binary plus source and skill
-archives when the matching tag exists. No release asset or model is bundled yet.
+Version 0.0.1 is published on crates.io. The GitHub release provides the
+model-free `x86_64-unknown-linux-musl` asset, and the standalone skill release is
+published. No model is bundled. Release checks require an x86-64 ELF with no
+interpreter, dynamic-library dependencies, or GLIBC version references. The
+published asset passed a release-session smoke test on a glibc 2.31 host. This
+evidence applies to the tested asset, not to broad operating-system compatibility.
 
 The current [model smoke report](reports/model-smoke.json) records one
 deterministic plan accepted with zero inference and two model-planned cases
@@ -110,12 +111,12 @@ make smoke
 ```
 
 `make build` enables `local-llm,tui`; `make lite` excludes both. The TUI is a
-secondary interface, not the product center. The Rust application
-statically embeds the inference core, but a GNU/Linux build can still depend on
-system C/C++ runtime libraries. This is not a promise of a fully static musl binary.
-Release packaging records build metadata for generated assets. The tag workflow
-is configured for a Linux x86_64 GNU lite binary; full local-LLM builds remain a
-maintainer build until release verification covers them.
+secondary interface, not the product center. Full local-model builds can depend on
+system C/C++ runtime libraries. The published lite release targets
+`x86_64-unknown-linux-musl`. Its ELF checks reject an interpreter, dynamic
+dependencies, and GLIBC version references. The published asset passed a
+release-session smoke test on a glibc 2.31 host. Full local-model builds remain
+maintainer builds.
 
 Provision the model explicitly, once:
 
@@ -166,8 +167,7 @@ watf index
 `PREFIX` and `DATA_DIR` are configurable Makefile variables. A non-default data
 location must also be set with `WATF_DATA_DIR` when running the engine.
 
-A curl installer is configured for the tagged release assets. This command works
-after `v0.0.1` is published from the `main` branch:
+The curl installer uses the published v0.0.1 release asset:
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/Sanix-Darker/watf/main/scripts/install.sh \
@@ -176,10 +176,10 @@ curl -fsSL https://raw.githubusercontent.com/Sanix-Darker/watf/main/scripts/inst
 
 For stronger review, download and inspect that script before running it. The
 installer verifies archive and model SHA256 values, installs without sudo,
-never edits shell configuration, and optionally builds the index. The tag workflow
-is configured for Linux x86_64 GNU lite archives only. Manually packaged compatible
-archives, including other targets or full builds, can still be installed with
-`--local-archive`. Checksums detect corruption;
+never edits shell configuration, and optionally builds the index. Online install
+supports the Linux `x86_64-unknown-linux-musl` lite archive only. Manually packaged
+archives, including `aarch64-unknown-linux-musl` or full builds, can still be
+installed with `--local-archive`. Checksums detect corruption;
 checksums from the same release location are not independent signatures.
 
 Offline installation of a previously downloaded release is also supported:
