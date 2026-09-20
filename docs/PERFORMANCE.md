@@ -6,6 +6,11 @@ claims. Only explicitly linked JSON reports are retained machine-readable
 artifacts; other measurements below are recorded prose results from the named
 harnesses.
 
+The retrieval, deterministic-planning, and bounded-output measurements below
+used the pre-musl host-target GNU build. They are not measurements of the
+published `x86_64-unknown-linux-musl` asset. The agent-loop section uses the
+exact published musl asset.
+
 ## Current retrieval and deterministic planning
 
 Measurements used rustc 1.96.0 on Linux x86_64 with an Intel i5-8365U and a
@@ -45,10 +50,17 @@ One-shot timing includes process startup and index open.
 
 Execution ships in 0.0.1. `scripts/bench_agent_loop.py` measures six accepted
 read-only Git tasks through one persistent foreground server and one
-`resolve_exec` request per task. Five independent runs used five rounds and a
-fresh deterministic temporary repository. Index and repository construction and
-warm server startup were excluded. The direct path used hand-authored expected
-argv as an optimistic process lower bound; it is not a competitor.
+`resolve_exec` request per task. Five independent runs used five rounds, a fresh
+deterministic temporary repository, and the exact downloaded v0.0.1
+`x86_64-unknown-linux-musl` binary. Its SHA-256 was
+`6e71f9a5f479b8f7e60517255097aafb0a25334409a6deafdab56366f9119703` and its size
+was 1,594,080 bytes. The host was Linux 5.15.0-139-generic x86_64 with glibc 2.31.
+The binary was downloaded, so the host Rust compiler is not part of this result.
+
+Index and repository construction and warm server startup were excluded. The
+direct path used hand-authored expected argv as an optimistic process lower bound;
+it is not a competitor. The revised harness alternated order by round and case
+parity: 75 tasks ran direct first and 75 ran WATF first.
 
 WATF success required the exact expected argv, zero inference, successful direct
 argv execution, untruncated streams, exact stdout and stderr equality with the
@@ -59,15 +71,17 @@ oracle, expected markers, schema version 1, and the exact request ID.
 | Tasks per path | 150 |
 | Direct task success | 150 of 150 |
 | WATF task success, exact argv, and exact output | 150 of 150 |
-| Direct p50 range | 2,787-3,317 us |
-| Direct p95 range | 3,096-3,748 us |
-| WATF resolve plus execute p50 range | 1,743-1,979 us |
-| WATF resolve plus execute p95 range | 2,020-2,375 us |
+| Measurement order | 75 direct first, 75 WATF first |
+| Direct p50 range | 2,970-3,365 us |
+| Direct p95 range | 3,424-4,363 us |
+| WATF resolve plus execute p50 range | 1,916-2,242 us |
+| WATF resolve plus execute p95 range | 2,413-2,841 us |
 | Direct agent-visible bytes per task | 91 |
 | WATF agent-visible bytes per task | 473 |
 | WATF calls and workload spawns per task | 1, 1 |
 | Model calls, fallback reads, retries | 0, 0, 0 |
 | Truncated streams or marker failures | 0 |
+| Clean server shutdowns | 5 of 5 |
 
 This comparison favors WATF on startup because the WATF server is already running
 while direct argv starts a process for every task. WATF performs intent resolution,
@@ -84,9 +98,9 @@ capture, and serialization, but excludes index and repository construction.
 | Task success, exact argv, exact output, clean shutdown | 5 of 5 |
 | Calls and workload spawns per task | 1, 1 |
 | Model calls, retries, fallback reads | 0, 0, 0 |
-| Start-to-result time | 16,931-35,206 us |
+| Start-to-result time | 20,155-28,665 us |
 | Request and response bytes | 237, 416 |
-| Server peak RSS | 4,320-4,488 KiB |
+| Server peak RSS | 2,296-2,424 KiB |
 
 Linux peak RSS is the foreground server's `VmHWM` after the response and excludes
 the Git child. The freshly built index may already be in the OS page cache, so
@@ -102,10 +116,10 @@ and no workload marker appeared.
 | Task success | 25 of 25 |
 | Calls per task | 1 |
 | Workload spawns, model calls, retries, documentation reads | 0, 0, 0, 0 |
-| Resolve p50 range | 202-275 us |
-| Resolve p95 range | 237-322 us |
-| Total p50 range | 280-371 us |
-| Total p95 range | 315-428 us |
+| Resolve p50 range | 424-475 us |
+| Resolve p95 range | 428-549 us |
+| Total p50 range | 529-596 us |
+| Total p95 range | 542-678 us |
 | Request and response bytes | 225, 653 mean |
 | Response budget | 1,024 bytes |
 

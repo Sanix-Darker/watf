@@ -316,18 +316,23 @@ def run_cold_first_task(binary, index, index_source, repo, case, env):
     }
 
 
-def run_case(client, repo, case, env):
+def run_case(client, repo, case, env, direct_first):
     expected = case["expected"]
-    direct = invoke(expected["argv"], repo, env)
+    request = {
+        "op": "resolve_exec", "query": case["query"], "cwd": str(repo),
+        "timeout_ms": 10000, "max_output_bytes": 4096, "max_bytes": 4096,
+        "limit": 16, "catalog": False, "fields": False, "installed_only": False,
+    }
+    if direct_first:
+        direct = invoke(expected["argv"], repo, env)
+        resolved = client.request(request)
+    else:
+        resolved = client.request(request)
+        direct = invoke(expected["argv"], repo, env)
     direct_stdout, stdout_error = decode(direct["stdout"])
     direct_stderr, stderr_error = decode(direct["stderr"])
     direct_markers = all(marker in direct_stdout for marker in case["markers"])
     direct_ok = direct["exit_code"] == 0 and stdout_error is None and stderr_error is None and direct_markers
-    resolved = client.request({
-        "op": "resolve_exec", "query": case["query"], "cwd": str(repo),
-        "timeout_ms": 10000, "max_output_bytes": 4096, "max_bytes": 4096,
-        "limit": 16, "catalog": False, "fields": False, "installed_only": False,
-    })
     execution, error = inspect_response(resolved["response"], resolved["request_id"], expected, case["markers"]) if resolved["error"] is None else (None, resolved["error"])
     equal = execution is not None and execution["streams_complete"] and execution["stdout"]["text"] == direct_stdout and execution["stderr"]["text"] == direct_stderr
     if execution is not None and not equal and error is None:
@@ -479,6 +484,11 @@ def metrics(runs):
 
 def summarize(cases, results, fallback_runs, cold_first_task, rounds, index, index_source, server):
     all_runs = [run for case in cases for run in results[case["id"]]]
+    direct_first_tasks = sum(
+        (round_index + case_index) % 2 == 0
+        for round_index in range(rounds)
+        for case_index in range(len(cases))
+    )
     case_results = []
     for case in cases:
         runs = results[case["id"]]
@@ -493,6 +503,12 @@ def summarize(cases, results, fallback_runs, cold_first_task, rounds, index, ind
         "suite": "deterministic_agent_loop", "corpus": str(CORPUS),
         "case_ids": list(CASE_SPECS), "index_source": index_source, "index_path": str(index),
         "cases": len(cases), "rounds": rounds, "tasks_per_path": len(all_runs),
+        "order_policy": {
+            "name": "alternating_round_case_parity",
+            "rule": "direct first when (round_index + case_index) % 2 == 0; WATF first otherwise",
+            "direct_first_tasks": direct_first_tasks,
+            "watf_first_tasks": len(all_runs) - direct_first_tasks,
+        },
         "setup_excluded": ["index construction", "repository construction", "warm persistent serve startup"],
         "inherited_environment_removed": ["GIT_*", "WATF_MODEL"], "tokens": "unavailable",
         "cold_first_task": cold_first_task,
@@ -505,6 +521,7 @@ def summarize(cases, results, fallback_runs, cold_first_task, rounds, index, ind
         "caveat": (
             "The direct argv path is an optimistic oracle lower bound with no planning or validation. "
             "WATF uses one request to a persistent foreground serve process and one direct workload spawn. "
+            "Warm task order alternates deterministically by round and case parity to balance direct-first and WATF-first measurements. "
             "The six fixed read-only Git tasks use a synthetic temporary repository. "
             + ("The temporary index contains bundled command surfaces. " if index_source == "temporary_bundled" else "A provided index must contain compatible bundled Git surfaces. ")
             + "Index construction, repository construction, and warm server startup are excluded. "
@@ -534,10 +551,11 @@ def benchmark(binary, index, index_source, rounds, cases, root, env):
     client = ServeClient(binary, index, repo, env)
     results = {case["id"]: [] for case in cases}
     fallback_runs = []
-    for _ in range(rounds):
+    for round_index in range(rounds):
         fallback_runs.append(run_fallback(client, repo, rejection_marker))
-        for case in cases:
-            results[case["id"]].append(run_case(client, repo, case, env))
+        for case_index, case in enumerate(cases):
+            direct_first = (round_index + case_index) % 2 == 0
+            results[case["id"]].append(run_case(client, repo, case, env, direct_first))
     code, stderr = client.close()
     stderr_text, stderr_error = decode(stderr)
     server = {"exit_code": code, "stderr": bounded(stderr_text), "clean": code == 0 and not stderr and stderr_error is None}
