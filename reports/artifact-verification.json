@@ -30,9 +30,9 @@
   "model_inference_verified": false,
   "performance_measured": false,
   "python_sources_parsed": 17,
-  "json_documents_parsed": 14,
+  "json_documents_parsed": 13,
   "toml_documents_parsed": 0,
   "toml_parser": "unavailable on this Python",
-  "text_files_without_em_dash": 117,
+  "text_files_without_em_dash": 116,
   "json_schema_checks": "not available: optional jsonschema package"
 }

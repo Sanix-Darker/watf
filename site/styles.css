@@ -95,8 +95,8 @@ nav a {
 
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(28rem, 1.15fr);
-  gap: clamp(2.5rem, 6vw, 5rem);
+  grid-template-columns: minmax(0, 1.15fr) minmax(19rem, 0.85fr);
+  gap: clamp(3rem, 8vw, 7rem);
   align-items: center;
   min-height: 42rem;
   padding-block: 6rem;
@@ -207,8 +207,7 @@ code {
   transition: transform 180ms ease, box-shadow 180ms ease;
 }
 
-.protocol-card:hover,
-.protocol-card:focus-visible {
+.protocol-card:hover {
   box-shadow: 1rem 1.15rem 0 var(--black);
   transform: translateY(-0.35rem) rotateX(1deg) rotateY(-2deg);
 }
@@ -231,59 +230,6 @@ code {
   padding: 0.45rem 1rem 1rem;
 }
 
-.protocol-body {
-  padding: 1rem 1rem 0;
-}
-
-.card-context {
-  margin-bottom: 0.65rem;
-  color: var(--mid);
-  font-size: 0.82rem;
-}
-
-.run-command {
-  margin: 0;
-  padding: 0.8rem;
-  border: 1px solid var(--line);
-  background: var(--soft);
-  line-height: 1.45;
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-}
-
-.quality-steps {
-  margin: 0.8rem 0 0;
-  padding: 0;
-  list-style: none;
-  counter-reset: quality-step;
-}
-
-.quality-steps li {
-  display: grid;
-  grid-template-columns: 1.75rem minmax(0, 1fr);
-  gap: 0.5rem;
-  padding: 0.45rem 0;
-  border-bottom: 1px solid var(--line);
-  counter-increment: quality-step;
-}
-
-.quality-steps li::before {
-  content: "0" counter(quality-step);
-  color: var(--mid);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 0.7rem;
-}
-
-.quality-steps code {
-  overflow-wrap: anywhere;
-}
-
-.result-lines {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 1rem;
-}
-
 .protocol-lines div {
   padding-block: 0.85rem;
   border-bottom: 1px solid var(--line);
@@ -291,10 +237,6 @@ code {
 
 .protocol-lines div:last-child {
   border-bottom: 0;
-}
-
-.result-lines div:last-child {
-  grid-column: 1 / -1;
 }
 
 .protocol-lines dt {
@@ -414,7 +356,7 @@ footer p {
   }
 
   .protocol-scene {
-    width: min(100%, 40rem);
+    width: min(100%, 31rem);
   }
 
   .boundary,
@@ -463,10 +405,6 @@ footer p {
 
   .protocol-card {
     box-shadow: 0.45rem 0.45rem 0 var(--black);
-  }
-
-  .result-lines {
-    grid-template-columns: 1fr;
   }
 
   footer {
