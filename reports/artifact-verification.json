@@ -24,7 +24,7 @@
     "data": 10,
     "abstain": 10
   },
-  "rust_test_functions_present": 136,
+  "rust_test_functions_present": 137,
   "rust_tests_executed": false,
   "rust_compilation_verified": false,
   "model_inference_verified": false,
